@@ -1,0 +1,26 @@
+prototype(Carbon.Alpine:Scripts) < prototype(Neos.Fusion:Component) {
+    files = ${Configuration.setting('Carbon.Alpine.Files')}
+    main = ${Configuration.setting('Carbon.Alpine.Main')}
+
+    renderer = Carbon.IncludeAssets:Collection {
+        collection = Neos.Fusion:Map {
+            items = ${props.files}
+            itemKey = 'Folder'
+            itemRenderer = Neos.Fusion:Map {
+                items = ${item}
+                itemKey = 'File'
+                itemRenderer = ${item ? Folder + '/' + File + '.js[defer]' : null}
+            }
+            @process {
+                extractSubElements = ${Array.filter(Carbon.Array.extractSubElements(value, false))}
+                addMain = ${props.main ? Array.push(value, 'Main.js[defer]') : value}
+            }
+        }
+        assetPackage = 'Carbon.Alpine'
+        paths = Neos.Fusion:DataStructure {
+            File {
+                JS = 'Public'
+            }
+        }
+    }
+}

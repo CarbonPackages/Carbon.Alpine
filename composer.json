@@ -1,0 +1,13 @@
+{
+  "name" : "carbon/alpine",
+  "description": "Include AlpineJS into Neos",
+  "type" : "neos-carbon",
+  "require": {
+    "carbon/includeassets": "^5.0 || ^6.0"
+  },
+  "autoload" : {
+    "psr-4" : {
+      "Carbon\\Alpine\\" : "Classes/"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+Carbon:
+  Alpine:
+    includeOnPage: false
+    Main: true
+    Files:
+      Plugins:
+        Collapse: false
+        Focus: false
+        Intersect: false
+        Mask: false
+        Morph: false
+        Persist: false
+      UI:
+        Combobox: false
+        Dialog: false
+        Disclosure: false
+        Menu: false
+        Popover: false
+        Radio: false
+        Switch: false
+        Tabs: false
+      Custom:
+        Counter: false
+        Fetch: false
+        Tooltip: false

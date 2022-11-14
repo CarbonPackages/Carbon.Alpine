@@ -1,0 +1,36 @@
+{
+  "name": "base.alpine",
+  "description": "Dependencies for Base.Alpine",
+  "license": "UNLICENSED",
+  "private": true,
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "not dead"
+  ],
+  "scripts": {
+    "main": "esbuild Resources/Private/Assets/*.js --bundle --minify --outdir=Resources/Public",
+    "ui": "esbuild Resources/Private/Assets/UI/*.js --bundle --minify --outdir=Resources/Public/UI",
+    "plugins": "esbuild Resources/Private/Assets/Plugins/*.js --bundle --minify --outdir=Resources/Public/Plugins",
+    "custom": "esbuild Resources/Private/Assets/Custom/*.ts --bundle --minify --outdir=Resources/Public/Custom",
+    "build": "pnpm main | pnpm ui | pnpm plugins | pnpm custom",
+    "start": "pnpm build"
+  },
+  "dependencies": {
+    "@alpinejs/collapse": "^3.10.5",
+    "@alpinejs/focus": "^3.10.5",
+    "@alpinejs/intersect": "^3.10.5",
+    "@alpinejs/mask": "^3.10.5",
+    "@alpinejs/morph": "^3.10.5",
+    "@alpinejs/persist": "^3.10.5",
+    "alpine": "^0.2.1",
+    "tippy.js": "^6.3.7"
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.48",
+    "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1"
+  }
+}
