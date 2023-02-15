@@ -12,7 +12,7 @@ export default function (Alpine) {
         // @ts-ignore
         tippy(element, {
             placement: expression || "top",
-            // content: content(element),
+            content: content(element),
             delay,
         });
     });
