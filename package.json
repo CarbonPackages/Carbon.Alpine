@@ -17,18 +17,18 @@
     "start": "pnpm build"
   },
   "dependencies": {
-    "@alpinejs/collapse": "^3.12.1",
-    "@alpinejs/focus": "^3.12.1",
-    "@alpinejs/intersect": "^3.12.1",
-    "@alpinejs/mask": "^3.12.1",
-    "@alpinejs/morph": "^3.12.1",
-    "@alpinejs/persist": "^3.12.1",
-    "alpinejs": "^3.12.1",
+    "@alpinejs/collapse": "^3.12.2",
+    "@alpinejs/focus": "^3.12.2",
+    "@alpinejs/intersect": "^3.12.2",
+    "@alpinejs/mask": "^3.12.2",
+    "@alpinejs/morph": "^3.12.2",
+    "@alpinejs/persist": "^3.12.2",
+    "alpinejs": "^3.12.2",
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
-    "esbuild": "^0.17.18",
-    "eslint": "^8.40.0",
+    "esbuild": "^0.17.19",
+    "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8"
