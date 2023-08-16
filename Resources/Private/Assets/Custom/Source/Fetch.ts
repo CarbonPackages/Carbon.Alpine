@@ -1,9 +1,17 @@
 const pathname = window.location.pathname;
 
 export default function (Alpine) {
-    Alpine.data("fetch", (url: string, notfication: string, maxItems: number) => ({
+    // x-data="fetch(url, notification, maxItems, showErrorIfNoMarkup)"
+    Alpine.data("fetch", (url: string, notfication: string, maxItems: number, showErrorIfNoMarkup: false) => ({
         noMarkup: false,
-        noContentFound() {
+        target: null,
+        noContentFound(errorMessage) {
+            this.$dispatch("fetch-no-content", { url, element: this.$el, target: this.target });
+
+            if (errorMessage) {
+                console.error(errorMessage);
+            }
+
             if (notfication) {
                 this.noMarkup = true;
                 return;
@@ -13,10 +21,13 @@ export default function (Alpine) {
         init() {
             const element = this.$el;
             const target = this.$refs.target || element;
+            this.target = target;
+
             if (!url || typeof url !== "string") {
-                this.noContentFound();
+                this.noContentFound("No URL defined in x-data='fetch'");
                 return;
             }
+
             const urls = url.split("||");
             Promise.all(
                 urls.map((url) =>
@@ -48,13 +59,17 @@ export default function (Alpine) {
                     }
                     const markup = entriesArray.join("");
                     if (!markup) {
-                        throw new Error("No Markup found");
+                        if (showErrorIfNoMarkup) {
+                            throw new Error("No Markup found");
+                        }
+                        this.noContentFound();
+                        return;
                     }
+                    this.$dispatch("fetch-has-content", { url, element, target });
                     target.innerHTML = markup;
                 })
-                .catch((e) => {
-                    console.error(e);
-                    this.noContentFound();
+                .catch((error) => {
+                    this.noContentFound(error);
                 });
         },
     }));
