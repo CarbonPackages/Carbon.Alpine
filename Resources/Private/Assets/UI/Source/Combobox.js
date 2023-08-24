@@ -33,7 +33,7 @@ export default function (Alpine) {
 
                 if (active) {
                     return Object.values(Alpine.raw(data.__context.items)).findIndex(
-                        (i) => Alpine.raw(active) == Alpine.raw(i)
+                        (i) => Alpine.raw(active) == Alpine.raw(i),
                     );
                 }
 
@@ -101,7 +101,7 @@ function handleRoot(el, Alpine) {
                     this.__compareBy = Alpine.extractProp(el, "by");
 
                     this.__context = generateContext(Alpine, this.__isMultiple, "vertical", () =>
-                        this.__activateSelectedOrFirst()
+                        this.__activateSelectedOrFirst(),
                     );
 
                     let defaultValue = Alpine.extractProp(el, "default-value", this.__isMultiple ? [] : null);
@@ -262,7 +262,7 @@ function handleRoot(el, Alpine) {
         // Register event listeners..
         "@mousedown.window"(e) {
             if (
-                !!!this.$refs.__input.contains(e.target) &&
+                !this.$refs.__input.contains(e.target) &&
                 !this.$refs.__button.contains(e.target) &&
                 !this.$refs.__options.contains(e.target)
             ) {
@@ -331,8 +331,8 @@ function handleInput(el, Alpine) {
                     false,
                     () => this.$data.__isOpen,
                     () => this.$data.__open(),
-                    (state) => (this.$data.__isTyping = state)
-                )
+                    (state) => (this.$data.__isTyping = state),
+                ),
             );
         },
         "@keydown.enter.prevent.stop"() {

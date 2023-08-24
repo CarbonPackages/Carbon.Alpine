@@ -23,7 +23,7 @@ export default function (Alpine) {
         // @ts-ignore
         const instances = [...element.querySelectorAll("[aria-label]")].map((element) =>
             // @ts-ignore
-            tippy(element, { placement, content: content(element), delay })
+            tippy(element, { placement, content: content(element), delay }),
         );
         createSingleton(instances, {
             delay: 500,

@@ -52,7 +52,7 @@ function handleRoot(el, Alpine) {
                                     return NodeFilter.FILTER_ACCEPT;
                                 },
                             },
-                            false
+                            false,
                         );
 
                         while (walker.nextNode()) walker.currentNode.setAttribute("role", "none");
