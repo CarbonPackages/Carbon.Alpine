@@ -9,6 +9,7 @@
     "not dead"
   ],
   "scripts": {
+    "prettierFiles": "prettier --write --no-error-on-unmatched-pattern 'Resources/Private/**/*.{js,ts}'",
     "main": "esbuild Resources/Private/Assets/*.js --bundle --minify --outdir=Resources/Public",
     "ui": "esbuild Resources/Private/Assets/UI/*.js --bundle --minify --outdir=Resources/Public/UI",
     "plugins": "esbuild Resources/Private/Assets/Plugins/*.js --bundle --minify --outdir=Resources/Public/Plugins",
