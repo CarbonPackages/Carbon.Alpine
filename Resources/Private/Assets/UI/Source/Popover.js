@@ -25,7 +25,7 @@ export default function (Alpine) {
 }
 
 function handleRoot(el, Alpine, evaluate) {
-    const xData = evaluate(el.getAttribute("x-data"));
+    const xData = evaluate(el.getAttribute("x-data") || "{}");
     Alpine.bind(el, {
         "x-id"() {
             return ["alpine-popover-button", "alpine-popover-panel"];
