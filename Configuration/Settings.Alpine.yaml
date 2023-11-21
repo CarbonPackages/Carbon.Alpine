@@ -4,6 +4,7 @@ Carbon:
     Main: true
     Files:
       Plugins:
+        Anchor: false
         Collapse: false
         Focus: false
         Intersect: false

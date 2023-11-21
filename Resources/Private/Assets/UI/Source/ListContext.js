@@ -312,6 +312,8 @@ export function generateContext(Alpine, multiple, orientation, activateSelectedO
                     break;
                 case "Home":
                 case "PageUp":
+                    if (e.key == "Home" && e.shiftKey) return;
+
                     e.preventDefault();
                     e.stopPropagation();
                     setIsTyping(false);
@@ -322,6 +324,8 @@ export function generateContext(Alpine, multiple, orientation, activateSelectedO
 
                 case "End":
                 case "PageDown":
+                    if (e.key == "End" && e.shiftKey) return;
+
                     e.preventDefault();
                     e.stopPropagation();
                     setIsTyping(false);
