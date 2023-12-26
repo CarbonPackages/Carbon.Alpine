@@ -71,6 +71,7 @@ function updatePosition() {
         placement,
         middleware,
     }).then(({ x, y, placement, middlewareData }) => {
+        // @ts-ignore
         Object.assign(floatingEl.style, {
             transform: `translate(${roundByDPR(x)}px,${roundByDPR(y)}px)`,
         });
