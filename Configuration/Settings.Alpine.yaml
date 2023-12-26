@@ -22,6 +22,7 @@ Carbon:
         Switch: false
         Tabs: false
       Custom:
+        Anchor: false
         Counter: false
         Fetch: false
         Tooltip: false
