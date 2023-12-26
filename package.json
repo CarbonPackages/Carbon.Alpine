@@ -9,13 +9,9 @@
     "not dead"
   ],
   "scripts": {
-    "prettierFiles": "prettier --write --no-error-on-unmatched-pattern 'Resources/Private/**/*.{js,ts}'",
-    "main": "esbuild Resources/Private/Assets/*.js --bundle --minify --outdir=Resources/Public",
-    "ui": "esbuild Resources/Private/Assets/UI/*.js --bundle --minify --outdir=Resources/Public/UI",
-    "plugins": "esbuild Resources/Private/Assets/Plugins/*.js --bundle --minify --outdir=Resources/Public/Plugins",
-    "custom": "esbuild Resources/Private/Assets/Custom/*.ts --bundle --minify --outdir=Resources/Public/Custom",
-    "build": "pnpm main | pnpm ui | pnpm plugins | pnpm custom",
-    "start": "pnpm build"
+    "build": "node build.mjs --production",
+    "watch": "node build.mjs --watch",
+    "dev": "node build.mjs"
   },
   "dependencies": {
     "@alpinejs/anchor": "^3.13.3",
@@ -29,10 +25,10 @@
     "tippy.js": "^6.3.7"
   },
   "devDependencies": {
-    "esbuild": "^0.19.7",
-    "eslint": "^8.54.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "prettier": "^3.1.0"
+    "esbuild": "^0.19.10",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.2",
+    "prettier": "^3.1.1"
   }
 }

@@ -1,6 +1,8 @@
 Carbon:
   Alpine:
     includeOnPage: false
+    useModules: true
+
     Main: true
     Files:
       Plugins:
