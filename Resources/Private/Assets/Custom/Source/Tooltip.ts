@@ -1,4 +1,4 @@
-import { computePosition, autoUpdate, flip, offset, shift, arrow } from "@floating-ui/dom";
+import { computePosition, autoUpdate, flip, offset, shift, arrow, hide } from "@floating-ui/dom";
 
 // x-tooltip adds a tooltip to an element, width x-tooltip="placement" (top, left, right, bottom, etc) will set the placement
 // x-tooltips will add a tooltip to all elements with a title or aria-label attribute. You can also set the placement here.
@@ -44,11 +44,15 @@ function updatePosition() {
     computePosition(referenceEl, floatingEl, {
         // @ts-ignore
         placement,
-        middleware: [offset(6), flip(), shift({ padding }), arrow({ element: arrowElement })],
+        middleware: [offset(6), flip(), shift({ padding }), arrow({ element: arrowElement }), hide()],
     }).then(({ x, y, placement, middlewareData }) => {
         Object.assign(floatingEl.style, {
             transform: `translate(${roundByDPR(x)}px,${roundByDPR(y)}px)`,
         });
+
+        if (middlewareData.hide.referenceHidden) {
+            hideTooltip();
+        }
 
         const { x: arrowX, y: arrowY } = middlewareData.arrow;
 
