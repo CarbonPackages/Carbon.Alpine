@@ -19,7 +19,7 @@ Or, to activate a bunch of tooltips at once
 </div>
 
 The tooltip element should look like this
-<div id="tooltip" role="tooltip">
+<div id="tooltip" role="tooltip" aria-hidden="true">
     <span id="tooltip-content"></span>
     <div id="tooltip-arrow"></div>
 </div>
@@ -31,26 +31,30 @@ this is an example with Tailwind CSS
     role="tooltip"
     class="absolute opacity-0 w-max top-0 left-0 pointer-events-none z-[9999] transition duration-300 text-sm rounded text-white px-2 py-1 drop-shadow bg-neutral-800"
     style="transition:none"
+    aria-hidden="true"
 >
     <span id="tooltip-content"></span>
     <div id="tooltip-arrow" class="absolute size-2 rotate-45 bg-neutral-800"></div>
 </div>
 
 I you remove the div with the id tooltip-arrow the arrow will be disabled
+
+Per default the id of the tooltip is tooltip, but you can change it with the id modifier
+
+If fixed is added as a modifier, the tooltip will be fixed positioned instead of absolute positioned
+If fixed is set, the tooltip id will be fixed-tooltip (unless you change it with the id modifier)
+
+With the offset modifier you can set the offset of the tooltip to the trigger element. Defaults to 6
+
 */
 
 const stayModifier = "stay-on-click";
 const focusModifier = "focus";
+const offsetModifier = "offset";
+const idModifier = "id";
+const fixedModifier = "fixed";
 
 const padding = 5;
-
-const floatingEl: HTMLElement | null = document.querySelector("#tooltip");
-const arrowElement: HTMLElement | null = document.querySelector("#tooltip-arrow");
-const tooltipContent: HTMLElement | null = document.querySelector("#tooltip-content");
-
-if (floatingEl) {
-    floatingEl.style.maxWidth = `calc(100vw - ${padding * 2}px)`;
-}
 
 let tooltipText: string;
 let referenceEl: Element;
@@ -58,116 +62,126 @@ let placement = "top";
 let cleanup: () => void;
 let timeout = 0;
 
-const middleware = [offset(6), flip(), shift({ padding })];
-if (arrowElement) {
-    middleware.push(arrow({ element: arrowElement }));
-}
-middleware.push(hide());
+export default function (Alpine) {
+    // Directive: x-tooltip
+    Alpine.directive("tooltip", (element, { expression, modifiers }, { evaluate }) => {
+        const strategy = modifiers.includes(fixedModifier) ? "fixed" : "absolute";
+        const id = modifiers.includes(idModifier)
+            ? modifiers[modifiers.indexOf(idModifier) + 1]
+            : strategy == "fixed"
+              ? "tooltip-fixed"
+              : "tooltip";
 
-function updatePosition() {
-    // @ts-ignore
-    computePosition(referenceEl, floatingEl, {
-        // @ts-ignore
-        placement,
-        middleware,
-    }).then(({ x, y, placement, middlewareData }) => {
-        // @ts-ignore
-        Object.assign(floatingEl.style, {
-            transform: `translate(${roundByDPR(x)}px,${roundByDPR(y)}px)`,
-        });
+        const { floatingEl, arrowElement, tooltipContent } = getElements(id);
 
-        // @ts-ignore
-        if (middlewareData.hide.referenceHidden) {
-            hideTooltip();
+        if (!floatingEl) {
+            console.warn(`Tooltip with the id '${id}' element not found`);
+            return;
         }
-
-        if (!middlewareData.arrow) {
+        if (!tooltipContent) {
+            console.warn(`Target element for content of the tooltip with the id '${id}-content' element not found`);
             return;
         }
 
-        const { x: arrowX, y: arrowY } = middlewareData.arrow;
-
-        const staticSide = {
-            top: "bottom",
-            right: "left",
-            bottom: "top",
-            left: "right",
-        }[placement.split("-")[0]];
-
-        Object.assign(arrowElement.style, {
-            left: arrowX != null ? `${arrowX}px` : "",
-            top: arrowY != null ? `${arrowY}px` : "",
-            right: "",
-            bottom: "",
-            // @ts-ignore
-            [staticSide]: "-4px",
-        });
-    });
-}
-
-function updateContent() {
-    // @ts-ignore
-    tooltipText = referenceEl.getAttribute("aria-label") || referenceEl.getAttribute("title");
-    // @ts-ignore
-    tooltipContent.textContent = tooltipText;
-}
-
-function showTooltip(element, expression) {
-    referenceEl = element;
-    placement = expression || "top";
-    // @ts-ignore
-    floatingEl.style.opacity = "1";
-
-    clearTimeout(timeout);
-    // No timeout given, so we show it without a transition
-    if (!timeout) {
-        // @ts-ignore
-        floatingEl.style.transition = "none";
-        timeout = window.setTimeout(() => {
-            // @ts-ignore
-            floatingEl.style.transition = null;
-        }, 10);
-    }
-
-    updateContent();
-    // @ts-ignore
-    cleanup = autoUpdate(referenceEl, floatingEl, updatePosition);
-}
-
-function hideTooltip() {
-    // @ts-ignore
-    if (floatingEl.style.opacity == "0") {
-        return;
-    }
-    // @ts-ignore
-    floatingEl.style.opacity = "0";
-    cleanup();
-    timeout = window.setTimeout(() => {
-        tooltipText = "";
-        // @ts-ignore
-        floatingEl.style.transition = "none";
-        timeout = 0;
-    }, 500);
-}
-
-function roundByDPR(value) {
-    const dpr = window.devicePixelRatio || 1;
-    return Math.round(value * dpr) / dpr;
-}
-
-export default function (Alpine) {
-    if (!floatingEl) {
-        console.error("Tooltip with the id 'tooltip' element not found");
-        return;
-    }
-    if (!tooltipContent) {
-        console.error("Target element for content of the tooltip with the id 'tooltip-content' element not found");
-        return;
-    }
-    // Directive: x-tooltip
-    Alpine.directive("tooltip", (element, { expression, modifiers }) => {
+        const offsetValue = modifiers.includes(offsetModifier)
+            ? evaluate(modifiers[modifiers.indexOf(offsetModifier) + 1])
+            : 6;
         const stayOnClick = modifiers.includes(stayModifier);
         const focusAction = modifiers.includes(focusModifier);
+
+        const middleware = [offset(offsetValue), flip(), shift({ padding })];
+        if (arrowElement) {
+            middleware.push(arrow({ element: arrowElement }));
+        }
+        middleware.push(hide());
+
+        function updateContent() {
+            // @ts-ignore
+            tooltipText = referenceEl.getAttribute("aria-label") || referenceEl.getAttribute("title");
+            // @ts-ignore
+            tooltipContent.textContent = tooltipText;
+        }
+
+        function updatePosition() {
+            // @ts-ignore
+            computePosition(referenceEl, floatingEl, {
+                // @ts-ignore
+                placement,
+                middleware,
+                strategy,
+            }).then(({ x, y, placement, middlewareData }) => {
+                // @ts-ignore
+                Object.assign(floatingEl.style, {
+                    transform: `translate(${roundByDPR(x)}px,${roundByDPR(y)}px)`,
+                });
+
+                // @ts-ignore
+                if (middlewareData.hide.referenceHidden) {
+                    hideTooltip();
+                }
+
+                if (!middlewareData.arrow || !arrowElement) {
+                    return;
+                }
+
+                const { x: arrowX, y: arrowY } = middlewareData.arrow;
+
+                const staticSide = {
+                    top: "bottom",
+                    right: "left",
+                    bottom: "top",
+                    left: "right",
+                }[placement.split("-")[0]];
+
+                Object.assign(arrowElement.style, {
+                    left: arrowX != null ? `${arrowX}px` : "",
+                    top: arrowY != null ? `${arrowY}px` : "",
+                    right: "",
+                    bottom: "",
+                    // @ts-ignore
+                    [staticSide]: "-4px",
+                });
+            });
+        }
+
+        function showTooltip(element, expression) {
+            referenceEl = element;
+            placement = expression || "top";
+            // @ts-ignore
+            floatingEl.style.opacity = "1";
+
+            clearTimeout(timeout);
+            // No timeout given, so we show it without a transition
+            if (!timeout) {
+                // @ts-ignore
+                floatingEl.style.transition = "none";
+                timeout = window.setTimeout(() => {
+                    // @ts-ignore
+                    floatingEl.style.transition = null;
+                }, 10);
+            }
+
+            updateContent();
+            // @ts-ignore
+            cleanup = autoUpdate(referenceEl, floatingEl, updatePosition);
+        }
+
+        function hideTooltip() {
+            // @ts-ignore
+            if (floatingEl.style.opacity == "0") {
+                return;
+            }
+            // @ts-ignore
+            floatingEl.style.opacity = "0";
+            cleanup();
+            timeout = window.setTimeout(() => {
+                tooltipText = "";
+                // @ts-ignore
+                floatingEl.style.transition = "none";
+                timeout = 0;
+            }, 500);
+        }
+
         Alpine.bind(element, {
             "@mouseenter"() {
                 showTooltip(element, expression);
@@ -223,6 +237,23 @@ const possibleXTooltipAttributes = [
     `${xTooltipAttribute}.${stayModifier}.${focusModifier}`,
     `${xTooltipAttribute}.${focusModifier}.${stayModifier}`,
 ];
+
 function tooltipIsSet(element) {
     return possibleXTooltipAttributes.some((attribute) => !!element.hasAttribute(attribute));
+}
+
+function getElements(id = "tooltip") {
+    const floatingEl: HTMLElement | null = document.querySelector(`#${id}`);
+    const arrowElement: HTMLElement | null = document.querySelector(`#${id}-arrow`);
+    const tooltipContent: HTMLElement | null = document.querySelector(`#${id}-content`);
+
+    if (floatingEl) {
+        floatingEl.style.maxWidth = `calc(100vw - ${padding * 2}px)`;
+    }
+    return { floatingEl, arrowElement, tooltipContent };
+}
+
+function roundByDPR(value) {
+    const dpr = window.devicePixelRatio || 1;
+    return Math.round(value * dpr) / dpr;
 }
