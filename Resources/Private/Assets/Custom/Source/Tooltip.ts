@@ -1,7 +1,7 @@
 import { computePosition, autoUpdate, flip, offset, shift, arrow, hide } from "@floating-ui/dom";
 
 // x-tooltip adds a tooltip to an element, width x-tooltip="placement" (top, left, right, bottom, etc) will set the placement
-// x-tooltips will add a tooltip to all elements with a title or aria-label attribute. You can also set the placement here.
+// x-tooltips will add a tooltip to all elements with a data-tooltip, aria-label or title attribute. You can also set the placement here.
 // The modifier stay-on-click will keep the tooltip open after clicking on the element (e.g. x-tooltip.stay-on-click)
 // The modifier focus will show the tooltip on focus and hide it on blur (e.g. x-tooltip.focus)
 // If inside a x-tooltips element an element has already x-tooltip it will not be overwritten
@@ -47,7 +47,8 @@ If fixed is set, the tooltip id will be fixed-tooltip (unless you change it with
 With the offset modifier you can set the offset of the tooltip to the trigger element. Defaults to 6
 
 */
-
+const xTooltipAttribute = "x-tooltip";
+const attributes = ["data-tooltip", "aria-label", "title"];
 const stayModifier = "stay-on-click";
 const focusModifier = "focus";
 const offsetModifier = "offset";
@@ -96,8 +97,13 @@ export default function (Alpine) {
         middleware.push(hide());
 
         function updateContent() {
+            const attribute = attributes.find((attribute) => referenceEl.hasAttribute(attribute));
+            if (!attribute) {
+                console.warn("No tooltip content found");
+                return;
+            }
             // @ts-ignore
-            tooltipText = referenceEl.getAttribute("aria-label") || referenceEl.getAttribute("title");
+            tooltipText = referenceEl.getAttribute(attribute);
             // @ts-ignore
             tooltipContent.textContent = tooltipText;
         }
@@ -217,10 +223,10 @@ export default function (Alpine) {
         Alpine.bind(element, {
             "x-init"() {
                 this.$nextTick(() => {
-                    const elements = [...element.querySelectorAll(":where([aria-label],[title])")];
+                    const elements = [...element.querySelectorAll(`:where([${attributes.join("],[")}])`)];
                     elements.forEach((element) => {
                         if (!tooltipIsSet(element)) {
-                            element.setAttribute("x-tooltip" + modifier, expression);
+                            element.setAttribute(xTooltipAttribute + modifier, expression);
                         }
                     });
                 });
@@ -229,7 +235,6 @@ export default function (Alpine) {
     });
 }
 
-const xTooltipAttribute = "x-tooltip";
 const possibleXTooltipAttributes = [
     xTooltipAttribute,
     `${xTooltipAttribute}.${stayModifier}`,
