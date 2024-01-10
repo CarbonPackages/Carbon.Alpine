@@ -21,11 +21,11 @@
     "@alpinejs/mask": "^3.13.3",
     "@alpinejs/morph": "^3.13.3",
     "@alpinejs/persist": "^3.13.3",
-    "@floating-ui/dom": "^1.5.3",
+    "@floating-ui/dom": "^1.5.4",
     "alpinejs": "^3.13.3"
   },
   "devDependencies": {
-    "esbuild": "^0.19.10",
+    "esbuild": "^0.19.11",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.2",
