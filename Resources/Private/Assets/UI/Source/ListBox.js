@@ -107,7 +107,7 @@ function handleRoot(el, Alpine) {
                     this.__orientation = Alpine.extractProp(el, "horizontal", false) ? "horizontal" : "vertical";
 
                     this.__context = generateContext(Alpine, this.__isMultiple, this.__orientation, () =>
-                        this.$data.__activateSelectedOrFirst(),
+                        this.__activateSelectedOrFirst(),
                     );
 
                     let defaultValue = Alpine.extractProp(el, "default-value", this.__isMultiple ? [] : null);
@@ -204,7 +204,7 @@ function handleRoot(el, Alpine) {
                     let item = this.__context.getItemByEl(el);
 
                     if (!item) return false;
-                    if (!item.value) return false;
+                    if (item.value === null || item.value === undefined) return false;
 
                     return this.__hasSelected(item.value);
                 },
