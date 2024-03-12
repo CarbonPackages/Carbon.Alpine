@@ -6,32 +6,32 @@ settings:
 
 dependencies:
   '@alpinejs/anchor':
-    specifier: ^3.13.6
-    version: 3.13.6
+    specifier: ^3.13.7
+    version: 3.13.7
   '@alpinejs/collapse':
-    specifier: ^3.13.6
-    version: 3.13.6
+    specifier: ^3.13.7
+    version: 3.13.7
   '@alpinejs/focus':
-    specifier: ^3.13.6
-    version: 3.13.6
+    specifier: ^3.13.7
+    version: 3.13.7
   '@alpinejs/intersect':
-    specifier: ^3.13.6
-    version: 3.13.6
+    specifier: ^3.13.7
+    version: 3.13.7
   '@alpinejs/mask':
-    specifier: ^3.13.6
-    version: 3.13.6
+    specifier: ^3.13.7
+    version: 3.13.7
   '@alpinejs/morph':
-    specifier: ^3.13.6
-    version: 3.13.6
+    specifier: ^3.13.7
+    version: 3.13.7
   '@alpinejs/persist':
-    specifier: ^3.13.6
-    version: 3.13.6
+    specifier: ^3.13.7
+    version: 3.13.7
   '@floating-ui/dom':
     specifier: ^1.6.3
     version: 1.6.3
   alpinejs:
-    specifier: ^3.13.6
-    version: 3.13.6
+    specifier: ^3.13.7
+    version: 3.13.7
 
 devDependencies:
   esbuild:
@@ -57,35 +57,35 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /@alpinejs/anchor@3.13.6:
-    resolution: {integrity: sha512-KvJ9nxJ9GgL1yAAze6K9HSTlE2d9viPrWeA/mSzQjHwgAaVxqhrJParYFU0I3vQc2Ijm7vPa/lCKLd6J3hHQxw==}
+  /@alpinejs/anchor@3.13.7:
+    resolution: {integrity: sha512-Ak5AXwng1wdpbuYglVr7KI8j6Fqh5s4ZQNIK/hDOk0wvnhAmFfNA8r8iuWxN8T0xziBFLAiL+ekWDcZs/bDjjw==}
     dev: false
 
-  /@alpinejs/collapse@3.13.6:
-    resolution: {integrity: sha512-icCBajKn+aUcyStrtJDfJ49WpSAvToF7O843/wguQ2r6YyY8hygqy5rlAgPODM5QXoW14LT3ULoBPHRchRA1OQ==}
+  /@alpinejs/collapse@3.13.7:
+    resolution: {integrity: sha512-/tYSskhj1df8j9T6vTkLVurA5eMtLxlztogYq9Zp2htgR01OFWW09jizDZK0JoMAfQEBiU2c72rdeBFyn9KWEQ==}
     dev: false
 
-  /@alpinejs/focus@3.13.6:
-    resolution: {integrity: sha512-HYEQKtGVHUnpXaUJOlaD7+9ysD6rO93a/f5bAXU345oKCl7Jq7f1pV9t+2+P7edi1de/eSXP3rTdWJvQ/3746g==}
+  /@alpinejs/focus@3.13.7:
+    resolution: {integrity: sha512-fvTXBlQlSSxJpCeRu/9MaMK6zWgvaNN+uZ8ycHBy/R7G6xhGUA1/ymTpulz69n1eIuYPTNjb8EluyTSNN6PeeA==}
     dependencies:
       focus-trap: 6.9.4
       tabbable: 5.3.3
     dev: false
 
-  /@alpinejs/intersect@3.13.6:
-    resolution: {integrity: sha512-RBwJIRpuEQShrXUqJSQIF7fGm6wb2Kf8E/sSP4F9EQUIexGWKs8xGCuK410OQai4DqykOZOc0U8rAxfYSfzaqw==}
+  /@alpinejs/intersect@3.13.7:
+    resolution: {integrity: sha512-McX0TsjVRAFejxQc/e29cm0NfkgTXsAVnRj35iJ5aeDbm085jhr1R00DYp5nmgDO+gBMG0pfFh1TNyOxYdlsiA==}
     dev: false
 
-  /@alpinejs/mask@3.13.6:
-    resolution: {integrity: sha512-PZ8cz5faRoQICMS7fdwWcFhrg/LOcaodF4SOFly0hGaN0L8P2Jfqj4jgn2y487DDhlcVi3uY5a82KTSXuQQVVg==}
+  /@alpinejs/mask@3.13.7:
+    resolution: {integrity: sha512-OBRIkUq0JFkaedY9TOL7s83K8/bdIpXpf6nJdeCVW5zC6hYGOy10cm1qCaSABqgoGWKyR08Oa+jH1TwIcEF8Nw==}
     dev: false
 
-  /@alpinejs/morph@3.13.6:
-    resolution: {integrity: sha512-vSTjb7MAB3g1WvkxPNJWOTCCQXRwn0CX1Z1ZuVFXoM+Ttt7tc+KUchf2fe5Umg/8k37fsp8Gvq0q9Kbdo0aqcA==}
+  /@alpinejs/morph@3.13.7:
+    resolution: {integrity: sha512-lL4DP9tO7TgStQ74dl4SOIEdQQKErJ/enc8Jj3zye0BJhKzx3wlsQNOUzwAKJ/+aEU9fT/KugNTBwArb+YPrdA==}
     dev: false
 
-  /@alpinejs/persist@3.13.6:
-    resolution: {integrity: sha512-o9GeebMWVnhGzEOnKqQYFs5WvP9ShhXS98/rC0ieDMmoRX9sNGDnKg2TKQLkw3mClovPwQgo7si9nfnT7Jpc5w==}
+  /@alpinejs/persist@3.13.7:
+    resolution: {integrity: sha512-H+Hv0gZbMimLSOq6P7w+fJEha6/tvKLlfqg7lHvcZQZ/u6T1d9bfdEDFetDoO1hmQjDnbk3cZwTRmFSW+On/4g==}
     dev: false
 
   /@esbuild/aix-ppc64@0.20.1:
@@ -432,8 +432,8 @@ packages:
       uri-js: 4.4.1
     dev: true
 
-  /alpinejs@3.13.6:
-    resolution: {integrity: sha512-/F7pVR+11r1A0KVw+eY1DcjTFlRQn9arD3p5/2Q4vq0N2WDC/dHpg+Pz7ZMiVQlHE7ZmZmcqTRm1wYTdDLMiEg==}
+  /alpinejs@3.13.7:
+    resolution: {integrity: sha512-rcTyjTANbsePq1hb7eSekt3qjI94HLGeO6JaRjCssCVbIIc+qBrc7pO5S/+2JB6oojIibjM6FA+xRI3zhGPZIg==}
     dependencies:
       '@vue/reactivity': 3.1.5
     dev: false
