@@ -13,6 +13,7 @@ Carbon:
         Mask: false
         Morph: false
         Persist: false
+        Sort: false
       UI:
         Combobox: false
         Dialog: false
