@@ -136,6 +136,13 @@ function handleTab(el, Alpine) {
         ":tabindex"() {
             return this.$tab.isSelected ? 0 : -1;
         },
+        // This is important because we want to only focus the tab when it gets focus
+        // OR it finished the click event (mouseup). However, if you perform a `click`,
+        // then you will first get the `focus` and then get the `click` event.
+        // See https://github.com/tailwindlabs/headlessui/pull/1192
+        "@mousedown"(event) {
+            event.preventDefault();
+        },
         "@focus"() {
             if (this.$data.__manualActivation) {
                 this.$el.focus();
