@@ -23,12 +23,12 @@
     "@alpinejs/persist": "^3.14.3",
     "@alpinejs/resize": "^3.14.3",
     "@alpinejs/sort": "^3.14.3",
-    "@floating-ui/dom": "^1.6.11",
+    "@floating-ui/dom": "^1.6.12",
     "alpinejs": "^3.14.3"
   },
   "devDependencies": {
     "esbuild": "^0.24.0",
-    "eslint": "^9.12.0",
+    "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "prettier": "^3.3.3"
