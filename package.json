@@ -14,23 +14,23 @@
     "dev": "node build.mjs"
   },
   "dependencies": {
-    "@alpinejs/anchor": "^3.14.3",
-    "@alpinejs/collapse": "^3.14.3",
-    "@alpinejs/focus": "^3.14.3",
-    "@alpinejs/intersect": "^3.14.3",
-    "@alpinejs/mask": "^3.14.3",
-    "@alpinejs/morph": "^3.14.3",
-    "@alpinejs/persist": "^3.14.3",
-    "@alpinejs/resize": "^3.14.3",
-    "@alpinejs/sort": "^3.14.3",
+    "@alpinejs/anchor": "^3.14.5",
+    "@alpinejs/collapse": "^3.14.5",
+    "@alpinejs/focus": "^3.14.5",
+    "@alpinejs/intersect": "^3.14.5",
+    "@alpinejs/mask": "^3.14.5",
+    "@alpinejs/morph": "^3.14.5",
+    "@alpinejs/persist": "^3.14.5",
+    "@alpinejs/resize": "^3.14.5",
+    "@alpinejs/sort": "^3.14.5",
     "@floating-ui/dom": "^1.6.12",
-    "alpinejs": "^3.14.3"
+    "alpinejs": "^3.14.5"
   },
   "devDependencies": {
     "esbuild": "^0.24.0",
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "prettier": "^3.3.3"
+    "prettier": "^3.4.1"
   }
 }
