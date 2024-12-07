@@ -14,17 +14,17 @@
     "dev": "node build.mjs"
   },
   "dependencies": {
-    "@alpinejs/anchor": "^3.14.6",
-    "@alpinejs/collapse": "^3.14.6",
-    "@alpinejs/focus": "^3.14.6",
-    "@alpinejs/intersect": "^3.14.6",
-    "@alpinejs/mask": "^3.14.6",
-    "@alpinejs/morph": "^3.14.6",
-    "@alpinejs/persist": "^3.14.6",
-    "@alpinejs/resize": "^3.14.6",
-    "@alpinejs/sort": "^3.14.6",
+    "@alpinejs/anchor": "^3.14.7",
+    "@alpinejs/collapse": "^3.14.7",
+    "@alpinejs/focus": "^3.14.7",
+    "@alpinejs/intersect": "^3.14.7",
+    "@alpinejs/mask": "^3.14.7",
+    "@alpinejs/morph": "^3.14.7",
+    "@alpinejs/persist": "^3.14.7",
+    "@alpinejs/resize": "^3.14.7",
+    "@alpinejs/sort": "^3.14.7",
     "@floating-ui/dom": "^1.6.12",
-    "alpinejs": "^3.14.6"
+    "alpinejs": "^3.14.7"
   },
   "devDependencies": {
     "esbuild": "^0.24.0",
