@@ -8,7 +8,6 @@ import { computePosition, autoUpdate, flip, offset, shift, arrow, hide } from "@
 
 // If you want to fetch content you can set the data-tooltip-fetch attribute to a URL, e.g. x-tooltip data-tooltip-fetch="{url: 'internal/site', text: "Loading…" }"
 
-
 // Element tooltip be absolute positioned (with left:0 and top: 0) and have opacity 0
 /*
 The trigger element could look like this
@@ -61,7 +60,7 @@ const fixedModifier = "fixed";
 
 const padding = 5;
 
-let tooltipText: string|null;
+let tooltipText: string | null;
 let referenceEl: Element;
 let placement = "top";
 let cleanup: () => void;
@@ -136,8 +135,7 @@ export default function (Alpine) {
                     }
                     hasContent = false;
                     hideTooltip();
-                }
-                );
+                });
         }
 
         function updatePosition() {
@@ -259,7 +257,6 @@ export default function (Alpine) {
             "x-init"() {
                 this.$nextTick(() => {
                     const elements = [...element.querySelectorAll(`:where([${attributes.join("],[")}])`)];
-                    console.log(elements)
                     elements.forEach((element) => {
                         if (!tooltipIsSet(element)) {
                             element.setAttribute(xTooltipAttribute + modifier, expression);
