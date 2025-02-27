@@ -6,6 +6,9 @@ import { computePosition, autoUpdate, flip, offset, shift, arrow, hide } from "@
 // The modifier focus will show the tooltip on focus and hide it on blur (e.g. x-tooltip.focus)
 // If inside a x-tooltips element an element has already x-tooltip it will not be overwritten
 
+// If you want to fetch content you can set the data-tooltip-fetch attribute to a URL, e.g. x-tooltip data-tooltip-fetch="{url: 'internal/site', text: "Loading…" }"
+
+
 // Element tooltip be absolute positioned (with left:0 and top: 0) and have opacity 0
 /*
 The trigger element could look like this
@@ -48,7 +51,8 @@ With the offset modifier you can set the offset of the tooltip to the trigger el
 
 */
 const xTooltipAttribute = "x-tooltip";
-const attributes = ["data-tooltip", "aria-label", "title"];
+const fetchAttribute = "data-tooltip-fetch";
+const attributes = [fetchAttribute, "data-tooltip", "aria-label", "title"];
 const stayModifier = "stay-on-click";
 const focusModifier = "focus";
 const offsetModifier = "offset";
@@ -57,7 +61,7 @@ const fixedModifier = "fixed";
 
 const padding = 5;
 
-let tooltipText: string;
+let tooltipText: string|null;
 let referenceEl: Element;
 let placement = "top";
 let cleanup: () => void;
@@ -89,6 +93,7 @@ export default function (Alpine) {
             : 6;
         const stayOnClick = modifiers.includes(stayModifier);
         const focusAction = modifiers.includes(focusModifier);
+        let hasContent = true;
 
         const middleware = [offset(offsetValue), flip(), shift({ padding })];
         if (arrowElement) {
@@ -102,10 +107,37 @@ export default function (Alpine) {
                 console.warn("No tooltip content found");
                 return;
             }
-            // @ts-ignore
+
             tooltipText = referenceEl.getAttribute(attribute);
-            // @ts-ignore
-            tooltipContent.textContent = tooltipText;
+            if (!tooltipText || !tooltipContent) {
+                hasContent = false;
+                hideTooltip();
+                return;
+            }
+
+            if (attribute !== fetchAttribute) {
+                tooltipContent.textContent = tooltipText;
+                return;
+            }
+
+            const { url, text } = evaluate(tooltipText);
+            if (!url) {
+                hasContent = false;
+                hideTooltip();
+                return;
+            }
+            tooltipContent.innerHTML = text || "";
+            fetch(url)
+                .then((response) => response.text())
+                .then((html) => {
+                    if (html) {
+                        tooltipContent.innerHTML = html;
+                        return;
+                    }
+                    hasContent = false;
+                    hideTooltip();
+                }
+                );
         }
 
         function updatePosition() {
@@ -151,6 +183,9 @@ export default function (Alpine) {
         }
 
         function showTooltip(element, expression) {
+            if (!hasContent) {
+                return;
+            }
             referenceEl = element;
             placement = expression || "top";
             // @ts-ignore
@@ -224,6 +259,7 @@ export default function (Alpine) {
             "x-init"() {
                 this.$nextTick(() => {
                     const elements = [...element.querySelectorAll(`:where([${attributes.join("],[")}])`)];
+                    console.log(elements)
                     elements.forEach((element) => {
                         if (!tooltipIsSet(element)) {
                             element.setAttribute(xTooltipAttribute + modifier, expression);
