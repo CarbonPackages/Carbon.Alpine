@@ -23,17 +23,17 @@
     "@alpinejs/persist": "^3.14.9",
     "@alpinejs/resize": "^3.14.9",
     "@alpinejs/sort": "^3.14.9",
-    "@floating-ui/dom": "^1.6.13",
+    "@floating-ui/dom": "^1.7.3",
     "alpinejs": "^3.14.9"
   },
   "devDependencies": {
-    "@eslint/js": "^9.22.0",
-    "esbuild": "^0.25.1",
-    "eslint": "^9.22.0",
-    "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-prettier": "^5.2.3",
-    "globals": "^16.0.0",
-    "prettier": "^3.5.3"
+    "@eslint/js": "^9.32.0",
+    "esbuild": "^0.25.8",
+    "eslint": "^9.32.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "globals": "^16.3.0",
+    "prettier": "^3.6.2"
   },
-  "packageManager": "pnpm@9.15.1+sha512.1acb565e6193efbebda772702950469150cf12bcc764262e7587e71d19dc98a423dff9536e57ea44c49bdf790ff694e83c27be5faa23d67e0c033b583be4bfcf"
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
 }
