@@ -9,54 +9,54 @@ importers:
   .:
     dependencies:
       '@alpinejs/anchor':
-        specifier: ^3.14.9
-        version: 3.14.9
+        specifier: ^3.15.0
+        version: 3.15.0
       '@alpinejs/collapse':
-        specifier: ^3.14.9
-        version: 3.14.9
+        specifier: ^3.15.0
+        version: 3.15.0
       '@alpinejs/focus':
-        specifier: ^3.14.9
-        version: 3.14.9
+        specifier: ^3.15.0
+        version: 3.15.0
       '@alpinejs/intersect':
-        specifier: ^3.14.9
-        version: 3.14.9
+        specifier: ^3.15.0
+        version: 3.15.0
       '@alpinejs/mask':
-        specifier: ^3.14.9
-        version: 3.14.9
+        specifier: ^3.15.0
+        version: 3.15.0
       '@alpinejs/morph':
-        specifier: ^3.14.9
-        version: 3.14.9
+        specifier: ^3.15.0
+        version: 3.15.0
       '@alpinejs/persist':
-        specifier: ^3.14.9
-        version: 3.14.9
+        specifier: ^3.15.0
+        version: 3.15.0
       '@alpinejs/resize':
-        specifier: ^3.14.9
-        version: 3.14.9
+        specifier: ^3.15.0
+        version: 3.15.0
       '@alpinejs/sort':
-        specifier: ^3.14.9
-        version: 3.14.9
+        specifier: ^3.15.0
+        version: 3.15.0
       '@floating-ui/dom':
-        specifier: ^1.7.3
-        version: 1.7.3
+        specifier: ^1.7.4
+        version: 1.7.4
       alpinejs:
-        specifier: ^3.14.9
-        version: 3.14.9
+        specifier: ^3.15.0
+        version: 3.15.0
     devDependencies:
       '@eslint/js':
-        specifier: ^9.33.0
-        version: 9.33.0
+        specifier: ^9.34.0
+        version: 9.34.0
       esbuild:
         specifier: ^0.25.9
         version: 0.25.9
       eslint:
-        specifier: ^9.33.0
-        version: 9.33.0
+        specifier: ^9.34.0
+        version: 9.34.0
       eslint-config-prettier:
         specifier: ^10.1.8
-        version: 10.1.8(eslint@9.33.0)
+        version: 10.1.8(eslint@9.34.0)
       eslint-plugin-prettier:
         specifier: ^5.5.4
-        version: 5.5.4(eslint-config-prettier@10.1.8(eslint@9.33.0))(eslint@9.33.0)(prettier@3.6.2)
+        version: 5.5.4(eslint-config-prettier@10.1.8(eslint@9.34.0))(eslint@9.34.0)(prettier@3.6.2)
       globals:
         specifier: ^16.3.0
         version: 16.3.0
@@ -66,32 +66,32 @@ importers:
 
 packages:
 
-  '@alpinejs/anchor@3.14.9':
-    resolution: {integrity: sha512-rx/ayMtLgtInXiY6zIikWM6+23uqGdp/zqpzlKp86P8s4+q9famgcO5NXIAXbAai1DV9Ec0QIpV+j3Wl/U1U+A==}
+  '@alpinejs/anchor@3.15.0':
+    resolution: {integrity: sha512-mIeSL/3BNYE37t7B7DTHL0nD3QK87YIwBpYutFyBNyA4JmUu8yYGVkQQb+AXYLU+k/5EYMG1ttk7IMlUP+/MeQ==}
 
-  '@alpinejs/collapse@3.14.9':
-    resolution: {integrity: sha512-cUjbBVo4KR/CfFg0cLB+Q7a8SnjmD4MdxmtZvFjh25Dlf/ZWYPSPx/28b+aAykuX/SUoDPQRmdFiVVvq+iILHw==}
+  '@alpinejs/collapse@3.15.0':
+    resolution: {integrity: sha512-RREZVE67/2E7rDZIxw3B5BGAFBm1x/16+3jeyjj+Fky4wPBqnhGCQZujkiggrOmdU6mcZPixYxkKFlhKfQMAXw==}
 
-  '@alpinejs/focus@3.14.9':
-    resolution: {integrity: sha512-+OMOcdkyEUr3gYWD0ZVqojLotI9D67F5BxGesDfZcPaGtNifXMoq0vt0UVDivGnXQXosOfNpO++GF4NzGrWE9Q==}
+  '@alpinejs/focus@3.15.0':
+    resolution: {integrity: sha512-Cm9vop09oNFw7T9SEBcfijrTdSN1aBNHK3cN4mB52eKvi9z5pa+xcyN+6S3FmZ44MR/u81JXa6hi5CjX1iy6dA==}
 
-  '@alpinejs/intersect@3.14.9':
-    resolution: {integrity: sha512-6LLIqrESA5kxuTbDJshtItfHmZoiiDOpf8lOeRrNtYjSj/FkggDpnjD+ZFGF5btEOVSpWic2VmG2BejR/aMxDw==}
+  '@alpinejs/intersect@3.15.0':
+    resolution: {integrity: sha512-K9ax9F4u0iQbWIlR1TFeXYmHN20n6fWyfCt/GlDb0qCEwRITOmd3xF7uZDAB706OgImIJBLulC5DSEcfrNNCWw==}
 
-  '@alpinejs/mask@3.14.9':
-    resolution: {integrity: sha512-duuEo1tkrpxqBXISXWU6y4pnIdp22OzmgrQ0Q+W4R/mG2545rl360ihI3Dolbv2dS2E3C0sFsmS0pZcpFaGOZw==}
+  '@alpinejs/mask@3.15.0':
+    resolution: {integrity: sha512-BNM/nGpH5f+8ICdq+HK2h2cmwz+ZYHMNKmc6zNMzf9Bzzuq8li1jZmscbgT4vO0wJxAg/Rd0rgX5vr2Fgc8J2w==}
 
-  '@alpinejs/morph@3.14.9':
-    resolution: {integrity: sha512-i1mrH5Gza/egszxnCVwQWypRhsKGq28RFWHWuW7aI0+rWo1pvFw+aPhJLImbpt7hx44DtDOr5m4l9Ah+JPFmFw==}
+  '@alpinejs/morph@3.15.0':
+    resolution: {integrity: sha512-J53MBtCc8ZjJtuG4aQZUHQ6c9xX/Cn6q7sXFT3A0kvdwNeSmQy19bknE55vJgIuzuTLOVnBMzeNUsbd2XZNK4w==}
 
-  '@alpinejs/persist@3.14.9':
-    resolution: {integrity: sha512-Td9hWEUtFFguYCRjXhq06sDultW21wXUnVro7YWJm+vjGu/nV/v3hepOXyYVjkGvH/F+zjx5UkzWXXzr3UiQ/w==}
+  '@alpinejs/persist@3.15.0':
+    resolution: {integrity: sha512-SmW1DWn9FRflfPqZZtpTq+2uXDq/ohbSiKmYg6HXX1UxQnsaSkTT0HT72SQcbqOC3WmIUF28CberBnwiWoqmpw==}
 
-  '@alpinejs/resize@3.14.9':
-    resolution: {integrity: sha512-UmKDn8MiuBLQxhohidze3NniMmXwFkLoul+IWnCDZO1mPCR0Q4227wjAYyj0P8pQwgARMUTiHrwdpYUId3vtnA==}
+  '@alpinejs/resize@3.15.0':
+    resolution: {integrity: sha512-c/9PnQtsJ6iTeMnSaxgX3DDCjZX38WSOFlZd1OLm1iqngfwteYWxzSjMI4IqLxb7vmKAtrofAVs+sxt5IBOCBg==}
 
-  '@alpinejs/sort@3.14.9':
-    resolution: {integrity: sha512-lzd0pQT3CmZmosinej4aEtxzPO/GhfKzzb7Klku1oPHsmDv3ItnxBQ8xI+r4fvHmWfFykp1XYGpDrZWu0BcWMQ==}
+  '@alpinejs/sort@3.15.0':
+    resolution: {integrity: sha512-ayRmcuGvqL2t9otuUiLaq6Rx8lYHAVok4TXdSXF97tcTaGLA1DN3/mwone8amCLlBar8FwVE6vak/4AtwRpWjw==}
 
   '@esbuild/aix-ppc64@0.25.9':
     resolution: {integrity: sha512-OaGtL73Jck6pBKjNIe24BnFE6agGl+6KxDtTfHhy1HmhthfKouEcOhqpSL64K4/0WCtbKFLOdzD/44cJ4k9opA==}
@@ -249,8 +249,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@eslint-community/eslint-utils@4.7.0':
-    resolution: {integrity: sha512-dyybb3AcajC7uha6CvhdVRJqaKyn7w2YKqKyAN37NKYgZT36w+iRb0Dymmc5qEJ549c/S31cMMSFd75bteCpCw==}
+  '@eslint-community/eslint-utils@4.8.0':
+    resolution: {integrity: sha512-MJQFqrZgcW0UNYLGOuQpey/oTN59vyWwplvCGZztn1cKz9agZPPYpJB7h2OMmuu7VLqkvEjN8feFZJmxNF9D+Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
@@ -275,8 +275,8 @@ packages:
     resolution: {integrity: sha512-gtF186CXhIl1p4pJNGZw8Yc6RlshoePRvE0X91oPGb3vZ8pM3qOS9W9NGPat9LziaBV7XrJWGylNQXkGcnM3IQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/js@9.33.0':
-    resolution: {integrity: sha512-5K1/mKhWaMfreBGJTwval43JJmkip0RmM+3+IuqupeSKNC/Th2Kc7ucaq5ovTSra/OOKB9c58CGSz3QMVbWt0A==}
+  '@eslint/js@9.34.0':
+    resolution: {integrity: sha512-EoyvqQnBNsV1CWaEJ559rxXL4c8V92gxirbawSmVUOWXlsRxxQXl6LmCpdUblgxgSkDIqKnhzba2SjRTI/A5Rw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.6':
@@ -290,8 +290,8 @@ packages:
   '@floating-ui/core@1.7.3':
     resolution: {integrity: sha512-sGnvb5dmrJaKEZ+LDIpguvdX3bDlEllmv4/ClQ9awcmCZrlx5jQyyMWFM5kBI+EyNOCDDiKk8il0zeuX3Zlg/w==}
 
-  '@floating-ui/dom@1.7.3':
-    resolution: {integrity: sha512-uZA413QEpNuhtb3/iIKoYMSK07keHPYeXF02Zhd6e213j+d1NamLix/mCLxBUDW/Gx52sPH2m+chlUsyaBs/Ag==}
+  '@floating-ui/dom@1.7.4':
+    resolution: {integrity: sha512-OOchDgh4F2CchOX94cRVqhvy7b3AFb+/rQXyswmzmGakRfkMgoWVjfnLWkRirfLEfuD4ysVW16eXzwt3jHIzKA==}
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
@@ -300,17 +300,13 @@ packages:
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
     engines: {node: '>=18.18.0'}
 
-  '@humanfs/node@0.16.6':
-    resolution: {integrity: sha512-YuI2ZHQL78Q5HbhDiBA1X4LmYdXCKCMQIfw0pw7piHJwyREFebJUvrQN4cMssyES6x+vfUbx1CIpaQUKYdQZOw==}
+  '@humanfs/node@0.16.7':
+    resolution: {integrity: sha512-/zUx+yOsIrG4Y43Eh2peDeKCxlRt/gET6aHfaKpuq267qXdYDFViVHfMaLyygZOnl0kGWxFIgsBy8QFuTLUXEQ==}
     engines: {node: '>=18.18.0'}
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
     engines: {node: '>=12.22'}
-
-  '@humanwhocodes/retry@0.3.1':
-    resolution: {integrity: sha512-JBxkERygn7Bv/GbN5Rv8Ul6LVknS+5Bp6RgDC/O8gEBU/yeH5Ui5C/OlWrTb6qct7LjjfT6Re2NxB0ln0yYybA==}
-    engines: {node: '>=18.18'}
 
   '@humanwhocodes/retry@0.4.3':
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
@@ -345,8 +341,8 @@ packages:
   ajv@6.12.6:
     resolution: {integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==}
 
-  alpinejs@3.14.9:
-    resolution: {integrity: sha512-gqSOhTEyryU9FhviNqiHBHzgjkvtukq9tevew29fTj+ofZtfsYriw4zPirHHOAy9bw8QoL3WGhyk7QqCh5AYlw==}
+  alpinejs@3.15.0:
+    resolution: {integrity: sha512-lpokA5okCF1BKh10LG8YjqhfpxyHBk4gE7boIgVHltJzYoM7O9nK3M7VlntLEJGsVmu7U/RzUWajmHREGT38Eg==}
 
   ansi-styles@4.3.0:
     resolution: {integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==}
@@ -436,8 +432,8 @@ packages:
     resolution: {integrity: sha512-Uhdk5sfqcee/9H/rCOJikYz67o0a2Tw2hGRPOG2Y1R2dg7brRe1uG0yaNQDHu+TO/uQPF/5eCapvYSmHUjt7JQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  eslint@9.33.0:
-    resolution: {integrity: sha512-TS9bTNIryDzStCpJN93aC5VRSW3uTx9sClUn4B87pwiCaJh220otoI0X8mJKr+VcPtniMdN8GKjlwgWGUv5ZKA==}
+  eslint@9.34.0:
+    resolution: {integrity: sha512-RNCHRX5EwdrESy3Jc9o8ie8Bog+PeYvvSR8sDGoZxNFTvZ4dlxUB3WzQ3bQMztFrSRODGrLLj8g6OFuGY/aiQg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     hasBin: true
     peerDependencies:
@@ -661,26 +657,26 @@ packages:
 
 snapshots:
 
-  '@alpinejs/anchor@3.14.9': {}
+  '@alpinejs/anchor@3.15.0': {}
 
-  '@alpinejs/collapse@3.14.9': {}
+  '@alpinejs/collapse@3.15.0': {}
 
-  '@alpinejs/focus@3.14.9':
+  '@alpinejs/focus@3.15.0':
     dependencies:
       focus-trap: 6.9.4
       tabbable: 5.3.3
 
-  '@alpinejs/intersect@3.14.9': {}
+  '@alpinejs/intersect@3.15.0': {}
 
-  '@alpinejs/mask@3.14.9': {}
+  '@alpinejs/mask@3.15.0': {}
 
-  '@alpinejs/morph@3.14.9': {}
+  '@alpinejs/morph@3.15.0': {}
 
-  '@alpinejs/persist@3.14.9': {}
+  '@alpinejs/persist@3.15.0': {}
 
-  '@alpinejs/resize@3.14.9': {}
+  '@alpinejs/resize@3.15.0': {}
 
-  '@alpinejs/sort@3.14.9': {}
+  '@alpinejs/sort@3.15.0': {}
 
   '@esbuild/aix-ppc64@0.25.9':
     optional: true
@@ -760,9 +756,9 @@ snapshots:
   '@esbuild/win32-x64@0.25.9':
     optional: true
 
-  '@eslint-community/eslint-utils@4.7.0(eslint@9.33.0)':
+  '@eslint-community/eslint-utils@4.8.0(eslint@9.34.0)':
     dependencies:
-      eslint: 9.33.0
+      eslint: 9.34.0
       eslint-visitor-keys: 3.4.3
 
   '@eslint-community/regexpp@4.12.1': {}
@@ -795,7 +791,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@eslint/js@9.33.0': {}
+  '@eslint/js@9.34.0': {}
 
   '@eslint/object-schema@2.1.6': {}
 
@@ -808,7 +804,7 @@ snapshots:
     dependencies:
       '@floating-ui/utils': 0.2.10
 
-  '@floating-ui/dom@1.7.3':
+  '@floating-ui/dom@1.7.4':
     dependencies:
       '@floating-ui/core': 1.7.3
       '@floating-ui/utils': 0.2.10
@@ -817,14 +813,12 @@ snapshots:
 
   '@humanfs/core@0.19.1': {}
 
-  '@humanfs/node@0.16.6':
+  '@humanfs/node@0.16.7':
     dependencies:
       '@humanfs/core': 0.19.1
-      '@humanwhocodes/retry': 0.3.1
+      '@humanwhocodes/retry': 0.4.3
 
   '@humanwhocodes/module-importer@1.0.1': {}
-
-  '@humanwhocodes/retry@0.3.1': {}
 
   '@humanwhocodes/retry@0.4.3': {}
 
@@ -853,7 +847,7 @@ snapshots:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  alpinejs@3.14.9:
+  alpinejs@3.15.0:
     dependencies:
       '@vue/reactivity': 3.1.5
 
@@ -928,18 +922,18 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-config-prettier@10.1.8(eslint@9.33.0):
+  eslint-config-prettier@10.1.8(eslint@9.34.0):
     dependencies:
-      eslint: 9.33.0
+      eslint: 9.34.0
 
-  eslint-plugin-prettier@5.5.4(eslint-config-prettier@10.1.8(eslint@9.33.0))(eslint@9.33.0)(prettier@3.6.2):
+  eslint-plugin-prettier@5.5.4(eslint-config-prettier@10.1.8(eslint@9.34.0))(eslint@9.34.0)(prettier@3.6.2):
     dependencies:
-      eslint: 9.33.0
+      eslint: 9.34.0
       prettier: 3.6.2
       prettier-linter-helpers: 1.0.0
       synckit: 0.11.11
     optionalDependencies:
-      eslint-config-prettier: 10.1.8(eslint@9.33.0)
+      eslint-config-prettier: 10.1.8(eslint@9.34.0)
 
   eslint-scope@8.4.0:
     dependencies:
@@ -950,17 +944,17 @@ snapshots:
 
   eslint-visitor-keys@4.2.1: {}
 
-  eslint@9.33.0:
+  eslint@9.34.0:
     dependencies:
-      '@eslint-community/eslint-utils': 4.7.0(eslint@9.33.0)
+      '@eslint-community/eslint-utils': 4.8.0(eslint@9.34.0)
       '@eslint-community/regexpp': 4.12.1
       '@eslint/config-array': 0.21.0
       '@eslint/config-helpers': 0.3.1
       '@eslint/core': 0.15.2
       '@eslint/eslintrc': 3.3.1
-      '@eslint/js': 9.33.0
+      '@eslint/js': 9.34.0
       '@eslint/plugin-kit': 0.3.5
-      '@humanfs/node': 0.16.6
+      '@humanfs/node': 0.16.7
       '@humanwhocodes/module-importer': 1.0.1
       '@humanwhocodes/retry': 0.4.3
       '@types/estree': 1.0.8
