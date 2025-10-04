@@ -1,5 +1,3 @@
-const pathname = window.location.pathname;
-
 export default function (Alpine) {
     // x-data="fetch(url, notification, maxItems, showErrorIfNoMarkup, insertMode)"
     // insertMode: replace | beforeBegin | afterBegin | beforeEnd | afterEnd
@@ -49,7 +47,7 @@ export default function (Alpine) {
                         // Write entries to object with key as path (This removes duplicates)
                         data.forEach((group) => {
                             group.forEach((item) => {
-                                if (item.url != pathname) {
+                                if (item.url != window.location.pathname) {
                                     entries[item.url] = item.markup;
                                 }
                             });
