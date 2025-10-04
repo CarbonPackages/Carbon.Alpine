@@ -33,6 +33,7 @@ watch:
 
 ## Check for upgrades
 upgrade:
+	@corepack use pnpm@latest;pnpm upgrade
 	@pnpm up --latest --interactive
 
 
