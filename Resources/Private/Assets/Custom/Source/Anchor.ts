@@ -43,7 +43,7 @@ export default function (Alpine: AlpineType) {
                 }
 
                 if (expression == "mouse") {
-                    const mouseEventFunction = (position: { clientX: any; clientY: any; }) => {
+                    const mouseEventFunction = (position: { clientX: any; clientY: any }) => {
                         const reference = createVirtualElement(position);
                         initComputePosition({ reference, el, placement, middleware, unstyled, arrowOptions });
                     };

@@ -3,7 +3,7 @@ import { Alpine as AlpineType } from "alpinejs";
 type ItemType = {
     url: string;
     markup: string;
-}
+};
 
 type InsertMode = "replace" | "beforebegin" | "afterbegin" | "beforeend" | "afterend";
 
@@ -13,7 +13,14 @@ export default function (Alpine: AlpineType) {
     // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
     Alpine.data(
         "fetch",
-        (url: string, notfication: string, maxItems: number, showErrorIfNoMarkup: false, insertMode: InsertMode = "replace", filter = true) => ({
+        (
+            url: string,
+            notfication: string,
+            maxItems: number,
+            showErrorIfNoMarkup: false,
+            insertMode: InsertMode = "replace",
+            filter = true,
+        ) => ({
             noMarkup: false,
             target: null as HTMLElement | null,
             fetched: false,

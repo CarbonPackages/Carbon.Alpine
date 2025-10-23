@@ -89,7 +89,7 @@ export default function (Alpine: AlpineType) {
         }
 
         const offsetValue = modifiers.includes(offsetModifier)
-            ? evaluate(modifiers[modifiers.indexOf(offsetModifier) + 1]) as number
+            ? (evaluate(modifiers[modifiers.indexOf(offsetModifier) + 1]) as number)
             : 6;
         const stayOnClick = modifiers.includes(stayModifier);
         const focusAction = modifiers.includes(focusModifier);

@@ -1,7 +1,7 @@
 import { Alpine as AlpineType, ElementWithXAttributes } from "alpinejs";
 
 export default function (Alpine: AlpineType) {
-    Alpine.directive("counter", (el: ElementWithXAttributes, { expression, modifiers }, { evaluate }) =>{
+    Alpine.directive("counter", (el: ElementWithXAttributes, { expression, modifiers }, { evaluate }) => {
         expression = evaluate(expression);
         let duration = 0;
         const modifierValue = modifiers[1];
