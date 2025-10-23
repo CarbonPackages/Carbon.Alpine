@@ -1,3 +1,4 @@
+import { Alpine as AlpineType } from "alpinejs";
 import { computePosition, autoUpdate, flip, offset, shift, arrow, hide } from "@floating-ui/dom";
 
 // x-tooltip adds a tooltip to an element, width x-tooltip="placement" (top, left, right, bottom, etc) will set the placement
@@ -66,7 +67,7 @@ let placement = "top";
 let cleanup: () => void;
 let timeout = 0;
 
-export default function (Alpine) {
+export default function (Alpine: AlpineType) {
     // Directive: x-tooltip
     Alpine.directive("tooltip", (element, { expression, modifiers }, { evaluate }) => {
         const strategy = modifiers.includes(fixedModifier) ? "fixed" : "absolute";
@@ -88,7 +89,7 @@ export default function (Alpine) {
         }
 
         const offsetValue = modifiers.includes(offsetModifier)
-            ? evaluate(modifiers[modifiers.indexOf(offsetModifier) + 1])
+            ? evaluate(modifiers[modifiers.indexOf(offsetModifier) + 1]) as number
             : 6;
         const stayOnClick = modifiers.includes(stayModifier);
         const focusAction = modifiers.includes(focusModifier);
@@ -119,7 +120,7 @@ export default function (Alpine) {
                 return;
             }
 
-            const { url, text } = evaluate(tooltipText);
+            const { url, text } = evaluate(tooltipText) as { url?: string; text?: string };
             if (!url) {
                 hasContent = false;
                 hideTooltip();
@@ -180,7 +181,7 @@ export default function (Alpine) {
             });
         }
 
-        function showTooltip(element, expression) {
+        function showTooltip(element: Element, expression: string) {
             if (!hasContent) {
                 return;
             }
@@ -233,7 +234,7 @@ export default function (Alpine) {
                     hideTooltip();
                     return;
                 }
-                this.$nextTick(() => {
+                (this as any).$nextTick(() => {
                     updateContent();
                 });
             },
@@ -255,7 +256,7 @@ export default function (Alpine) {
         const modifier = modifiers.length ? `.${modifiers.join(".")}` : "";
         Alpine.bind(element, {
             "x-init"() {
-                this.$nextTick(() => {
+                (this as any).$nextTick(() => {
                     const elements = [...element.querySelectorAll(`:where([${attributes.join("],[")}])`)];
                     elements.forEach((element) => {
                         if (!tooltipIsSet(element)) {
@@ -276,7 +277,7 @@ const possibleXTooltipAttributes = [
     `${xTooltipAttribute}.${focusModifier}.${stayModifier}`,
 ];
 
-function tooltipIsSet(element) {
+function tooltipIsSet(element: Element) {
     return possibleXTooltipAttributes.some((attribute) => !!element.hasAttribute(attribute));
 }
 
@@ -291,7 +292,7 @@ function getElements(id = "tooltip") {
     return { floatingEl, arrowElement, tooltipContent };
 }
 
-function roundByDPR(value) {
+function roundByDPR(value: number) {
     const dpr = window.devicePixelRatio || 1;
     return Math.round(value * dpr) / dpr;
 }

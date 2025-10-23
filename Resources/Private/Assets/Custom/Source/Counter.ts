@@ -1,5 +1,7 @@
-export default function (Alpine) {
-    Alpine.directive("counter", (el, { expression, modifiers }, { evaluate }) => {
+import { Alpine as AlpineType, ElementWithXAttributes } from "alpinejs";
+
+export default function (Alpine: AlpineType) {
+    Alpine.directive("counter", (el: ElementWithXAttributes, { expression, modifiers }, { evaluate }) =>{
         expression = evaluate(expression);
         let duration = 0;
         const modifierValue = modifiers[1];
@@ -22,14 +24,14 @@ export default function (Alpine) {
                 if (typeof expression !== "number") {
                     return;
                 }
-                this.countTo = expression;
-                this.useEase = expression > 10;
+                (this as any).countTo = expression;
+                (this as any).useEase = expression > 10;
 
                 // How long you want the animation to take, in ms
                 if (!duration) {
-                    duration = this.useEase ? 2000 : 1000;
+                    duration = (this as any).useEase ? 2000 : 1000;
                 }
-                this.totalFrames = Math.round(duration / frameDuration);
+                (this as any).totalFrames = Math.round(duration / frameDuration);
             },
 
             "x-intersect.full.once"() {
@@ -40,25 +42,25 @@ export default function (Alpine) {
                     // Calculate our progress as a value between 0 and 1
                     // Pass that value to our easing function to get our
                     // progress on a curve
-                    const progressValue = frame / this.totalFrames;
+                    const progressValue = frame / (this as any).totalFrames;
 
-                    const progress = this.useEase ? ease(progressValue) : progressValue;
+                    const progress = (this as any).useEase ? ease(progressValue) : progressValue;
                     // Use the progress value to calculate the current count
-                    const currentCount = Math.round(this.countTo * progress);
+                    const currentCount = Math.round((this as any).countTo * progress);
 
                     // If the current count has changed, update the element
-                    if (this.current !== currentCount) {
-                        this.current = currentCount;
+                    if ((this as any).current !== currentCount) {
+                        (this as any).current = currentCount;
                     }
 
                     // If we’ve reached our last frame, stop the animation
-                    if (frame === this.totalFrames) {
+                    if (frame === (this as any).totalFrames) {
                         counter.clear();
                     }
                 }, frameDuration);
             },
             "x-text"() {
-                return formatThousands(this.current);
+                return formatThousands((this as any).current);
             },
         });
     });

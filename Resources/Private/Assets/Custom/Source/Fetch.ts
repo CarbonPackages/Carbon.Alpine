@@ -1,14 +1,23 @@
-export default function (Alpine) {
+import { Alpine as AlpineType } from "alpinejs";
+
+type ItemType = {
+    url: string;
+    markup: string;
+}
+
+type InsertMode = "replace" | "beforebegin" | "afterbegin" | "beforeend" | "afterend";
+
+export default function (Alpine: AlpineType) {
     // x-data="fetch(url, notification, maxItems, showErrorIfNoMarkup, insertMode)"
     // insertMode: replace | beforeBegin | afterBegin | beforeEnd | afterEnd
     // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
     Alpine.data(
         "fetch",
-        (url: string, notfication: string, maxItems: number, showErrorIfNoMarkup: false, insertMode = "replace") => ({
+        (url: string, notfication: string, maxItems: number, showErrorIfNoMarkup: false, insertMode: InsertMode = "replace") => ({
             noMarkup: false,
-            target: null,
+            target: null as HTMLElement | null,
             fetched: false,
-            noContentFound(errorMessage) {
+            noContentFound(errorMessage: any) {
                 this.$dispatch("fetch-no-content", { url, element: this.$el, target: this.target });
 
                 if (errorMessage) {
@@ -43,10 +52,10 @@ export default function (Alpine) {
                     ),
                 )
                     .then((data) => {
-                        let entries = {};
+                        let entries: { [key: string]: string } = {};
                         // Write entries to object with key as path (This removes duplicates)
                         data.forEach((group) => {
-                            group.forEach((item) => {
+                            group.forEach((item: ItemType) => {
                                 if (item.url != window.location.pathname) {
                                     entries[item.url] = item.markup;
                                 }
@@ -65,7 +74,7 @@ export default function (Alpine) {
                             if (showErrorIfNoMarkup) {
                                 throw new Error("No Markup found");
                             }
-                            this.noContentFound();
+                            this.noContentFound(null);
                             return;
                         }
                         this.fetched = true;
