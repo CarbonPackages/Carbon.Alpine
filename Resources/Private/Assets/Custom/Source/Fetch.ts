@@ -8,12 +8,12 @@ type ItemType = {
 type InsertMode = "replace" | "beforebegin" | "afterbegin" | "beforeend" | "afterend";
 
 export default function (Alpine: AlpineType) {
-    // x-data="fetch(url, notification, maxItems, showErrorIfNoMarkup, insertMode)"
+    // x-data="fetch(url, notification, maxItems, showErrorIfNoMarkup, insertMode, filter)"
     // insertMode: replace | beforeBegin | afterBegin | beforeEnd | afterEnd
     // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
     Alpine.data(
         "fetch",
-        (url: string, notfication: string, maxItems: number, showErrorIfNoMarkup: false, insertMode: InsertMode = "replace") => ({
+        (url: string, notfication: string, maxItems: number, showErrorIfNoMarkup: false, insertMode: InsertMode = "replace", filter = true) => ({
             noMarkup: false,
             target: null as HTMLElement | null,
             fetched: false,
@@ -56,7 +56,8 @@ export default function (Alpine: AlpineType) {
                         // Write entries to object with key as path (This removes duplicates)
                         data.forEach((group) => {
                             group.forEach((item: ItemType) => {
-                                if (item.url != window.location.pathname) {
+                                // If filter is true, only add items that are not the current page
+                                if (filter && item.url != window.location.pathname) {
                                     entries[item.url] = item.markup;
                                 }
                             });
