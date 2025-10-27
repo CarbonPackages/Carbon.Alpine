@@ -64,7 +64,7 @@ export default function (Alpine: AlpineType) {
                         data.forEach((group) => {
                             group.forEach((item: ItemType) => {
                                 // If filter is true, only add items that are not the current page
-                                if (filter && item.url != window.location.pathname) {
+                                if (!filter || item.url != window.location.pathname) {
                                     entries[item.url] = item.markup;
                                 }
                             });
