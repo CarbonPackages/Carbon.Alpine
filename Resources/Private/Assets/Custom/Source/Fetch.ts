@@ -15,7 +15,7 @@ export default function (Alpine: AlpineType) {
         "fetch",
         (
             url: string,
-            notfication: string,
+            notification: boolean,
             maxItems: number,
             showErrorIfNoMarkup: false,
             insertMode: InsertMode = "replace",
@@ -31,7 +31,7 @@ export default function (Alpine: AlpineType) {
                     console.error(errorMessage);
                 }
 
-                if (notfication) {
+                if (notification) {
                     this.noMarkup = true;
                     return;
                 }
