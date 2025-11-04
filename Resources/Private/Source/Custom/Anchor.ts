@@ -1,5 +1,5 @@
 import { Alpine as AlpineType, ElementWithXAttributes } from "alpinejs";
-import { computePosition, autoUpdate, flip, offset, shift, arrow, Placement, Padding } from "@floating-ui/dom";
+import { computePosition, autoUpdate, flip, offset, shift, arrow, Placement, Padding } from "../FloatingUI";
 
 // This is basically the same as the Alpine anchor directive, but it adds an arrowClass option
 // use it like this x-anchor.arrow.arrowClassName.arrowPadding (e.g. x-anchor.arrow.arrow-anchor.0)

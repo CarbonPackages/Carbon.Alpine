@@ -1,4 +1,4 @@
-import Popover from "./Source/Popover";
+import Popover from "../../Source/UI/Popover";
 
 window.addEventListener("alpine:init", () => {
     window.Alpine.plugin(Popover);

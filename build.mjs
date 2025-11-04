@@ -30,11 +30,28 @@ const moduleOptions = {
     splitting: true,
 };
 
+const pluginSourceOptions = {
+    logLevel: "info",
+    bundle: true,
+    minify: false,
+    sourcemap: false,
+    target: "esnext",
+    splitting: true,
+    format: "esm",
+    entryPoints: [
+        "Resources/Private/Source/*.ts",
+        "Resources/Private/Source/**/*.ts",
+        "Resources/Private/Source/**/*.js",
+    ],
+    outdir: "Resources/Private/Bundled",
+    legalComments: "none",
+};
+
 async function watch(options) {
     const context = await esbuild.context(options);
     await context.watch();
 }
 
-[scriptOptions, moduleOptions].forEach((options) => {
+[scriptOptions, moduleOptions, pluginSourceOptions].forEach((options) => {
     process.argv.includes("--watch") ? watch(options) : esbuild.build(options);
 });

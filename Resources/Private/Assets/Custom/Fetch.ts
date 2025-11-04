@@ -1,4 +1,4 @@
-import Fetch from "./Source/Fetch";
+import Fetch from "../../Source/Custom/Fetch";
 
 window.addEventListener("alpine:init", () => {
     window.Alpine.plugin(Fetch);

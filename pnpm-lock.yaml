@@ -14,6 +14,9 @@ importers:
       '@alpinejs/collapse':
         specifier: ^3.15.1
         version: 3.15.1
+      '@alpinejs/focus':
+        specifier: ^3.15.1
+        version: 3.15.1
       '@alpinejs/intersect':
         specifier: ^3.15.1
         version: 3.15.1
@@ -35,6 +38,12 @@ importers:
       '@floating-ui/dom':
         specifier: ^1.7.4
         version: 1.7.4
+      '@imacrayon/alpine-ajax':
+        specifier: ^0.12.5
+        version: 0.12.5
+      '@ryangjchandler/alpine-clipboard':
+        specifier: ^2.3.0
+        version: 2.3.0
       alpinejs:
         specifier: ^3.15.1
         version: 3.15.1
@@ -77,6 +86,9 @@ packages:
 
   '@alpinejs/collapse@3.15.1':
     resolution: {integrity: sha512-p3ejDFk8VWdrHa6+Fq3NQp6X4LxWoj2TFRgKEKPQPmVyJMV+Zf5m4ZUFk3Z54zIsgOM9JkAZE0Xany00ntTTng==}
+
+  '@alpinejs/focus@3.15.1':
+    resolution: {integrity: sha512-Svu8ILVafdJouRVAV/vAkw7i/5/RNi5USh/C1llOhmhpSlX+F8JI1FuVhlJHLMcNqNIV6fm9yoiUBjB2NLwwUQ==}
 
   '@alpinejs/intersect@3.15.1':
     resolution: {integrity: sha512-nEtGPLVZrFHOW5CCz1o13jCT+F9JhTjv8P07EdNZYIlJMYcJMIfoT7vsFrK7Ehl75q9OEuPdkxuEADwKXpNE3A==}
@@ -315,9 +327,15 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
+  '@imacrayon/alpine-ajax@0.12.5':
+    resolution: {integrity: sha512-E1f4H/6W4Ug4S/nTQZw90LpJAHVeC/IWkZ71/KIBZrBcxhtYHS/YT78YFImAsMxjlaPM87m0ShcxfOePn4fRxQ==}
+
   '@pkgr/core@0.2.9':
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+
+  '@ryangjchandler/alpine-clipboard@2.3.0':
+    resolution: {integrity: sha512-r1YL/LL851vSemjgcca+M6Yz9SNtA9ATul8nJ0n0sAS1W3V1GUWvH0Od2XdQF1r36YJF+/4sUc0eHF/Zexw7dA==}
 
   '@types/alpinejs@3.13.11':
     resolution: {integrity: sha512-3KhGkDixCPiLdL3Z/ok1GxHwLxEWqQOKJccgaQL01wc0EVM2tCTaqlC3NIedmxAXkVzt/V6VTM8qPgnOHKJ1MA==}
@@ -495,6 +513,9 @@ packages:
   flatted@3.3.3:
     resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
 
+  focus-trap@6.9.4:
+    resolution: {integrity: sha512-v2NTsZe2FF59Y+sDykKY+XjqZ0cPfhq/hikWVL88BqLivnNiEffAsac6rP6H45ff9wG9LL5ToiDqrLEP9GX9mw==}
+
   focus-trap@7.6.6:
     resolution: {integrity: sha512-v/Z8bvMCajtx4mEXmOo7QEsIzlIOqRXTIwgUfsFOF9gEsespdbD0AkPIka1bSXZ8Y8oZ+2IVDQZePkTfEHZl7Q==}
 
@@ -638,6 +659,9 @@ packages:
     resolution: {integrity: sha512-MeQTA1r0litLUf0Rp/iisCaL8761lKAZHaimlbGK4j0HysC4PLfqygQj9srcs0m2RdtDYnF8UuYyKpbjHYp7Jw==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
+  tabbable@5.3.3:
+    resolution: {integrity: sha512-QD9qKY3StfbZqWOPLp0++pOrAVb/HbUi5xCc8cUo4XjP19808oaMiDzn0leBY5mCespIBM0CIZePzZjgzR83kA==}
+
   tabbable@6.3.0:
     resolution: {integrity: sha512-EIHvdY5bPLuWForiR/AN2Bxngzpuwn1is4asboytXtpTgsArc+WmSJKVLlhdh71u7jFcryDqB2A8lQvj78MkyQ==}
 
@@ -666,6 +690,11 @@ snapshots:
   '@alpinejs/anchor@3.15.1': {}
 
   '@alpinejs/collapse@3.15.1': {}
+
+  '@alpinejs/focus@3.15.1':
+    dependencies:
+      focus-trap: 6.9.4
+      tabbable: 5.3.3
 
   '@alpinejs/intersect@3.15.1': {}
 
@@ -825,7 +854,11 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
+  '@imacrayon/alpine-ajax@0.12.5': {}
+
   '@pkgr/core@0.2.9': {}
+
+  '@ryangjchandler/alpine-clipboard@2.3.0': {}
 
   '@types/alpinejs@3.13.11': {}
 
@@ -1030,6 +1063,10 @@ snapshots:
 
   flatted@3.3.3: {}
 
+  focus-trap@6.9.4:
+    dependencies:
+      tabbable: 5.3.3
+
   focus-trap@7.6.6:
     dependencies:
       tabbable: 6.3.0
@@ -1146,6 +1183,8 @@ snapshots:
   synckit@0.11.11:
     dependencies:
       '@pkgr/core': 0.2.9
+
+  tabbable@5.3.3: {}
 
   tabbable@6.3.0: {}
 

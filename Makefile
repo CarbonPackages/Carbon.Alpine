@@ -15,11 +15,13 @@ prettier:
 
 cleanup:
 	@rm -rf Resources/Public
+	rm -rf Resources/Private/Bundled
 
 ## Build production version
 build:
 	@make cleanup
 	@pnpm build
+	@make prettier
 
 ## Watch files
 dev:

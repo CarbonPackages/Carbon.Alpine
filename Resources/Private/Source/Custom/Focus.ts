@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { createFocusTrap } from "focus-trap";
 import { focusable, isFocusable } from "tabbable";
 

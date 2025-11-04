@@ -1,12 +1,22 @@
+# If you want to enable automatic inclusion of Carbon Alpine on all pages,
+# add this to your Settings
+# Neos:
+#   Neos:
+#     fusion:
+#       autoInclude:
+#         Carbon.Alpine: true
+
 Carbon:
   Alpine:
-    includeOnPage: false
+    includeOnPage: true
     useModules: true
 
     Main: true
     Files:
       Plugins:
+        Ajax: false
         Anchor: false
+        Clipboard: false
         Collapse: false
         Focus: false
         Intersect: false
@@ -29,4 +39,7 @@ Carbon:
         Anchor: false
         Counter: false
         Fetch: false
+        Focus: false
+        Tash: false
         Tooltip: false
+        TypeWriter: false
