@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@imacrayon+alpine-ajax@0.12.5/node_modules/@imacrayon/alpine-ajax/dist/module.esm.js
+// node_modules/.pnpm/@imacrayon+alpine-ajax@0.12.6/node_modules/@imacrayon/alpine-ajax/dist/module.esm.js
 var settings = {
     headers: {},
     mergeStrategy: "replace",
@@ -271,8 +271,10 @@ async function send(control, action = "", method = "GET", body = null, enctype =
         if (method === "GET") {
             action.search = formDataToParams(body).toString();
             body = null;
-        } else if (enctype !== "multipart/form-data") {
+        } else if (enctype !== "multipart/form-data" && body instanceof FormData) {
             body = formDataToParams(body);
+        } else {
+            enctype = null;
         }
     }
     let request = {
@@ -292,6 +294,9 @@ async function send(control, action = "", method = "GET", body = null, enctype =
             control.headers,
         ),
     };
+    if (!request.enctype) {
+        delete request.enctype;
+    }
     dispatch(control.el, "ajax:send", request);
     let pending;
     if (request.method === "GET" && RequestCache.has(request.action)) {
@@ -359,6 +364,7 @@ async function send(control, action = "", method = "GET", body = null, enctype =
         }
         if (target === document.documentElement) {
             window.location.href = response.url;
+            return;
         }
         let content = response.html.getElementById(target._ajax_id);
         if (!content) {
@@ -405,6 +411,13 @@ async function send(control, action = "", method = "GET", body = null, enctype =
 function parseFormData(data) {
     if (data instanceof FormData) return data;
     if (data instanceof HTMLFormElement) return new FormData(data);
+    if (typeof data === "string") return data;
+    if (data instanceof ArrayBuffer) return data;
+    if (data instanceof DataView) return data;
+    if (data instanceof Blob) return data;
+    if (data instanceof File) return data;
+    if (data instanceof URLSearchParams) return data;
+    if (data instanceof ReadableStream) return data;
     const formData = new FormData();
     for (let key in data) {
         if (typeof data[key] === "object") {
