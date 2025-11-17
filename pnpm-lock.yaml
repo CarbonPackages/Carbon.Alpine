@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@alpinejs/anchor':
-        specifier: ^3.15.1
-        version: 3.15.1
+        specifier: ^3.15.2
+        version: 3.15.2
       '@alpinejs/collapse':
         specifier: ^3.15.1
         version: 3.15.1
@@ -81,8 +81,8 @@ importers:
 
 packages:
 
-  '@alpinejs/anchor@3.15.1':
-    resolution: {integrity: sha512-54aeGLAFq5dZ7kNQWOR+I9czjdOuj3M5+mKlOk7u68nf0RRdGAKz4kllKFWZqOD9vdMQL5VsvNF45JmrZef+Cg==}
+  '@alpinejs/anchor@3.15.2':
+    resolution: {integrity: sha512-rvZaFMezLPByK3QE6/nHqxLpnxANuyMQZWVvUesWwcRd0eUW/NPRzy05uws6oBfE7sDZg6lZ/+HrvZXQ+vXjqg==}
 
   '@alpinejs/collapse@3.15.1':
     resolution: {integrity: sha512-p3ejDFk8VWdrHa6+Fq3NQp6X4LxWoj2TFRgKEKPQPmVyJMV+Zf5m4ZUFk3Z54zIsgOM9JkAZE0Xany00ntTTng==}
@@ -687,7 +687,7 @@ packages:
 
 snapshots:
 
-  '@alpinejs/anchor@3.15.1': {}
+  '@alpinejs/anchor@3.15.2': {}
 
   '@alpinejs/collapse@3.15.1': {}
 

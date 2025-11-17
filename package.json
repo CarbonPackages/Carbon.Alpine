@@ -14,7 +14,7 @@
     "dev": "node build.mjs"
   },
   "dependencies": {
-    "@alpinejs/anchor": "^3.15.1",
+    "@alpinejs/anchor": "^3.15.2",
     "@alpinejs/collapse": "^3.15.1",
     "@alpinejs/focus": "^3.15.1",
     "@alpinejs/intersect": "^3.15.1",
