@@ -24,8 +24,8 @@ importers:
         specifier: ^3.15.1
         version: 3.15.1
       '@alpinejs/morph':
-        specifier: ^3.15.1
-        version: 3.15.1
+        specifier: ^3.15.2
+        version: 3.15.2
       '@alpinejs/persist':
         specifier: ^3.15.1
         version: 3.15.1
@@ -96,8 +96,8 @@ packages:
   '@alpinejs/mask@3.15.1':
     resolution: {integrity: sha512-1LgqlhYA7V6Ia44uk/Hh+l+Nl+/gNSwslNXM6+f88vEZP50GkC4lhqLAQxe1o0jcNl8weItX97wDaRb4xf/xgg==}
 
-  '@alpinejs/morph@3.15.1':
-    resolution: {integrity: sha512-eTJw185UmeHuEBZT1OEiCoRjKyHG9aYcR305wVNiGUZsiGqr3xLaU4+EZLhEtYLW/0NB0EefPOrOWglVT6c6sw==}
+  '@alpinejs/morph@3.15.2':
+    resolution: {integrity: sha512-dt2uAgqRhGbExdVUJ/R4TIIOkzQfOFqGkl6kv6rGxURoFAmMU1iAUNYL4ajA2NCsUWA3KDmk96HrIRA3pv8WWw==}
 
   '@alpinejs/persist@3.15.1':
     resolution: {integrity: sha512-EtK4s7I0xhRTJsLaYjhJ4SyQan8+gkGaRYvzFw+ndg7rzrjSHzhgRmQ20GZbnjj+eDg77fPMTvzvngX6yAExbg==}
@@ -700,7 +700,7 @@ snapshots:
 
   '@alpinejs/mask@3.15.1': {}
 
-  '@alpinejs/morph@3.15.1': {}
+  '@alpinejs/morph@3.15.2': {}
 
   '@alpinejs/persist@3.15.1': {}
 
