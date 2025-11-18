@@ -1,4 +1,4 @@
-// node_modules/.pnpm/alpinejs@3.15.1/node_modules/alpinejs/dist/module.esm.js
+// node_modules/.pnpm/alpinejs@3.15.2/node_modules/alpinejs/dist/module.esm.js
 var flushPending = false;
 var flushing = false;
 var queue = [];
@@ -385,7 +385,14 @@ function tryCatch(el, expression, callback, ...args) {
         handleError(e, el, expression);
     }
 }
-function handleError(error2, el, expression = void 0) {
+function handleError(...args) {
+    return errorHandler(...args);
+}
+var errorHandler = normalErrorHandler;
+function setErrorHandler(handler4) {
+    errorHandler = handler4;
+}
+function normalErrorHandler(error2, el, expression = void 0) {
     error2 = Object.assign(error2 ?? { message: "No error message given." }, { el, expression });
     console.warn(
         `Alpine Expression Error: ${error2.message}
@@ -1579,7 +1586,7 @@ var Alpine = {
     get raw() {
         return raw;
     },
-    version: "3.15.1",
+    version: "3.15.2",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,
@@ -1593,6 +1600,7 @@ var Alpine = {
     onlyDuringClone,
     addRootSelector,
     addInitSelector,
+    setErrorHandler,
     interceptClone,
     addScopeToNode,
     deferMutations,
