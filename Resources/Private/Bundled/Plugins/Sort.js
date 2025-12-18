@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+sort@3.15.2/node_modules/@alpinejs/sort/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+sort@3.15.3/node_modules/@alpinejs/sort/dist/module.esm.js
 function ownKeys(object, enumerableOnly) {
     var keys = Object.keys(object);
     if (Object.getOwnPropertySymbols) {

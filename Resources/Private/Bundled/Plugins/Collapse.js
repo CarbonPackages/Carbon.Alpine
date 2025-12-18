@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+collapse@3.15.2/node_modules/@alpinejs/collapse/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+collapse@3.15.3/node_modules/@alpinejs/collapse/dist/module.esm.js
 function src_default(Alpine) {
     Alpine.directive("collapse", collapse);
     collapse.inline = (el, { modifiers }) => {
