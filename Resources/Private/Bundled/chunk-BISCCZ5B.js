@@ -1,4 +1,4 @@
-// node_modules/.pnpm/alpinejs@3.15.3/node_modules/alpinejs/dist/module.esm.js
+// node_modules/.pnpm/alpinejs@3.15.4/node_modules/alpinejs/dist/module.esm.js
 var flushPending = false;
 var flushing = false;
 var queue = [];
@@ -688,6 +688,7 @@ function outNonAlpineAttributes({ name }) {
 var alpineAttributeRegex = () => new RegExp(`^${prefixAsString}([^:^.]+)\\b`);
 function toParsedDirectives(transformedAttributeMap, originalAttributeOverride) {
     return ({ name, value }) => {
+        if (name === value) value = "";
         let typeMatch = name.match(alpineAttributeRegex());
         let valueMatch = name.match(/:([a-zA-Z0-9\-_:]+)/);
         let modifiers = name.match(/\.[^.\]]+(?=[^\]]*$)/g) || [];
@@ -1634,7 +1635,7 @@ var Alpine = {
     get raw() {
         return raw;
     },
-    version: "3.15.3",
+    version: "3.15.4",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,

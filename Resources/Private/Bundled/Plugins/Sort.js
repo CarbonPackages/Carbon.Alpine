@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+sort@3.15.3/node_modules/@alpinejs/sort/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+sort@3.15.4/node_modules/@alpinejs/sort/dist/module.esm.js
 function ownKeys(object, enumerableOnly) {
     var keys = Object.keys(object);
     if (Object.getOwnPropertySymbols) {
@@ -2632,8 +2632,8 @@ function walk(el, callback) {
         node = node.nextElementSibling;
     }
 }
-function src_default(Alpine2) {
-    Alpine2.directive("sort", (el, { value, modifiers, expression }, { effect, evaluate, evaluateLater, cleanup }) => {
+function src_default(Alpine) {
+    Alpine.directive("sort", (el, { value, modifiers, expression }, { effect, evaluate, cleanup }) => {
         if (value === "config") {
             return;
         }
@@ -2653,7 +2653,7 @@ function src_default(Alpine2) {
             useHandles: !!el.querySelector("[x-sort\\:handle],[wire\\:sort\\:handle]"),
             group: getGroupName(el, modifiers),
         };
-        let handleSort = generateSortHandler(expression, evaluateLater);
+        let handleSort = generateSortHandler(expression, evaluate);
         let config = getConfigurationOverrides(el, modifiers, evaluate);
         let sortable = initSortable(el, config, preferences, (key, position) => {
             handleSort(key, position);
@@ -2661,26 +2661,17 @@ function src_default(Alpine2) {
         cleanup(() => sortable.destroy());
     });
 }
-function generateSortHandler(expression, evaluateLater) {
+function generateSortHandler(expression, evaluate) {
     if ([void 0, null, ""].includes(expression)) return () => {};
-    let handle = evaluateLater(expression);
     return (key, position) => {
-        Alpine.dontAutoEvaluateFunctions(() => {
-            handle(
-                // If a function is returned, call it with the key/position params...
-                (received) => {
-                    if (typeof received === "function") received(key, position);
-                },
-                // Provide $key and $position to the scope in case they want to call their own function...
-                {
-                    scope: {
-                        // Supporting both `$item` AND `$key` ($key for BC)...
-                        $key: key,
-                        $item: key,
-                        $position: position,
-                    },
-                },
-            );
+        evaluate(expression, {
+            scope: {
+                // Supporting both `$item` AND `$key` ($key for BC)...
+                $key: key,
+                $item: key,
+                $position: position,
+            },
+            params: [key, position],
         });
     };
 }
