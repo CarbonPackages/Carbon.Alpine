@@ -3,7 +3,8 @@ import { arrow, autoUpdate, computePosition, flip, hide, offset, shift } from ".
 // Resources/Private/Source/Custom/Tooltip.ts
 var xTooltipAttribute = "x-tooltip";
 var fetchAttribute = "data-tooltip-fetch";
-var attributes = [fetchAttribute, "data-tooltip", "aria-label", "title"];
+var contentAttribute = "data-tooltip-html";
+var attributes = [fetchAttribute, contentAttribute, "data-tooltip", "aria-label", "title"];
 var stayModifier = "stay-on-click";
 var focusModifier = "focus";
 var offsetModifier = "offset";
@@ -53,6 +54,10 @@ function Tooltip_default(Alpine) {
             if (!tooltipText || !tooltipContent) {
                 hasContent = false;
                 hideTooltip();
+                return;
+            }
+            if (attribute === contentAttribute) {
+                tooltipContent.innerHTML = tooltipText;
                 return;
             }
             if (attribute !== fetchAttribute) {
