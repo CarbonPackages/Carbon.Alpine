@@ -52,7 +52,7 @@ export default function (Alpine: AlpineType) {
             showErrorIfNoMarkup: false,
             insertMode: InsertMode = "replace",
             filter = true,
-            maxAgeInSeconds = 300,
+            maxAgeInSeconds: number = 300,
             cache: boolean | "flush" = true,
             release: string,
         ) => ({
