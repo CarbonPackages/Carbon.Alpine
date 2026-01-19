@@ -8,6 +8,7 @@ import { computePosition, autoUpdate, flip, offset, shift, arrow, hide } from ".
 // If inside a x-tooltips element an element has already x-tooltip it will not be overwritten
 
 // If you want to fetch content you can set the data-tooltip-fetch attribute to a URL, e.g. x-tooltip data-tooltip-fetch="{url: 'internal/site', text: "Loading…" }"
+// If you want to show html content you can set the data-tooltip-html, e.g. x-tooltip data-tooltip-html="CONTENT"
 
 // Element tooltip be absolute positioned (with left:0 and top: 0) and have opacity 0
 /*
@@ -52,7 +53,8 @@ With the offset modifier you can set the offset of the tooltip to the trigger el
 */
 const xTooltipAttribute = "x-tooltip";
 const fetchAttribute = "data-tooltip-fetch";
-const attributes = [fetchAttribute, "data-tooltip", "aria-label", "title"];
+const contentAttribute = "data-tooltip-html";
+const attributes = [fetchAttribute, contentAttribute, "data-tooltip", "aria-label", "title"];
 const stayModifier = "stay-on-click";
 const focusModifier = "focus";
 const offsetModifier = "offset";
@@ -112,6 +114,11 @@ export default function (Alpine: AlpineType) {
             if (!tooltipText || !tooltipContent) {
                 hasContent = false;
                 hideTooltip();
+                return;
+            }
+
+            if (attribute === contentAttribute) {
+                tooltipContent.innerHTML = tooltipText;
                 return;
             }
 
