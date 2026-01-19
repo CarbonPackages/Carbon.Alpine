@@ -1,5 +1,17 @@
 import { Alpine as AlpineType } from "alpinejs";
 
+/*
+<div
+  x-data="{ name: 'Walter White', age: 50, company: 'Gray Matter Technologies' }"
+>
+  <p x-tash="name, age, company">
+    Hello, I am {name}! I am {age} years old and I currently work at {company}!
+  </p>
+
+  <!-- Hello, I am Walter White! I am 50 years old and I currently work at Gray Matter Technologies! -->
+</div>
+*/
+
 export default function (Alpine: AlpineType) {
     Alpine.directive("tash", (el, { modifiers, expression }, { evaluate, effect }) => {
         const expressionFinder = (expression: string) => new RegExp(`{${expression}}`, "g");
