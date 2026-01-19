@@ -10,7 +10,7 @@ type magicOptions = {
     prefix: string | number;
     version: string | number;
     cache: boolean | "flush";
-}
+};
 
 type cachedFetchOptions = {
     url: string;
@@ -18,28 +18,26 @@ type cachedFetchOptions = {
     version?: string | number;
     maxAgeInSeconds?: number;
     forceFlush?: boolean;
-}
+};
 
 type InsertMode = "replace" | "beforebegin" | "afterbegin" | "beforeend" | "afterend";
 
 // Get release date from environment variable or use default
 // @ts-ignore
-const release: string = ENV.RELEASE_DATE || 'v1';
+const release: string = ENV.RELEASE_DATE || "v1";
 
 export default function (Alpine: AlpineType) {
     // add $fetch
     Alpine.magic(
-        'fetch',
+        "fetch",
         () =>
             async (
                 url: string,
-                {
-                    maxAgeInSeconds = 0,
-                    prefix = 'alpine-fetch-',
-                    version = release,
-                    cache = true,
-                } = {} as magicOptions,
-            ) => cache ? await cachedFetch({url, prefix, version, maxAgeInSeconds, forceFlush: cache === 'flush'}) : await fetch(url),
+                { maxAgeInSeconds = 0, prefix = "alpine-fetch-", version = release, cache = true } = {} as magicOptions,
+            ) =>
+                cache
+                    ? await cachedFetch({ url, prefix, version, maxAgeInSeconds, forceFlush: cache === "flush" })
+                    : await fetch(url),
     );
 
     // x-data="fetch(url, notification, maxItems, showErrorIfNoMarkup, insertMode, filter)"
@@ -87,20 +85,21 @@ export default function (Alpine: AlpineType) {
                 const urls = url.split("||");
                 Promise.all(
                     urls.map(async (url) => {
-                        const response: Response = cache ? await cachedFetch({
-                            url,
-                            prefix: 'alpine-fetch-',
-                            version: release,
-                            maxAgeInSeconds,
-                            forceFlush: cache === 'flush'
-                        }) : await fetch(url);
+                        const response: Response = cache
+                            ? await cachedFetch({
+                                  url,
+                                  prefix: "alpine-fetch-",
+                                  version: release,
+                                  maxAgeInSeconds,
+                                  forceFlush: cache === "flush",
+                              })
+                            : await fetch(url);
 
                         if (!response?.ok) {
                             throw new Error("Network response was not ok " + JSON.stringify(response));
                         }
 
                         return response.json();
-
                     }),
                 )
                     .then((data) => {
@@ -147,7 +146,15 @@ export default function (Alpine: AlpineType) {
     );
 }
 
-export async function cachedFetch({url = '', prefix = 'alpine-', version = release, maxAgeInSeconds = 0, forceFlush = false} = {} as cachedFetchOptions): Promise<Response> {
+export async function cachedFetch(
+    {
+        url = "",
+        prefix = "alpine-",
+        version = release,
+        maxAgeInSeconds = 0,
+        forceFlush = false,
+    } = {} as cachedFetchOptions,
+): Promise<Response> {
     if (!("caches" in window)) {
         return fetch(url);
     }
@@ -180,7 +187,11 @@ export async function cachedFetch({url = '', prefix = 'alpine-', version = relea
 }
 
 // Get data from the cache.
-async function getCachedResponse(cacheName: string, url: string, maxAgeInSeconds = 0): Promise<Response | false | undefined> {
+async function getCachedResponse(
+    cacheName: string,
+    url: string,
+    maxAgeInSeconds = 0,
+): Promise<Response | false | undefined> {
     const cacheStorage = await caches.open(cacheName);
     const cachedResponse = await cacheStorage.match(url);
 
@@ -188,7 +199,7 @@ async function getCachedResponse(cacheName: string, url: string, maxAgeInSeconds
         return cachedResponse;
     }
 
-    const dateHeader = maxAgeInSeconds > 0 ? cachedResponse.headers.get('date') : null;
+    const dateHeader = maxAgeInSeconds > 0 ? cachedResponse.headers.get("date") : null;
     if (dateHeader) {
         const date = new Date(dateHeader);
         // if cached file is older maxAgeInSeconds
