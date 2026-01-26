@@ -9,32 +9,32 @@ importers:
   .:
     dependencies:
       '@alpinejs/anchor':
-        specifier: ^3.15.4
-        version: 3.15.4
+        specifier: ^3.15.5
+        version: 3.15.5
       '@alpinejs/collapse':
-        specifier: ^3.15.4
-        version: 3.15.4
+        specifier: ^3.15.5
+        version: 3.15.5
       '@alpinejs/focus':
-        specifier: ^3.15.4
-        version: 3.15.4
+        specifier: ^3.15.5
+        version: 3.15.5
       '@alpinejs/intersect':
-        specifier: ^3.15.4
-        version: 3.15.4
+        specifier: ^3.15.5
+        version: 3.15.5
       '@alpinejs/mask':
-        specifier: ^3.15.4
-        version: 3.15.4
+        specifier: ^3.15.5
+        version: 3.15.5
       '@alpinejs/morph':
-        specifier: ^3.15.4
-        version: 3.15.4
+        specifier: ^3.15.5
+        version: 3.15.5
       '@alpinejs/persist':
-        specifier: ^3.15.4
-        version: 3.15.4
+        specifier: ^3.15.5
+        version: 3.15.5
       '@alpinejs/resize':
-        specifier: ^3.15.4
-        version: 3.15.4
+        specifier: ^3.15.5
+        version: 3.15.5
       '@alpinejs/sort':
-        specifier: ^3.15.4
-        version: 3.15.4
+        specifier: ^3.15.5
+        version: 3.15.5
       '@floating-ui/dom':
         specifier: ^1.7.4
         version: 1.7.4
@@ -45,8 +45,8 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
       alpinejs:
-        specifier: ^3.15.4
-        version: 3.15.4
+        specifier: ^3.15.5
+        version: 3.15.5
       focus-trap:
         specifier: ^7.8.0
         version: 7.8.0
@@ -71,42 +71,42 @@ importers:
         version: 10.1.8(eslint@9.39.2)
       eslint-plugin-prettier:
         specifier: ^5.5.5
-        version: 5.5.5(eslint-config-prettier@10.1.8(eslint@9.39.2))(eslint@9.39.2)(prettier@3.8.0)
+        version: 5.5.5(eslint-config-prettier@10.1.8(eslint@9.39.2))(eslint@9.39.2)(prettier@3.8.1)
       globals:
-        specifier: ^17.0.0
-        version: 17.0.0
+        specifier: ^17.1.0
+        version: 17.1.0
       prettier:
-        specifier: ^3.8.0
-        version: 3.8.0
+        specifier: ^3.8.1
+        version: 3.8.1
 
 packages:
 
-  '@alpinejs/anchor@3.15.4':
-    resolution: {integrity: sha512-HTPgAMpWSLjjhLbHsL+WWrUwQfNmA4Ahf7Ch2KkMHeoUf/QgYLJOQbc61V5Vf+S9Qtw63uJubdYo/l1xnmnPog==}
+  '@alpinejs/anchor@3.15.5':
+    resolution: {integrity: sha512-tKu56iLZJdOXs0IU29MRPsmRJXJHb50Ou95Rzwo3MLkwXAvHob6CYgt4cAQp9/Qla8fvJQgrb/UlOYrMGIsmHw==}
 
-  '@alpinejs/collapse@3.15.4':
-    resolution: {integrity: sha512-yXJ68i3z4TatceD3VblicYZr0wD3UtYQvFw20ML/53iww+vAXTH/smgHrtvgyq3Ju4c21aVrRqCvXRnkxIsQVQ==}
+  '@alpinejs/collapse@3.15.5':
+    resolution: {integrity: sha512-vKXl/AC5kuy0LcZwElFwk4cZxxbl/DcqJRJOJmNZkQdT6CVLCwgl86ZyDL3crN1ECmVrYbQpKGHahC7ze1VJ4A==}
 
-  '@alpinejs/focus@3.15.4':
-    resolution: {integrity: sha512-ggzUN4/wACPOc+MpQTX0XP7vcdm+XWug3SHZoH3uX6P9ptReYP5yyyKD/XgEJRwSdGi3TZKah1qXb5bJQKTIaQ==}
+  '@alpinejs/focus@3.15.5':
+    resolution: {integrity: sha512-5HHI1HBFzl3Ac4QoZxRUgWkEopLPNOebYGV1PH388sO4WcbhBkY4N0AMVRo2N/A6fw2V6Au4T7jU5d4p1F3ztw==}
 
-  '@alpinejs/intersect@3.15.4':
-    resolution: {integrity: sha512-BbhyRN/x1rvJZxb67pfqpEQblfBNhHr/j0rksCAx/b/ibMTyaRyRUv0COo41OKSMEsRVwI6/FZYChZ43zJkYLg==}
+  '@alpinejs/intersect@3.15.5':
+    resolution: {integrity: sha512-O4Xq4RZE5JFQ1zLxfKkQsgmkMKs2YZ5FDW62bjVtK8t06F3/gq6VTT7RQiCIF+HN3Tv6paCyAvxo2K7CjqYgQw==}
 
-  '@alpinejs/mask@3.15.4':
-    resolution: {integrity: sha512-mRqlcCcHXG1Al/y0z4CKxQoKYNHowBizxvSs72Qb5H0yzLWp6GIgUKzTzUXoDBoKvvGAq4vj/coeFq2VhVIhFQ==}
+  '@alpinejs/mask@3.15.5':
+    resolution: {integrity: sha512-TdYzc+kUhMpRfTKTY9YK7JhpDNh794ahJXpv4cNTBj7wRFlyGD6jZhkhnF4bZLPuwctGXIggV3SUh7dA2YzofA==}
 
-  '@alpinejs/morph@3.15.4':
-    resolution: {integrity: sha512-7tbimDhg7QNYTNKDhHBkZA3xJDgvqVI70B5FmHUvTfTFlD5f7ijNF1yyqyUtHXKMsCItjq1SGuq2i2YC4+LQpg==}
+  '@alpinejs/morph@3.15.5':
+    resolution: {integrity: sha512-eyws1q7xoUlR38od+vcEi3LTk5A8E825BW2+MhKu38Ar1BNOYj8m5aUFFkoeUS42BAqiRoFvg4l08YxLwqSW5g==}
 
-  '@alpinejs/persist@3.15.4':
-    resolution: {integrity: sha512-PdSpPTh8sUN8a3S2BoJWpXbod68RqjuW9QGtDp0LJclAFERVjLLx2K5YzQSSg5IDQJV9OMiknSpzcEYeZPwLNw==}
+  '@alpinejs/persist@3.15.5':
+    resolution: {integrity: sha512-COUYM1ji0tvWkj4jL0Ov7vI8jgenzm6V9l7cWuKlLpkCjuXpP6opwubkc319hjhT+CKQZMA5HvrsJIqaC0/0sQ==}
 
-  '@alpinejs/resize@3.15.4':
-    resolution: {integrity: sha512-hpvJdeRXTKh7P802fI3hLGcI/mPLQJls9Hkez9KWAUE3J2rv5/FRltiRbJQxcAMxSVtWPzNTytd5CnalBeXvBw==}
+  '@alpinejs/resize@3.15.5':
+    resolution: {integrity: sha512-YXFVmRP8cUQsRQcssw/sOlHKSRfHb39KvVl2ffbhksgcUZ6bWe53hqff+gXTdwH0feEmDr86UYrRNbi34S3jnA==}
 
-  '@alpinejs/sort@3.15.4':
-    resolution: {integrity: sha512-CzvqGo0BkqDn3aO6PYL33jBn3oLhQUdE4qTocfvbh6WbrGIKe2l8nqQAIbags0kG1zGgoJO3dFv33xq2fTC+5Q==}
+  '@alpinejs/sort@3.15.5':
+    resolution: {integrity: sha512-y9On6dcvayrSN6P3l6HuTCLvvZQF5s2uhBDzRm5YL/TioUBUlVNZ7PdweShMB+O245X3cNRzjPQg+zLn/RVTKQ==}
 
   '@esbuild/aix-ppc64@0.27.2':
     resolution: {integrity: sha512-GZMB+a0mOMZs4MpDbj8RJp4cw+w1WV5NYD6xzgvzUJ5Ek2jerwfO2eADyI6ExDSUED+1X8aMbegahsJi+8mgpw==}
@@ -365,8 +365,8 @@ packages:
   ajv@6.12.6:
     resolution: {integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==}
 
-  alpinejs@3.15.4:
-    resolution: {integrity: sha512-lDpOdoVo0bhFjgl310k1qw3kbpUYwM/v0WByvAchsO93bl3o1rrgr0P/ssx3CimwEtNfXbmwKbtHbqTRCTTH9g==}
+  alpinejs@3.15.5:
+    resolution: {integrity: sha512-l1R4em/uCUr7eJimcO/b0L1+H2tVcB1Y7cQ3d+pzwVnv0zWs7gw4MhwdsLjfLccWV2iH0ahlfaJWitNRFOZdvQ==}
 
   ansi-styles@4.3.0:
     resolution: {integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==}
@@ -527,8 +527,8 @@ packages:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
     engines: {node: '>=18'}
 
-  globals@17.0.0:
-    resolution: {integrity: sha512-gv5BeD2EssA793rlFWVPMMCqefTlpusw6/2TbAVMy0FzcG8wKJn4O+NqJ4+XWmmwrayJgw5TzrmWjFgmz1XPqw==}
+  globals@17.1.0:
+    resolution: {integrity: sha512-8HoIcWI5fCvG5NADj4bDav+er9B9JMj2vyL2pI8D0eismKyUvPLTSs+Ln3wqhwcp306i73iyVnEKx3F6T47TGw==}
     engines: {node: '>=18'}
 
   has-flag@4.0.0:
@@ -626,8 +626,8 @@ packages:
     resolution: {integrity: sha512-SxToR7P8Y2lWmv/kTzVLC1t/GDI2WGjMwNhLLE9qtH8Q13C+aEmuRlzDst4Up4s0Wc8sF2M+J57iB3cMLqftfg==}
     engines: {node: '>=6.0.0'}
 
-  prettier@3.8.0:
-    resolution: {integrity: sha512-yEPsovQfpxYfgWNhCfECjG5AQaO+K3dp6XERmOepyPDVqcJm+bjyCVO3pmU+nAPe0N5dDvekfGezt/EIiRe1TA==}
+  prettier@3.8.1:
+    resolution: {integrity: sha512-UOnG6LftzbdaHZcKoPFtOcCKztrQ57WkHDeRD9t/PTQtmT0NHSeWWepj6pS0z/N7+08BHFDQVUrfmfMRcZwbMg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -687,26 +687,26 @@ packages:
 
 snapshots:
 
-  '@alpinejs/anchor@3.15.4': {}
+  '@alpinejs/anchor@3.15.5': {}
 
-  '@alpinejs/collapse@3.15.4': {}
+  '@alpinejs/collapse@3.15.5': {}
 
-  '@alpinejs/focus@3.15.4':
+  '@alpinejs/focus@3.15.5':
     dependencies:
       focus-trap: 6.9.4
       tabbable: 5.3.3
 
-  '@alpinejs/intersect@3.15.4': {}
+  '@alpinejs/intersect@3.15.5': {}
 
-  '@alpinejs/mask@3.15.4': {}
+  '@alpinejs/mask@3.15.5': {}
 
-  '@alpinejs/morph@3.15.4': {}
+  '@alpinejs/morph@3.15.5': {}
 
-  '@alpinejs/persist@3.15.4': {}
+  '@alpinejs/persist@3.15.5': {}
 
-  '@alpinejs/resize@3.15.4': {}
+  '@alpinejs/resize@3.15.5': {}
 
-  '@alpinejs/sort@3.15.4': {}
+  '@alpinejs/sort@3.15.5': {}
 
   '@esbuild/aix-ppc64@0.27.2':
     optional: true
@@ -885,7 +885,7 @@ snapshots:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  alpinejs@3.15.4:
+  alpinejs@3.15.5:
     dependencies:
       '@vue/reactivity': 3.1.5
 
@@ -964,10 +964,10 @@ snapshots:
     dependencies:
       eslint: 9.39.2
 
-  eslint-plugin-prettier@5.5.5(eslint-config-prettier@10.1.8(eslint@9.39.2))(eslint@9.39.2)(prettier@3.8.0):
+  eslint-plugin-prettier@5.5.5(eslint-config-prettier@10.1.8(eslint@9.39.2))(eslint@9.39.2)(prettier@3.8.1):
     dependencies:
       eslint: 9.39.2
-      prettier: 3.8.0
+      prettier: 3.8.1
       prettier-linter-helpers: 1.0.1
       synckit: 0.11.12
     optionalDependencies:
@@ -1077,7 +1077,7 @@ snapshots:
 
   globals@14.0.0: {}
 
-  globals@17.0.0: {}
+  globals@17.1.0: {}
 
   has-flag@4.0.0: {}
 
@@ -1162,7 +1162,7 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier@3.8.0: {}
+  prettier@3.8.1: {}
 
   punycode@2.3.1: {}
 

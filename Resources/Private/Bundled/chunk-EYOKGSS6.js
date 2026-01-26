@@ -1,4 +1,4 @@
-// node_modules/.pnpm/alpinejs@3.15.4/node_modules/alpinejs/dist/module.esm.js
+// node_modules/.pnpm/alpinejs@3.15.5/node_modules/alpinejs/dist/module.esm.js
 var flushPending = false;
 var flushing = false;
 var queue = [];
@@ -1635,7 +1635,7 @@ var Alpine = {
     get raw() {
         return raw;
     },
-    version: "3.15.4",
+    version: "3.15.5",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,
@@ -2738,6 +2738,9 @@ function isListeningForASpecificKeyThatHasntBeenPressed(e, modifiers) {
             "outside",
             "passive",
             "preserve-scroll",
+            "blur",
+            "change",
+            "lazy",
         ].includes(i);
     });
     if (keyModifiers.includes("debounce")) {
@@ -2833,15 +2836,37 @@ directive("model", (el, { modifiers, expression }, { effect: effect3, cleanup: c
             if (!el.hasAttribute("name")) el.setAttribute("name", expression);
         });
     }
-    let event =
-        el.tagName.toLowerCase() === "select" || ["checkbox", "radio"].includes(el.type) || modifiers.includes("lazy")
-            ? "change"
-            : "input";
-    let removeListener = isCloning
-        ? () => {}
-        : on(el, event, modifiers, (e) => {
-              setValue(getInputValue(el, modifiers, e, getValue()));
-          });
+    let hasChangeModifier = modifiers.includes("change") || modifiers.includes("lazy");
+    let hasBlurModifier = modifiers.includes("blur");
+    let hasEnterModifier = modifiers.includes("enter");
+    let hasExplicitEventModifiers = hasChangeModifier || hasBlurModifier || hasEnterModifier;
+    let removeListener;
+    if (isCloning) {
+        removeListener = () => {};
+    } else if (hasExplicitEventModifiers) {
+        let listeners = [];
+        let syncValue = (e) => setValue(getInputValue(el, modifiers, e, getValue()));
+        if (hasChangeModifier) {
+            listeners.push(on(el, "change", modifiers, syncValue));
+        }
+        if (hasBlurModifier) {
+            listeners.push(on(el, "blur", modifiers, syncValue));
+        }
+        if (hasEnterModifier) {
+            listeners.push(
+                on(el, "keydown", modifiers, (e) => {
+                    if (e.key === "Enter") syncValue(e);
+                }),
+            );
+        }
+        removeListener = () => listeners.forEach((remove) => remove());
+    } else {
+        let event =
+            el.tagName.toLowerCase() === "select" || ["checkbox", "radio"].includes(el.type) ? "change" : "input";
+        removeListener = on(el, event, modifiers, (e) => {
+            setValue(getInputValue(el, modifiers, e, getValue()));
+        });
+    }
     if (modifiers.includes("fill")) {
         if (
             [void 0, null, ""].includes(getValue()) ||

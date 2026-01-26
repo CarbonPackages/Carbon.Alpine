@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+focus@3.15.4/node_modules/@alpinejs/focus/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+focus@3.15.5/node_modules/@alpinejs/focus/dist/module.esm.js
 var candidateSelectors = [
     "input",
     "select",
