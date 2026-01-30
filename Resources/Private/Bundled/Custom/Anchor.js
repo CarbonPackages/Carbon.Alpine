@@ -1,4 +1,4 @@
-import { arrow, autoUpdate, computePosition, flip, offset, shift } from "../chunk-2APP7BWQ.js";
+import { arrow, autoUpdate, computePosition, flip, offset, shift } from "../chunk-SVORO3BY.js";
 
 // Resources/Private/Source/Custom/Anchor.ts
 function Anchor_default(Alpine) {

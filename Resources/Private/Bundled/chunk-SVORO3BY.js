@@ -138,7 +138,7 @@ function rectToClientRect(rect) {
     };
 }
 
-// node_modules/.pnpm/@floating-ui+core@1.7.3/node_modules/@floating-ui/core/dist/floating-ui.core.mjs
+// node_modules/.pnpm/@floating-ui+core@1.7.4/node_modules/@floating-ui/core/dist/floating-ui.core.mjs
 function computeCoordsFromPlacement(_ref, placement, rtl) {
     let { reference, floating } = _ref;
     const sideAxis = getSideAxis(placement);
@@ -191,78 +191,6 @@ function computeCoordsFromPlacement(_ref, placement, rtl) {
     }
     return coords;
 }
-var computePosition = async (reference, floating, config) => {
-    const { placement = "bottom", strategy = "absolute", middleware = [], platform: platform2 } = config;
-    const validMiddleware = middleware.filter(Boolean);
-    const rtl = await (platform2.isRTL == null ? void 0 : platform2.isRTL(floating));
-    let rects = await platform2.getElementRects({
-        reference,
-        floating,
-        strategy,
-    });
-    let { x, y } = computeCoordsFromPlacement(rects, placement, rtl);
-    let statefulPlacement = placement;
-    let middlewareData = {};
-    let resetCount = 0;
-    for (let i = 0; i < validMiddleware.length; i++) {
-        const { name, fn } = validMiddleware[i];
-        const {
-            x: nextX,
-            y: nextY,
-            data,
-            reset,
-        } = await fn({
-            x,
-            y,
-            initialPlacement: placement,
-            placement: statefulPlacement,
-            strategy,
-            middlewareData,
-            rects,
-            platform: platform2,
-            elements: {
-                reference,
-                floating,
-            },
-        });
-        x = nextX != null ? nextX : x;
-        y = nextY != null ? nextY : y;
-        middlewareData = {
-            ...middlewareData,
-            [name]: {
-                ...middlewareData[name],
-                ...data,
-            },
-        };
-        if (reset && resetCount <= 50) {
-            resetCount++;
-            if (typeof reset === "object") {
-                if (reset.placement) {
-                    statefulPlacement = reset.placement;
-                }
-                if (reset.rects) {
-                    rects =
-                        reset.rects === true
-                            ? await platform2.getElementRects({
-                                  reference,
-                                  floating,
-                                  strategy,
-                              })
-                            : reset.rects;
-                }
-                ({ x, y } = computeCoordsFromPlacement(rects, statefulPlacement, rtl));
-            }
-            i = -1;
-        }
-    }
-    return {
-        x,
-        y,
-        placement: statefulPlacement,
-        strategy,
-        middlewareData,
-    };
-};
 async function detectOverflow(state, options) {
     var _await$platform$isEle;
     if (options === void 0) {
@@ -335,6 +263,83 @@ async function detectOverflow(state, options) {
         right: (elementClientRect.right - clippingClientRect.right + paddingObject.right) / offsetScale.x,
     };
 }
+var computePosition = async (reference, floating, config) => {
+    const { placement = "bottom", strategy = "absolute", middleware = [], platform: platform2 } = config;
+    const validMiddleware = middleware.filter(Boolean);
+    const rtl = await (platform2.isRTL == null ? void 0 : platform2.isRTL(floating));
+    let rects = await platform2.getElementRects({
+        reference,
+        floating,
+        strategy,
+    });
+    let { x, y } = computeCoordsFromPlacement(rects, placement, rtl);
+    let statefulPlacement = placement;
+    let middlewareData = {};
+    let resetCount = 0;
+    for (let i = 0; i < validMiddleware.length; i++) {
+        var _platform$detectOverf;
+        const { name, fn } = validMiddleware[i];
+        const {
+            x: nextX,
+            y: nextY,
+            data,
+            reset,
+        } = await fn({
+            x,
+            y,
+            initialPlacement: placement,
+            placement: statefulPlacement,
+            strategy,
+            middlewareData,
+            rects,
+            platform: {
+                ...platform2,
+                detectOverflow:
+                    (_platform$detectOverf = platform2.detectOverflow) != null ? _platform$detectOverf : detectOverflow,
+            },
+            elements: {
+                reference,
+                floating,
+            },
+        });
+        x = nextX != null ? nextX : x;
+        y = nextY != null ? nextY : y;
+        middlewareData = {
+            ...middlewareData,
+            [name]: {
+                ...middlewareData[name],
+                ...data,
+            },
+        };
+        if (reset && resetCount <= 50) {
+            resetCount++;
+            if (typeof reset === "object") {
+                if (reset.placement) {
+                    statefulPlacement = reset.placement;
+                }
+                if (reset.rects) {
+                    rects =
+                        reset.rects === true
+                            ? await platform2.getElementRects({
+                                  reference,
+                                  floating,
+                                  strategy,
+                              })
+                            : reset.rects;
+                }
+                ({ x, y } = computeCoordsFromPlacement(rects, statefulPlacement, rtl));
+            }
+            i = -1;
+        }
+    }
+    return {
+        x,
+        y,
+        placement: statefulPlacement,
+        strategy,
+        middlewareData,
+    };
+};
 var arrow = (options) => ({
     name: "arrow",
     options,
@@ -430,7 +435,7 @@ var flip = function (options) {
                 );
             }
             const placements2 = [initialPlacement, ...fallbackPlacements];
-            const overflow = await detectOverflow(state, detectOverflowOptions);
+            const overflow = await platform2.detectOverflow(state, detectOverflowOptions);
             const overflows = [];
             let overflowsData =
                 ((_middlewareData$flip = middlewareData.flip) == null ? void 0 : _middlewareData$flip.overflows) || [];
@@ -548,11 +553,11 @@ var hide = function (options) {
         name: "hide",
         options,
         async fn(state) {
-            const { rects } = state;
+            const { rects, platform: platform2 } = state;
             const { strategy = "referenceHidden", ...detectOverflowOptions } = evaluate(options, state);
             switch (strategy) {
                 case "referenceHidden": {
-                    const overflow = await detectOverflow(state, {
+                    const overflow = await platform2.detectOverflow(state, {
                         ...detectOverflowOptions,
                         elementContext: "reference",
                     });
@@ -565,7 +570,7 @@ var hide = function (options) {
                     };
                 }
                 case "escaped": {
-                    const overflow = await detectOverflow(state, {
+                    const overflow = await platform2.detectOverflow(state, {
                         ...detectOverflowOptions,
                         altBoundary: true,
                     });
@@ -659,7 +664,7 @@ var shift = function (options) {
         name: "shift",
         options,
         async fn(state) {
-            const { x, y, placement } = state;
+            const { x, y, placement, platform: platform2 } = state;
             const {
                 mainAxis: checkMainAxis = true,
                 crossAxis: checkCrossAxis = false,
@@ -678,7 +683,7 @@ var shift = function (options) {
                 x,
                 y,
             };
-            const overflow = await detectOverflow(state, detectOverflowOptions);
+            const overflow = await platform2.detectOverflow(state, detectOverflowOptions);
             const crossAxis = getSideAxis(getSide(placement));
             const mainAxis = getOppositeAxis(crossAxis);
             let mainAxisCoord = coords[mainAxis];
@@ -887,7 +892,7 @@ function getFrameElement(win) {
     return win.parent && Object.getPrototypeOf(win.parent) ? win.frameElement : null;
 }
 
-// node_modules/.pnpm/@floating-ui+dom@1.7.4/node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs
+// node_modules/.pnpm/@floating-ui+dom@1.7.5/node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs
 function getCssDimensions(element) {
     const css = getComputedStyle2(element);
     let width = parseFloat(css.width) || 0;
