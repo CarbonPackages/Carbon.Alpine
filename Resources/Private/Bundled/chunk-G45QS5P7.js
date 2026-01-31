@@ -1,10 +1,18 @@
-// node_modules/.pnpm/alpinejs@3.15.5/node_modules/alpinejs/dist/module.esm.js
+// node_modules/.pnpm/alpinejs@3.15.6/node_modules/alpinejs/dist/module.esm.js
 var flushPending = false;
 var flushing = false;
 var queue = [];
 var lastFlushedIndex = -1;
+var transactionActive = false;
 function scheduler(callback) {
     queueJob(callback);
+}
+function startTransaction() {
+    transactionActive = true;
+}
+function commitTransaction() {
+    transactionActive = false;
+    queueFlush();
 }
 function queueJob(job) {
     if (!queue.includes(job)) queue.push(job);
@@ -16,6 +24,7 @@ function dequeueJob(job) {
 }
 function queueFlush() {
     if (!flushing && !flushPending) {
+        if (transactionActive) return;
         flushPending = true;
         queueMicrotask(flushJobs);
     }
@@ -101,6 +110,15 @@ function watch(getter, callback) {
         firstTime = false;
     });
     return () => release(effectReference);
+}
+async function transaction(callback) {
+    startTransaction();
+    try {
+        await callback();
+        await Promise.resolve();
+    } finally {
+        commitTransaction();
+    }
 }
 var onAttributeAddeds = [];
 var onElRemoveds = [];
@@ -1635,7 +1653,10 @@ var Alpine = {
     get raw() {
         return raw;
     },
-    version: "3.15.5",
+    get transaction() {
+        return transaction;
+    },
+    version: "3.15.6",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,

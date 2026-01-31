@@ -9,32 +9,32 @@ importers:
   .:
     dependencies:
       '@alpinejs/anchor':
-        specifier: ^3.15.5
-        version: 3.15.5
+        specifier: ^3.15.6
+        version: 3.15.6
       '@alpinejs/collapse':
-        specifier: ^3.15.5
-        version: 3.15.5
+        specifier: ^3.15.6
+        version: 3.15.6
       '@alpinejs/focus':
-        specifier: ^3.15.5
-        version: 3.15.5
+        specifier: ^3.15.6
+        version: 3.15.6
       '@alpinejs/intersect':
-        specifier: ^3.15.5
-        version: 3.15.5
+        specifier: ^3.15.6
+        version: 3.15.6
       '@alpinejs/mask':
-        specifier: ^3.15.5
-        version: 3.15.5
+        specifier: ^3.15.6
+        version: 3.15.6
       '@alpinejs/morph':
-        specifier: ^3.15.5
-        version: 3.15.5
+        specifier: ^3.15.6
+        version: 3.15.6
       '@alpinejs/persist':
-        specifier: ^3.15.5
-        version: 3.15.5
+        specifier: ^3.15.6
+        version: 3.15.6
       '@alpinejs/resize':
-        specifier: ^3.15.5
-        version: 3.15.5
+        specifier: ^3.15.6
+        version: 3.15.6
       '@alpinejs/sort':
-        specifier: ^3.15.5
-        version: 3.15.5
+        specifier: ^3.15.6
+        version: 3.15.6
       '@floating-ui/dom':
         specifier: ^1.7.5
         version: 1.7.5
@@ -45,8 +45,8 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
       alpinejs:
-        specifier: ^3.15.5
-        version: 3.15.5
+        specifier: ^3.15.6
+        version: 3.15.6
       focus-trap:
         specifier: ^8.0.0
         version: 8.0.0
@@ -81,32 +81,32 @@ importers:
 
 packages:
 
-  '@alpinejs/anchor@3.15.5':
-    resolution: {integrity: sha512-tKu56iLZJdOXs0IU29MRPsmRJXJHb50Ou95Rzwo3MLkwXAvHob6CYgt4cAQp9/Qla8fvJQgrb/UlOYrMGIsmHw==}
+  '@alpinejs/anchor@3.15.6':
+    resolution: {integrity: sha512-EIwfcsQImjw1TsQVgEqO2XB2TO7XYKanX4s52En9Ym2vj6BIJrfOkGQnujwW2et0ReSUkHIrICcmzmos9IRkvg==}
 
-  '@alpinejs/collapse@3.15.5':
-    resolution: {integrity: sha512-vKXl/AC5kuy0LcZwElFwk4cZxxbl/DcqJRJOJmNZkQdT6CVLCwgl86ZyDL3crN1ECmVrYbQpKGHahC7ze1VJ4A==}
+  '@alpinejs/collapse@3.15.6':
+    resolution: {integrity: sha512-qt7kD7UhgnI9C0LIA/jKLqlgdDcNQOn9khKfPYk+NEMfrivtEBO9dFjdT5dHZwnJqiIfZFnmF5qwCjQmoKkPGA==}
 
-  '@alpinejs/focus@3.15.5':
-    resolution: {integrity: sha512-5HHI1HBFzl3Ac4QoZxRUgWkEopLPNOebYGV1PH388sO4WcbhBkY4N0AMVRo2N/A6fw2V6Au4T7jU5d4p1F3ztw==}
+  '@alpinejs/focus@3.15.6':
+    resolution: {integrity: sha512-X/FegvO3i5/svT5S1BuREf4wpGMGC3s9TpVIzijK7qV6mhEywMpbh5+QcMntcY8aUU0yyDGbBLv/4n8BaUDybQ==}
 
-  '@alpinejs/intersect@3.15.5':
-    resolution: {integrity: sha512-O4Xq4RZE5JFQ1zLxfKkQsgmkMKs2YZ5FDW62bjVtK8t06F3/gq6VTT7RQiCIF+HN3Tv6paCyAvxo2K7CjqYgQw==}
+  '@alpinejs/intersect@3.15.6':
+    resolution: {integrity: sha512-/iD/ANpShZ1mLmRTOkq3/qtnWo+ihP4OiRSLuC+OBBHDSyS/+9CBSO2Pgxzy+zxPW674Laho09sLgZOAqUsLQw==}
 
-  '@alpinejs/mask@3.15.5':
-    resolution: {integrity: sha512-TdYzc+kUhMpRfTKTY9YK7JhpDNh794ahJXpv4cNTBj7wRFlyGD6jZhkhnF4bZLPuwctGXIggV3SUh7dA2YzofA==}
+  '@alpinejs/mask@3.15.6':
+    resolution: {integrity: sha512-43VMETmCR/yoE2zKmt9IwuTzMuMa5zMW6tvgkPbPefDn2pnEVi4DV7E4u4XCoTv++7YhbJvsNHJRsDRrUhhwtw==}
 
-  '@alpinejs/morph@3.15.5':
-    resolution: {integrity: sha512-eyws1q7xoUlR38od+vcEi3LTk5A8E825BW2+MhKu38Ar1BNOYj8m5aUFFkoeUS42BAqiRoFvg4l08YxLwqSW5g==}
+  '@alpinejs/morph@3.15.6':
+    resolution: {integrity: sha512-tkELqOzGpyhKp/s2r3CEfoxI9ImrxGftHDgLVVcpg/ncGis5TYT7+QzdU5EiRA+689sw+31CjyY21s/NjWXdVQ==}
 
-  '@alpinejs/persist@3.15.5':
-    resolution: {integrity: sha512-COUYM1ji0tvWkj4jL0Ov7vI8jgenzm6V9l7cWuKlLpkCjuXpP6opwubkc319hjhT+CKQZMA5HvrsJIqaC0/0sQ==}
+  '@alpinejs/persist@3.15.6':
+    resolution: {integrity: sha512-gjjqSdIgFO/mbvlyW1C5JO6EhWNPsPacQQY9HC0Exizq/NEUZOEYxRkTpq5dx9JkI5oyK8lEw+f1vJ/3TK18Fg==}
 
-  '@alpinejs/resize@3.15.5':
-    resolution: {integrity: sha512-YXFVmRP8cUQsRQcssw/sOlHKSRfHb39KvVl2ffbhksgcUZ6bWe53hqff+gXTdwH0feEmDr86UYrRNbi34S3jnA==}
+  '@alpinejs/resize@3.15.6':
+    resolution: {integrity: sha512-/tfafYAU1IY4GeiU7Virvd3usI0TI+xu7mAdqQIuhV/+9cwENhjHfRW/CK80MHz2Y/TFh+VDPaVoPQpKgNSzTA==}
 
-  '@alpinejs/sort@3.15.5':
-    resolution: {integrity: sha512-y9On6dcvayrSN6P3l6HuTCLvvZQF5s2uhBDzRm5YL/TioUBUlVNZ7PdweShMB+O245X3cNRzjPQg+zLn/RVTKQ==}
+  '@alpinejs/sort@3.15.6':
+    resolution: {integrity: sha512-sOTJ+1jM3dXz7E0R/e2F89dwpXp93AN5K8ZAoFTemCoqaf7zMCfNvbvnVJNlJLduyITVvr+6+MkqskThBD6GLQ==}
 
   '@esbuild/aix-ppc64@0.27.2':
     resolution: {integrity: sha512-GZMB+a0mOMZs4MpDbj8RJp4cw+w1WV5NYD6xzgvzUJ5Ek2jerwfO2eADyI6ExDSUED+1X8aMbegahsJi+8mgpw==}
@@ -365,8 +365,8 @@ packages:
   ajv@6.12.6:
     resolution: {integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==}
 
-  alpinejs@3.15.5:
-    resolution: {integrity: sha512-l1R4em/uCUr7eJimcO/b0L1+H2tVcB1Y7cQ3d+pzwVnv0zWs7gw4MhwdsLjfLccWV2iH0ahlfaJWitNRFOZdvQ==}
+  alpinejs@3.15.6:
+    resolution: {integrity: sha512-ETE0k88xU74URryk2JyvmrvyCyZG0Wo+2/tZux9gEvaPc/k5XcBSdvFHyW76puIFqhD+nHgeO/5j3pRRsHh6HA==}
 
   ansi-styles@4.3.0:
     resolution: {integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==}
@@ -687,26 +687,26 @@ packages:
 
 snapshots:
 
-  '@alpinejs/anchor@3.15.5': {}
+  '@alpinejs/anchor@3.15.6': {}
 
-  '@alpinejs/collapse@3.15.5': {}
+  '@alpinejs/collapse@3.15.6': {}
 
-  '@alpinejs/focus@3.15.5':
+  '@alpinejs/focus@3.15.6':
     dependencies:
       focus-trap: 6.9.4
       tabbable: 5.3.3
 
-  '@alpinejs/intersect@3.15.5': {}
+  '@alpinejs/intersect@3.15.6': {}
 
-  '@alpinejs/mask@3.15.5': {}
+  '@alpinejs/mask@3.15.6': {}
 
-  '@alpinejs/morph@3.15.5': {}
+  '@alpinejs/morph@3.15.6': {}
 
-  '@alpinejs/persist@3.15.5': {}
+  '@alpinejs/persist@3.15.6': {}
 
-  '@alpinejs/resize@3.15.5': {}
+  '@alpinejs/resize@3.15.6': {}
 
-  '@alpinejs/sort@3.15.5': {}
+  '@alpinejs/sort@3.15.6': {}
 
   '@esbuild/aix-ppc64@0.27.2':
     optional: true
@@ -885,7 +885,7 @@ snapshots:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  alpinejs@3.15.5:
+  alpinejs@3.15.6:
     dependencies:
       '@vue/reactivity': 3.1.5
 

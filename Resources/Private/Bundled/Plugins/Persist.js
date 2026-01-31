@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+persist@3.15.5/node_modules/@alpinejs/persist/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+persist@3.15.6/node_modules/@alpinejs/persist/dist/module.esm.js
 function src_default(Alpine) {
     let persist = () => {
         let alias;
