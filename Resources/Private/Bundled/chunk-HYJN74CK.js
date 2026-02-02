@@ -1,4 +1,4 @@
-// node_modules/.pnpm/alpinejs@3.15.6/node_modules/alpinejs/dist/module.esm.js
+// node_modules/.pnpm/alpinejs@3.15.7/node_modules/alpinejs/dist/module.esm.js
 var flushPending = false;
 var flushing = false;
 var queue = [];
@@ -100,13 +100,14 @@ function watch(getter, callback) {
         let value = getter();
         JSON.stringify(value);
         if (!firstTime) {
-            queueMicrotask(() => {
-                callback(value, oldValue);
-                oldValue = value;
-            });
-        } else {
-            oldValue = value;
+            if (typeof value === "object" || value !== oldValue) {
+                let previousValue = oldValue;
+                queueMicrotask(() => {
+                    callback(value, previousValue);
+                });
+            }
         }
+        oldValue = value;
         firstTime = false;
     });
     return () => release(effectReference);
@@ -1656,7 +1657,7 @@ var Alpine = {
     get transaction() {
         return transaction;
     },
-    version: "3.15.6",
+    version: "3.15.7",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,
