@@ -1,4 +1,4 @@
-// node_modules/.pnpm/alpinejs@3.15.7/node_modules/alpinejs/dist/module.esm.js
+// node_modules/.pnpm/alpinejs@3.15.8/node_modules/alpinejs/dist/module.esm.js
 var flushPending = false;
 var flushing = false;
 var queue = [];
@@ -1657,7 +1657,7 @@ var Alpine = {
     get transaction() {
         return transaction;
     },
-    version: "3.15.7",
+    version: "3.15.8",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,
@@ -2711,6 +2711,14 @@ function on(el, event, modifiers, callback) {
         handler4 = wrapHandler(handler4, (next, e) => {
             e.target === el && next(e);
         });
+    if (event === "submit") {
+        handler4 = wrapHandler(handler4, (next, e) => {
+            if (e.target._x_pendingModelUpdates) {
+                e.target._x_pendingModelUpdates.forEach((fn) => fn());
+            }
+            next(e);
+        });
+    }
     if (isKeyEvent(event) || isClickEvent(event)) {
         handler4 = wrapHandler(handler4, (next, e) => {
             if (isListeningForASpecificKeyThatHasntBeenPressed(e, modifiers)) {
@@ -2873,6 +2881,14 @@ directive("model", (el, { modifiers, expression }, { effect: effect3, cleanup: c
         }
         if (hasBlurModifier) {
             listeners.push(on(el, "blur", modifiers, syncValue));
+            if (el.form) {
+                let syncCallback = () => syncValue({ target: el });
+                if (!el.form._x_pendingModelUpdates) el.form._x_pendingModelUpdates = [];
+                el.form._x_pendingModelUpdates.push(syncCallback);
+                cleanup2(() =>
+                    el.form._x_pendingModelUpdates.splice(el.form._x_pendingModelUpdates.indexOf(syncCallback), 1),
+                );
+            }
         }
         if (hasEnterModifier) {
             listeners.push(
