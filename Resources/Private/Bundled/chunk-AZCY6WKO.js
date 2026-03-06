@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@floating-ui+utils@0.2.10/node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
+// node_modules/.pnpm/@floating-ui+utils@0.2.11/node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
 var sides = ["top", "right", "bottom", "left"];
 var min = Math.min;
 var max = Math.max;
@@ -13,10 +13,6 @@ var oppositeSideMap = {
     right: "left",
     bottom: "top",
     top: "bottom",
-};
-var oppositeAlignmentMap = {
-    start: "end",
-    end: "start",
 };
 function clamp(start, value, end) {
     return max(start, min(value, end));
@@ -36,9 +32,9 @@ function getOppositeAxis(axis) {
 function getAxisLength(axis) {
     return axis === "y" ? "height" : "width";
 }
-var yAxisSides = /* @__PURE__ */ new Set(["top", "bottom"]);
 function getSideAxis(placement) {
-    return yAxisSides.has(getSide(placement)) ? "y" : "x";
+    const firstChar = placement[0];
+    return firstChar === "t" || firstChar === "b" ? "y" : "x";
 }
 function getAlignmentAxis(placement) {
     return getOppositeAxis(getSideAxis(placement));
@@ -72,7 +68,7 @@ function getExpandedPlacements(placement) {
     ];
 }
 function getOppositeAlignmentPlacement(placement) {
-    return placement.replace(/start|end/g, (alignment) => oppositeAlignmentMap[alignment]);
+    return placement.includes("start") ? placement.replace("start", "end") : placement.replace("end", "start");
 }
 var lrPlacement = ["left", "right"];
 var rlPlacement = ["right", "left"];
@@ -103,7 +99,8 @@ function getOppositeAxisPlacements(placement, flipAlignment, direction, rtl) {
     return list;
 }
 function getOppositePlacement(placement) {
-    return placement.replace(/left|right|bottom|top/g, (side) => oppositeSideMap[side]);
+    const side = getSide(placement);
+    return oppositeSideMap[side] + placement.slice(side.length);
 }
 function expandPaddingObject(padding) {
     return {
@@ -138,7 +135,7 @@ function rectToClientRect(rect) {
     };
 }
 
-// node_modules/.pnpm/@floating-ui+core@1.7.4/node_modules/@floating-ui/core/dist/floating-ui.core.mjs
+// node_modules/.pnpm/@floating-ui+core@1.7.5/node_modules/@floating-ui/core/dist/floating-ui.core.mjs
 function computeCoordsFromPlacement(_ref, placement, rtl) {
     let { reference, floating } = _ref;
     const sideAxis = getSideAxis(placement);
@@ -263,9 +260,15 @@ async function detectOverflow(state, options) {
         right: (elementClientRect.right - clippingClientRect.right + paddingObject.right) / offsetScale.x,
     };
 }
+var MAX_RESET_COUNT = 50;
 var computePosition = async (reference, floating, config) => {
     const { placement = "bottom", strategy = "absolute", middleware = [], platform: platform2 } = config;
-    const validMiddleware = middleware.filter(Boolean);
+    const platformWithDetectOverflow = platform2.detectOverflow
+        ? platform2
+        : {
+              ...platform2,
+              detectOverflow,
+          };
     const rtl = await (platform2.isRTL == null ? void 0 : platform2.isRTL(floating));
     let rects = await platform2.getElementRects({
         reference,
@@ -274,11 +277,14 @@ var computePosition = async (reference, floating, config) => {
     });
     let { x, y } = computeCoordsFromPlacement(rects, placement, rtl);
     let statefulPlacement = placement;
-    let middlewareData = {};
     let resetCount = 0;
-    for (let i = 0; i < validMiddleware.length; i++) {
-        var _platform$detectOverf;
-        const { name, fn } = validMiddleware[i];
+    const middlewareData = {};
+    for (let i = 0; i < middleware.length; i++) {
+        const currentMiddleware = middleware[i];
+        if (!currentMiddleware) {
+            continue;
+        }
+        const { name, fn } = currentMiddleware;
         const {
             x: nextX,
             y: nextY,
@@ -292,11 +298,7 @@ var computePosition = async (reference, floating, config) => {
             strategy,
             middlewareData,
             rects,
-            platform: {
-                ...platform2,
-                detectOverflow:
-                    (_platform$detectOverf = platform2.detectOverflow) != null ? _platform$detectOverf : detectOverflow,
-            },
+            platform: platformWithDetectOverflow,
             elements: {
                 reference,
                 floating,
@@ -304,14 +306,11 @@ var computePosition = async (reference, floating, config) => {
         });
         x = nextX != null ? nextX : x;
         y = nextY != null ? nextY : y;
-        middlewareData = {
-            ...middlewareData,
-            [name]: {
-                ...middlewareData[name],
-                ...data,
-            },
+        middlewareData[name] = {
+            ...middlewareData[name],
+            ...data,
         };
-        if (reset && resetCount <= 50) {
+        if (reset && resetCount < MAX_RESET_COUNT) {
             resetCount++;
             if (typeof reset === "object") {
                 if (reset.placement) {
@@ -722,7 +721,7 @@ var shift = function (options) {
     };
 };
 
-// node_modules/.pnpm/@floating-ui+utils@0.2.10/node_modules/@floating-ui/utils/dist/floating-ui.utils.dom.mjs
+// node_modules/.pnpm/@floating-ui+utils@0.2.11/node_modules/@floating-ui/utils/dist/floating-ui.utils.dom.mjs
 function hasWindow() {
     return typeof window !== "undefined";
 }
@@ -770,41 +769,44 @@ function isShadowRoot(value) {
     }
     return value instanceof ShadowRoot || value instanceof getWindow(value).ShadowRoot;
 }
-var invalidOverflowDisplayValues = /* @__PURE__ */ new Set(["inline", "contents"]);
 function isOverflowElement(element) {
     const { overflow, overflowX, overflowY, display } = getComputedStyle2(element);
     return (
         /auto|scroll|overlay|hidden|clip/.test(overflow + overflowY + overflowX) &&
-        !invalidOverflowDisplayValues.has(display)
+        display !== "inline" &&
+        display !== "contents"
     );
 }
-var tableElements = /* @__PURE__ */ new Set(["table", "td", "th"]);
 function isTableElement(element) {
-    return tableElements.has(getNodeName(element));
+    return /^(table|td|th)$/.test(getNodeName(element));
 }
-var topLayerSelectors = [":popover-open", ":modal"];
 function isTopLayer(element) {
-    return topLayerSelectors.some((selector) => {
-        try {
-            return element.matches(selector);
-        } catch (_e) {
-            return false;
+    try {
+        if (element.matches(":popover-open")) {
+            return true;
         }
-    });
+    } catch (_e) {}
+    try {
+        return element.matches(":modal");
+    } catch (_e) {
+        return false;
+    }
 }
-var transformProperties = ["transform", "translate", "scale", "rotate", "perspective"];
-var willChangeValues = ["transform", "translate", "scale", "rotate", "perspective", "filter"];
-var containValues = ["paint", "layout", "strict", "content"];
+var willChangeRe = /transform|translate|scale|rotate|perspective|filter/;
+var containRe = /paint|layout|strict|content/;
+var isNotNone = (value) => !!value && value !== "none";
+var isWebKitValue;
 function isContainingBlock(elementOrCss) {
-    const webkit = isWebKit();
     const css = isElement(elementOrCss) ? getComputedStyle2(elementOrCss) : elementOrCss;
     return (
-        transformProperties.some((value) => (css[value] ? css[value] !== "none" : false)) ||
-        (css.containerType ? css.containerType !== "normal" : false) ||
-        (!webkit && (css.backdropFilter ? css.backdropFilter !== "none" : false)) ||
-        (!webkit && (css.filter ? css.filter !== "none" : false)) ||
-        willChangeValues.some((value) => (css.willChange || "").includes(value)) ||
-        containValues.some((value) => (css.contain || "").includes(value))
+        isNotNone(css.transform) ||
+        isNotNone(css.translate) ||
+        isNotNone(css.scale) ||
+        isNotNone(css.rotate) ||
+        isNotNone(css.perspective) ||
+        (!isWebKit() && (isNotNone(css.backdropFilter) || isNotNone(css.filter))) ||
+        willChangeRe.test(css.willChange || "") ||
+        containRe.test(css.contain || "")
     );
 }
 function getContainingBlock(element) {
@@ -820,12 +822,13 @@ function getContainingBlock(element) {
     return null;
 }
 function isWebKit() {
-    if (typeof CSS === "undefined" || !CSS.supports) return false;
-    return CSS.supports("-webkit-backdrop-filter", "none");
+    if (isWebKitValue == null) {
+        isWebKitValue = typeof CSS !== "undefined" && CSS.supports && CSS.supports("-webkit-backdrop-filter", "none");
+    }
+    return isWebKitValue;
 }
-var lastTraversableNodeNames = /* @__PURE__ */ new Set(["html", "body", "#document"]);
 function isLastTraversableNode(node) {
-    return lastTraversableNodeNames.has(getNodeName(node));
+    return /^(html|body|#document)$/.test(getNodeName(node));
 }
 function getComputedStyle2(element) {
     return getWindow(element).getComputedStyle(element);
@@ -885,14 +888,15 @@ function getOverflowAncestors(node, list, traverseIframes) {
             isOverflowElement(scrollableAncestor) ? scrollableAncestor : [],
             frameElement && traverseIframes ? getOverflowAncestors(frameElement) : [],
         );
+    } else {
+        return list.concat(scrollableAncestor, getOverflowAncestors(scrollableAncestor, [], traverseIframes));
     }
-    return list.concat(scrollableAncestor, getOverflowAncestors(scrollableAncestor, [], traverseIframes));
 }
 function getFrameElement(win) {
     return win.parent && Object.getPrototypeOf(win.parent) ? win.frameElement : null;
 }
 
-// node_modules/.pnpm/@floating-ui+dom@1.7.5/node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs
+// node_modules/.pnpm/@floating-ui+dom@1.7.6/node_modules/@floating-ui/dom/dist/floating-ui.dom.mjs
 function getCssDimensions(element) {
     const css = getComputedStyle2(element);
     let width = parseFloat(css.width) || 0;
@@ -1043,7 +1047,7 @@ function convertOffsetParentRelativeRectToViewportRelativeRect(_ref) {
         if (getNodeName(offsetParent) !== "body" || isOverflowElement(documentElement)) {
             scroll = getNodeScroll(offsetParent);
         }
-        if (isHTMLElement(offsetParent)) {
+        if (isOffsetParentAnElement) {
             const offsetRect = getBoundingClientRect(offsetParent);
             scale = getScale(offsetParent);
             offsets.x = offsetRect.x + offsetParent.clientLeft;
@@ -1123,7 +1127,6 @@ function getViewportRect(element, strategy) {
         y,
     };
 }
-var absoluteOrFixed = /* @__PURE__ */ new Set(["absolute", "fixed"]);
 function getInnerBoundingClientRect(element, strategy) {
     const clientRect = getBoundingClientRect(element, true, strategy === "fixed");
     const top = clientRect.top + element.clientTop;
@@ -1186,7 +1189,8 @@ function getClippingElementAncestors(element, cache) {
             : (!currentNodeIsContaining &&
                   computedStyle.position === "static" &&
                   !!currentContainingBlockComputedStyle &&
-                  absoluteOrFixed.has(currentContainingBlockComputedStyle.position)) ||
+                  (currentContainingBlockComputedStyle.position === "absolute" ||
+                      currentContainingBlockComputedStyle.position === "fixed")) ||
               (isOverflowElement(currentNode) &&
                   !currentNodeIsContaining &&
                   hasFixedPositionAncestor(element, currentNode));
@@ -1209,23 +1213,23 @@ function getClippingRect(_ref) {
                 : getClippingElementAncestors(element, this._c)
             : [].concat(boundary);
     const clippingAncestors = [...elementClippingAncestors, rootBoundary];
-    const firstClippingAncestor = clippingAncestors[0];
-    const clippingRect = clippingAncestors.reduce(
-        (accRect, clippingAncestor) => {
-            const rect = getClientRectFromClippingAncestor(element, clippingAncestor, strategy);
-            accRect.top = max(rect.top, accRect.top);
-            accRect.right = min(rect.right, accRect.right);
-            accRect.bottom = min(rect.bottom, accRect.bottom);
-            accRect.left = max(rect.left, accRect.left);
-            return accRect;
-        },
-        getClientRectFromClippingAncestor(element, firstClippingAncestor, strategy),
-    );
+    const firstRect = getClientRectFromClippingAncestor(element, clippingAncestors[0], strategy);
+    let top = firstRect.top;
+    let right = firstRect.right;
+    let bottom = firstRect.bottom;
+    let left = firstRect.left;
+    for (let i = 1; i < clippingAncestors.length; i++) {
+        const rect = getClientRectFromClippingAncestor(element, clippingAncestors[i], strategy);
+        top = max(rect.top, top);
+        right = min(rect.right, right);
+        bottom = min(rect.bottom, bottom);
+        left = max(rect.left, left);
+    }
     return {
-        width: clippingRect.right - clippingRect.left,
-        height: clippingRect.bottom - clippingRect.top,
-        x: clippingRect.left,
-        y: clippingRect.top,
+        width: right - left,
+        height: bottom - top,
+        x: left,
+        y: top,
     };
 }
 function getDimensions(element) {
@@ -1436,7 +1440,10 @@ function autoUpdate(reference, floating, update, options) {
     const referenceEl = unwrapElement(reference);
     const ancestors =
         ancestorScroll || ancestorResize
-            ? [...(referenceEl ? getOverflowAncestors(referenceEl) : []), ...getOverflowAncestors(floating)]
+            ? [
+                  ...(referenceEl ? getOverflowAncestors(referenceEl) : []),
+                  ...(floating ? getOverflowAncestors(floating) : []),
+              ]
             : [];
     ancestors.forEach((ancestor) => {
         ancestorScroll &&
@@ -1451,7 +1458,7 @@ function autoUpdate(reference, floating, update, options) {
     if (elementResize) {
         resizeObserver = new ResizeObserver((_ref) => {
             let [firstEntry] = _ref;
-            if (firstEntry && firstEntry.target === referenceEl && resizeObserver) {
+            if (firstEntry && firstEntry.target === referenceEl && resizeObserver && floating) {
                 resizeObserver.unobserve(floating);
                 cancelAnimationFrame(reobserveFrame);
                 reobserveFrame = requestAnimationFrame(() => {
@@ -1464,7 +1471,9 @@ function autoUpdate(reference, floating, update, options) {
         if (referenceEl && !animationFrame) {
             resizeObserver.observe(referenceEl);
         }
-        resizeObserver.observe(floating);
+        if (floating) {
+            resizeObserver.observe(floating);
+        }
     }
     let frameId;
     let prevRefRect = animationFrame ? getBoundingClientRect(reference) : null;
