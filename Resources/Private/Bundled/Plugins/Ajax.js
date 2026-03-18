@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@imacrayon+alpine-ajax@0.12.6/node_modules/@imacrayon/alpine-ajax/dist/module.esm.js
+// node_modules/.pnpm/@imacrayon+alpine-ajax@0.12.7/node_modules/@imacrayon/alpine-ajax/dist/module.esm.js
 var settings = {
     headers: {},
     mergeStrategy: "replace",
@@ -318,6 +318,7 @@ async function send(control, action = "", method = "GET", body = null, enctype =
         response.status = r.status;
         response.html = r.html;
         response.raw = r.raw;
+        response.headers = r.headers;
     });
     if (response.ok) {
         if (response.redirected) {
@@ -405,7 +406,11 @@ async function send(control, action = "", method = "GET", body = null, enctype =
         return render2();
     });
     let render = await Promise.all(renders);
-    dispatch(control.el, "ajax:after", { response, render });
+    if (control.el && control.el.isConnected) {
+        dispatch(control.el, "ajax:after", { response, render });
+    } else {
+        dispatch(window, "ajax:after", { response, render });
+    }
     return render;
 }
 function parseFormData(data) {
