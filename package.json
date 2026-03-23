@@ -27,14 +27,14 @@
     "@imacrayon/alpine-ajax": "^0.12.7",
     "@ryangjchandler/alpine-clipboard": "^2.3.0",
     "alpinejs": "^3.15.8",
-    "focus-trap": "^8.0.0",
+    "focus-trap": "^8.0.1",
     "tabbable": "^6.4.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/alpinejs": "^3.13.11",
     "esbuild": "^0.27.4",
-    "eslint": "^10.0.3",
+    "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^17.4.0",
