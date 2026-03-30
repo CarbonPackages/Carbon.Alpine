@@ -30,8 +30,8 @@ importers:
         specifier: ^3.15.8
         version: 3.15.8
       '@alpinejs/resize':
-        specifier: ^3.15.8
-        version: 3.15.8
+        specifier: ^3.15.9
+        version: 3.15.9
       '@alpinejs/sort':
         specifier: ^3.15.8
         version: 3.15.8
@@ -102,8 +102,8 @@ packages:
   '@alpinejs/persist@3.15.8':
     resolution: {integrity: sha512-xKJk0aa5p0QAquP9ivEuLnpzuBC2MyoWmiMRVzWiTR9/VLnbVgFM+6dE/D+NvfKOzhTSeht6FkYqOi/C27LBTg==}
 
-  '@alpinejs/resize@3.15.8':
-    resolution: {integrity: sha512-3XGZz/OIBDsGacHtK0vyTBOmd7JqL6IuQZmKSPcJDoF+Kh5aUX5n4DCqnqw+R17niK0UKGyYtVLdgmBOh4GvOA==}
+  '@alpinejs/resize@3.15.9':
+    resolution: {integrity: sha512-SlgTZsAPBC1kU/PWDgflcPz48Rzt2a7V7vofApppOxykhR0ug2uFDt9in4mbjTO66NCC8GW7E6on2ney//+DcA==}
 
   '@alpinejs/sort@3.15.8':
     resolution: {integrity: sha512-m+bfzlSgC8u9Q8kDjVb+0DnFWxERYLGC4MarlRMdz5KpSp5OZwx42o0j87ceRfD6PBIwsrA/uGOfN3oj1J/JmQ==}
@@ -651,7 +651,7 @@ snapshots:
 
   '@alpinejs/persist@3.15.8': {}
 
-  '@alpinejs/resize@3.15.8': {}
+  '@alpinejs/resize@3.15.9': {}
 
   '@alpinejs/sort@3.15.8': {}
 
