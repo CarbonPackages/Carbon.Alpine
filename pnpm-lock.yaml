@@ -33,8 +33,8 @@ importers:
         specifier: ^3.15.8
         version: 3.15.8
       '@alpinejs/sort':
-        specifier: ^3.15.8
-        version: 3.15.8
+        specifier: ^3.15.9
+        version: 3.15.9
       '@floating-ui/dom':
         specifier: ^1.7.6
         version: 1.7.6
@@ -105,8 +105,8 @@ packages:
   '@alpinejs/resize@3.15.8':
     resolution: {integrity: sha512-3XGZz/OIBDsGacHtK0vyTBOmd7JqL6IuQZmKSPcJDoF+Kh5aUX5n4DCqnqw+R17niK0UKGyYtVLdgmBOh4GvOA==}
 
-  '@alpinejs/sort@3.15.8':
-    resolution: {integrity: sha512-m+bfzlSgC8u9Q8kDjVb+0DnFWxERYLGC4MarlRMdz5KpSp5OZwx42o0j87ceRfD6PBIwsrA/uGOfN3oj1J/JmQ==}
+  '@alpinejs/sort@3.15.9':
+    resolution: {integrity: sha512-quDvOqHveWtvuTquOqFIQm4f1cEi5GzAFuifFOB59R85lZk/Gzs6V9uR4AvbapsYf1xBOuKVrXQKi3dAdEPSvA==}
 
   '@esbuild/aix-ppc64@0.27.4':
     resolution: {integrity: sha512-cQPwL2mp2nSmHHJlCyoXgHGhbEPMrEEU5xhkcy3Hs/O7nGZqEpZ2sUtLaL9MORLtDfRvVl2/3PAuEkYZH0Ty8Q==}
@@ -602,6 +602,9 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
+  sortablejs@1.15.7:
+    resolution: {integrity: sha512-Kk8wLQPlS+yi1ZEf48a4+fzHa4yxjC30M/Sr2AnQu+f/MPwvvX9XjZ6OWejiz8crBsLwSq8GHqaxaET7u6ux0A==}
+
   synckit@0.11.12:
     resolution: {integrity: sha512-Bh7QjT8/SuKUIfObSXNHNSK6WHo6J1tHCqJsuaFDP7gP0fkzSfTxI8y85JrppZ0h8l0maIgc2tfuZQ6/t3GtnQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -653,7 +656,9 @@ snapshots:
 
   '@alpinejs/resize@3.15.8': {}
 
-  '@alpinejs/sort@3.15.8': {}
+  '@alpinejs/sort@3.15.9':
+    dependencies:
+      sortablejs: 1.15.7
 
   '@esbuild/aix-ppc64@0.27.4':
     optional: true
@@ -1065,6 +1070,8 @@ snapshots:
       shebang-regex: 3.0.0
 
   shebang-regex@3.0.0: {}
+
+  sortablejs@1.15.7: {}
 
   synckit@0.11.12:
     dependencies:
