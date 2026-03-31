@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+morph@3.15.8/node_modules/@alpinejs/morph/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+morph@3.15.9/node_modules/@alpinejs/morph/dist/module.esm.js
 function morph(from, toHtml, options) {
     monkeyPatchDomSetAttributeToAllowAtSymbols();
     let context = createMorphContext(options);
@@ -116,7 +116,11 @@ function createMorphContext(options = {}) {
         for (let i = domAttributes.length - 1; i >= 0; i--) {
             let name = domAttributes[i].name;
             if (!to.hasAttribute(name)) {
-                from.removeAttribute(name);
+                if (name === "open" && from.nodeName === "DIALOG" && from.open) {
+                    from.close();
+                } else {
+                    from.removeAttribute(name);
+                }
             }
         }
         for (let i = toAttributes.length - 1; i >= 0; i--) {
@@ -360,7 +364,8 @@ function monkeyPatchDomSetAttributeToAllowAtSymbols() {
         if (!name.includes("@")) {
             return original.call(this, name, value);
         }
-        hostDiv.innerHTML = `<span ${name}="${value}"></span>`;
+        let escapedValue = value.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+        hostDiv.innerHTML = `<span ${name}="${escapedValue}"></span>`;
         let attr = hostDiv.firstElementChild.getAttributeNode(name);
         hostDiv.firstElementChild.removeAttributeNode(attr);
         this.setAttributeNode(attr);

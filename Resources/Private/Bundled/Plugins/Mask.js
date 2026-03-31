@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+mask@3.15.8/node_modules/@alpinejs/mask/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+mask@3.15.9/node_modules/@alpinejs/mask/dist/module.esm.js
 function src_default(Alpine) {
     Alpine.directive("mask", (el, { value, expression }, { effect, evaluateLater, cleanup }) => {
         let templateFn = () => expression;
@@ -31,9 +31,22 @@ function src_default(Alpine) {
                 processInputValue(el, false);
             }
             if (el._x_model) {
-                if (el._x_model.get() === el.value) return;
-                if (el._x_model.get() === null && el.value === "") return;
-                el._x_model.set(el.value);
+                if (el._x_model.get() !== el.value) {
+                    if (!(el._x_model.get() === null && el.value === "")) {
+                        el._x_model.set(el.value);
+                    }
+                }
+                let updater = el._x_forceModelUpdate;
+                el._x_forceModelUpdate = (value2) => {
+                    value2 = String(value2);
+                    let template = templateFn(value2);
+                    if (template && template !== "false") {
+                        value2 = formatInput(template, value2);
+                    }
+                    lastInputValue = value2;
+                    updater(value2);
+                    el._x_model.set(value2);
+                };
             }
         });
         const controller = new AbortController();
@@ -55,7 +68,7 @@ function src_default(Alpine) {
                 return (lastInputValue = el2.value);
             }
             let setInput = () => {
-                lastInputValue = el2.value = formatInput(input, template);
+                lastInputValue = el2.value = formatInput(template, input);
             };
             if (shouldRestoreCursor) {
                 restoreCursorPosition(el2, template, () => {
@@ -65,12 +78,6 @@ function src_default(Alpine) {
                 setInput();
             }
         }
-        function formatInput(input, template) {
-            if (input === "") return "";
-            let strippedDownInput = stripDown(template, input);
-            let rebuiltInput = buildUp(template, strippedDownInput);
-            return rebuiltInput;
-        }
     }).before("model");
 }
 function restoreCursorPosition(el, template, callback) {
@@ -78,54 +85,32 @@ function restoreCursorPosition(el, template, callback) {
     let unformattedValue = el.value;
     callback();
     let beforeLeftOfCursorBeforeFormatting = unformattedValue.slice(0, cursorPosition);
-    let newPosition = buildUp(template, stripDown(template, beforeLeftOfCursorBeforeFormatting)).length;
+    let newPosition = formatInput(template, beforeLeftOfCursorBeforeFormatting).length;
     el.setSelectionRange(newPosition, newPosition);
 }
-function stripDown(template, input) {
-    let inputToBeStripped = input;
+var regexes = {
+    9: /[0-9]/,
+    a: /[a-zA-Z]/,
+    "*": /[a-zA-Z0-9]/,
+};
+function formatInput(template, input) {
+    let templateMark = 0;
+    let inputMark = 0;
     let output = "";
-    let regexes = {
-        9: /[0-9]/,
-        a: /[a-zA-Z]/,
-        "*": /[a-zA-Z0-9]/,
-    };
-    let wildcardTemplate = "";
-    for (let i = 0; i < template.length; i++) {
-        if (["9", "a", "*"].includes(template[i])) {
-            wildcardTemplate += template[i];
-            continue;
-        }
-        for (let j = 0; j < inputToBeStripped.length; j++) {
-            if (inputToBeStripped[j] === template[i]) {
-                inputToBeStripped = inputToBeStripped.slice(0, j) + inputToBeStripped.slice(j + 1);
-                break;
+    while (templateMark < template.length && inputMark < input.length) {
+        let templateChar = template[templateMark];
+        let inputChar = input[inputMark];
+        if (templateChar in regexes) {
+            if (regexes[templateChar].test(inputChar)) {
+                output += inputChar;
+                templateMark++;
             }
+            inputMark++;
+        } else {
+            output += templateChar;
+            templateMark++;
+            if (templateChar === input[inputMark]) inputMark++;
         }
-    }
-    for (let i = 0; i < wildcardTemplate.length; i++) {
-        let found = false;
-        for (let j = 0; j < inputToBeStripped.length; j++) {
-            if (regexes[wildcardTemplate[i]].test(inputToBeStripped[j])) {
-                output += inputToBeStripped[j];
-                inputToBeStripped = inputToBeStripped.slice(0, j) + inputToBeStripped.slice(j + 1);
-                found = true;
-                break;
-            }
-        }
-        if (!found) break;
-    }
-    return output;
-}
-function buildUp(template, input) {
-    let clean = Array.from(input);
-    let output = "";
-    for (let i = 0; i < template.length; i++) {
-        if (!["9", "a", "*"].includes(template[i])) {
-            output += template[i];
-            continue;
-        }
-        if (clean.length === 0) break;
-        output += clean.shift();
     }
     return output;
 }

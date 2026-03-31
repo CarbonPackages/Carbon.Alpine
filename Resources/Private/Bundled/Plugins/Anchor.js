@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+anchor@3.15.8/node_modules/@alpinejs/anchor/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+anchor@3.15.9/node_modules/@alpinejs/anchor/dist/module.esm.js
 var min = Math.min;
 var max = Math.max;
 var round = Math.round;
@@ -1240,27 +1240,38 @@ function src_default(Alpine) {
     Alpine.directive(
         "anchor",
         Alpine.skipDuringClone(
-            (el, { expression, modifiers, value }, { cleanup, evaluate: evaluate2 }) => {
+            (el, { expression, modifiers, value }, { evaluate: evaluate2, effect, cleanup }) => {
                 let { placement, offsetValue, unstyled } = getOptions(modifiers);
                 el._x_anchor = Alpine.reactive({ x: 0, y: 0 });
-                let reference = evaluate2(expression);
-                if (!reference) throw "Alpine: no element provided to x-anchor...";
-                let compute = () => {
-                    let previousValue;
-                    computePosition2(reference, el, {
-                        placement,
-                        middleware: [flip(), shift({ padding: 5 }), offset(offsetValue)],
-                    }).then(({ x, y }) => {
-                        unstyled || setStyles(el, x, y);
-                        if (JSON.stringify({ x, y }) !== previousValue) {
-                            el._x_anchor.x = x;
-                            el._x_anchor.y = y;
-                        }
-                        previousValue = JSON.stringify({ x, y });
-                    });
-                };
-                let release = autoUpdate(reference, el, () => compute());
-                cleanup(() => release());
+                let previousReference = null;
+                let release = null;
+                let effector = effect(() => {
+                    let reference = evaluate2(expression);
+                    if (!reference) throw "Alpine: no element provided to x-anchor...";
+                    if (previousReference !== reference) {
+                        if (release) release();
+                        previousReference = reference;
+                        let compute = () => {
+                            let previousValue;
+                            computePosition2(reference, el, {
+                                placement,
+                                middleware: [flip(), shift({ padding: 5 }), offset(offsetValue)],
+                            }).then(({ x, y }) => {
+                                unstyled || setStyles(el, x, y);
+                                if (JSON.stringify({ x, y }) !== previousValue) {
+                                    el._x_anchor.x = x;
+                                    el._x_anchor.y = y;
+                                }
+                                previousValue = JSON.stringify({ x, y });
+                            });
+                        };
+                        release = autoUpdate(reference, el, () => compute());
+                    }
+                });
+                cleanup(() => {
+                    effector();
+                    if (release) release();
+                });
             },
             // When cloning (or "morphing"), we will graft the style and position data from the live tree...
             (el, { expression, modifiers, value }, { cleanup, evaluate: evaluate2 }) => {
