@@ -32,16 +32,18 @@ export default function (Alpine: AlpineType) {
     Alpine.directive(
         "anchor",
         Alpine.skipDuringClone(
-            (el: ElementWithAnchor, { expression, modifiers }, { cleanup, evaluate }) => {
+            (el: ElementWithAnchor, { expression, modifiers }, { evaluate, effect, cleanup }) => {
                 let { placement, offsetValue, unstyled, arrowOptions, allowFlip } = getOptions(el, modifiers);
 
                 el._x_anchor = Alpine.reactive({ x: 0, y: 0 });
 
+                // Create the middleware array here so that we can reuse it in the mouse event listener and the regular reference case...
                 const middleware = [allowFlip && flip(), shift({ padding: 5 }), offset(offsetValue)];
                 if (arrowOptions) {
                     middleware.push(arrow(arrowOptions));
                 }
 
+                // If the target is the mouse, we will create a virtual element that follows the mouse position...
                 if (expression == "mouse") {
                     const mouseEventFunction = (position: { clientX: any; clientY: any }) => {
                         const reference = createVirtualElement(position);
@@ -55,25 +57,39 @@ export default function (Alpine: AlpineType) {
                     return;
                 }
 
-                const reference = evaluate(expression) as Element;
-                if (!reference) {
-                    throw "Alpine: no element provided to x-anchor...";
-                }
+                let previousReference: any = null;
+                let release: any = null;
 
-                let compute = () => {
-                    initComputePosition({
-                        reference,
-                        el,
-                        placement,
-                        middleware,
-                        unstyled,
-                        arrowOptions,
-                    });
-                };
+                effect(() => {
+                    let reference = evaluate(expression) as Element;
+                    if (!reference || previousReference === reference) {
+                        return;
+                    }
 
-                let release = autoUpdate(reference as Element, el, () => compute());
+                    if (release) {
+                        release();
+                    }
+                    previousReference = reference;
 
-                cleanup(() => release());
+                    let compute = () => {
+                        initComputePosition({
+                            reference,
+                            el,
+                            placement,
+                            middleware,
+                            unstyled,
+                            arrowOptions,
+                        });
+                    };
+
+                    release = autoUpdate(reference as Element, el, () => compute());
+                });
+
+                cleanup(() => {
+                    if (release) {
+                        release();
+                    }
+                });
             },
 
             // When cloning (or "morphing"), we will graft the style and position data from the live tree...
