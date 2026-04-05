@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+sort@3.15.9/node_modules/@alpinejs/sort/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+sort@3.15.11/node_modules/@alpinejs/sort/dist/module.esm.js
 function ownKeys(object, enumerableOnly) {
     var keys = Object.keys(object);
     if (Object.getOwnPropertySymbols) {
@@ -2648,9 +2648,12 @@ function src_default(Alpine) {
             el._x_sort_key = evaluate(expression);
             return;
         }
+        let handleSelector = "[x-sort\\:handle],[wire\\:sort\\:handle]";
         let preferences = {
             hideGhost: !modifiers.includes("ghost"),
-            useHandles: !!el.querySelector("[x-sort\\:handle],[wire\\:sort\\:handle]"),
+            useHandles:
+                !!el.querySelector(handleSelector) ||
+                Array.from(el.querySelectorAll("template")).some((tmpl) => tmpl.content.querySelector(handleSelector)),
             group: getGroupName(el, modifiers),
         };
         let handleSort = generateSortHandler(expression, evaluate);

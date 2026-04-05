@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+focus@3.15.9/node_modules/@alpinejs/focus/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+focus@3.15.11/node_modules/@alpinejs/focus/dist/module.esm.js
 var candidateSelectors = [
     "input:not([inert]):not([inert] *)",
     "select:not([inert]):not([inert] *)",
@@ -1868,7 +1868,13 @@ function disableScrolling() {
     let overflow = document.documentElement.style.overflow;
     let paddingRight = document.documentElement.style.paddingRight;
     let scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    let scrollbarGutter = window.getComputedStyle(document.documentElement).scrollbarGutter;
     document.documentElement.style.overflow = "hidden";
+    if (scrollbarGutter && scrollbarGutter !== "auto") {
+        return () => {
+            document.documentElement.style.overflow = overflow;
+        };
+    }
     document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
     return () => {
         document.documentElement.style.overflow = overflow;

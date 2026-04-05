@@ -14,24 +14,17 @@ function Anchor_default(Alpine) {
     Alpine.directive(
         "anchor",
         Alpine.skipDuringClone(
-            (el, { expression, modifiers }, { cleanup, evaluate }) => {
-                let { placement, offsetValue, unstyled, arrowOptions } = getOptions(el, modifiers);
+            (el, { expression, modifiers }, { evaluate, effect, cleanup }) => {
+                let { placement, offsetValue, unstyled, arrowOptions, allowFlip } = getOptions(el, modifiers);
                 el._x_anchor = Alpine.reactive({ x: 0, y: 0 });
-                const middleware = [flip(), shift({ padding: 5 }), offset(offsetValue)];
+                const middleware = [allowFlip && flip(), shift({ padding: 5 }), offset(offsetValue)];
                 if (arrowOptions) {
                     middleware.push(arrow(arrowOptions));
                 }
                 if (expression == "mouse") {
                     const mouseEventFunction = (position) => {
-                        const reference2 = createVirtualElement(position);
-                        initComputePosition({
-                            reference: reference2,
-                            el,
-                            placement,
-                            middleware,
-                            unstyled,
-                            arrowOptions,
-                        });
+                        const reference = createVirtualElement(position);
+                        initComputePosition({ reference, el, placement, middleware, unstyled, arrowOptions });
                     };
                     document.addEventListener("mousemove", mouseEventFunction);
                     cleanup(() => {
@@ -39,22 +32,34 @@ function Anchor_default(Alpine) {
                     });
                     return;
                 }
-                const reference = evaluate(expression);
-                if (!reference) {
-                    throw "Alpine: no element provided to x-anchor...";
-                }
-                let compute = () => {
-                    initComputePosition({
-                        reference,
-                        el,
-                        placement,
-                        middleware,
-                        unstyled,
-                        arrowOptions,
-                    });
-                };
-                let release = autoUpdate(reference, el, () => compute());
-                cleanup(() => release());
+                let previousReference = null;
+                let release = null;
+                effect(() => {
+                    let reference = evaluate(expression);
+                    if (!reference || previousReference === reference) {
+                        return;
+                    }
+                    if (release) {
+                        release();
+                    }
+                    previousReference = reference;
+                    let compute = () => {
+                        initComputePosition({
+                            reference,
+                            el,
+                            placement,
+                            middleware,
+                            unstyled,
+                            arrowOptions,
+                        });
+                    };
+                    release = autoUpdate(reference, el, () => compute());
+                });
+                cleanup(() => {
+                    if (release) {
+                        release();
+                    }
+                });
             },
             // When cloning (or "morphing"), we will graft the style and position data from the live tree...
             (el, { expression, modifiers, value }, { cleanup, evaluate }) => {
@@ -109,7 +114,8 @@ function getOptions(el, modifiers) {
         offsetValue = modifiers[idx + 1] !== void 0 ? Number(modifiers[idx + 1]) : offsetValue;
     }
     let unstyled = modifiers.includes("no-style");
-    return { placement, offsetValue, unstyled, arrowOptions };
+    let allowFlip = !modifiers.includes("noflip");
+    return { placement, offsetValue, unstyled, arrowOptions, allowFlip };
 }
 function initComputePosition({
     reference,

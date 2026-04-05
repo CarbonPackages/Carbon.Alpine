@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+anchor@3.15.9/node_modules/@alpinejs/anchor/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+anchor@3.15.11/node_modules/@alpinejs/anchor/dist/module.esm.js
 var min = Math.min;
 var max = Math.max;
 var round = Math.round;
@@ -1241,13 +1241,13 @@ function src_default(Alpine) {
         "anchor",
         Alpine.skipDuringClone(
             (el, { expression, modifiers, value }, { evaluate: evaluate2, effect, cleanup }) => {
-                let { placement, offsetValue, unstyled } = getOptions(modifiers);
+                let { placement, offsetValue, unstyled, allowFlip } = getOptions(modifiers);
                 el._x_anchor = Alpine.reactive({ x: 0, y: 0 });
                 let previousReference = null;
                 let release = null;
-                let effector = effect(() => {
+                effect(() => {
                     let reference = evaluate2(expression);
-                    if (!reference) throw "Alpine: no element provided to x-anchor...";
+                    if (!reference) return;
                     if (previousReference !== reference) {
                         if (release) release();
                         previousReference = reference;
@@ -1255,7 +1255,7 @@ function src_default(Alpine) {
                             let previousValue;
                             computePosition2(reference, el, {
                                 placement,
-                                middleware: [flip(), shift({ padding: 5 }), offset(offsetValue)],
+                                middleware: [allowFlip && flip(), shift({ padding: 5 }), offset(offsetValue)],
                             }).then(({ x, y }) => {
                                 unstyled || setStyles(el, x, y);
                                 if (JSON.stringify({ x, y }) !== previousValue) {
@@ -1269,7 +1269,6 @@ function src_default(Alpine) {
                     }
                 });
                 cleanup(() => {
-                    effector();
                     if (release) release();
                 });
             },
@@ -1312,7 +1311,8 @@ function getOptions(modifiers) {
         offsetValue = modifiers[idx + 1] !== void 0 ? Number(modifiers[idx + 1]) : offsetValue;
     }
     let unstyled = modifiers.includes("no-style");
-    return { placement, offsetValue, unstyled };
+    let allowFlip = !modifiers.includes("noflip");
+    return { placement, offsetValue, unstyled, allowFlip };
 }
 var module_default = src_default;
 

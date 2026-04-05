@@ -1814,14 +1814,21 @@ function createFocusPlugin(Alpine, config) {
                     allowOutsideClick: true,
                     fallbackFocus: () => el,
                 };
+                let undoInert = () => {};
                 if (modifiers.includes("noautofocus")) {
                     options.initialFocus = false;
                 } else {
                     let autofocusEl = el.querySelector("[autofocus]");
                     if (autofocusEl) options.initialFocus = autofocusEl;
                 }
+                if (modifiers.includes("inert")) {
+                    options.onPostActivate = () => {
+                        Alpine.nextTick(() => {
+                            undoInert = setInert(el);
+                        });
+                    };
+                }
                 let trap = createFocusTrap(el, options);
-                let undoInert = () => {};
                 let undoDisableScrolling = () => {};
                 const releaseFocus = () => {
                     undoInert();
@@ -1837,7 +1844,6 @@ function createFocusPlugin(Alpine, config) {
                         if (oldValue === value) return;
                         if (value && !oldValue) {
                             if (modifiers.includes("noscroll")) undoDisableScrolling = disableScrolling();
-                            if (modifiers.includes("inert")) undoInert = setInert(el);
                             setTimeout(() => {
                                 trap.activate();
                             }, 15);
@@ -1884,7 +1890,13 @@ function disableScrolling() {
     let overflow = document.documentElement.style.overflow;
     let paddingRight = document.documentElement.style.paddingRight;
     let scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    let scrollbarGutter = window.getComputedStyle(document.documentElement).scrollbarGutter;
     document.documentElement.style.overflow = "hidden";
+    if (scrollbarGutter && scrollbarGutter !== "auto") {
+        return () => {
+            document.documentElement.style.overflow = overflow;
+        };
+    }
     document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
     return () => {
         document.documentElement.style.overflow = overflow;

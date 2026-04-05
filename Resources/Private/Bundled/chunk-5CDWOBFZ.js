@@ -1,4 +1,4 @@
-// node_modules/.pnpm/alpinejs@3.15.9/node_modules/alpinejs/dist/module.esm.js
+// node_modules/.pnpm/alpinejs@3.15.11/node_modules/alpinejs/dist/module.esm.js
 var flushPending = false;
 var flushing = false;
 var queue = [];
@@ -1663,7 +1663,7 @@ var Alpine = {
     get transaction() {
         return transaction;
     },
-    version: "3.15.9",
+    version: "3.15.11",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,
@@ -3283,6 +3283,11 @@ function loop(templateEl, iteratorNames, evaluateItems, evaluateKey) {
                     }
                     return;
                 }
+                if (templateEl.content.children.length > 1)
+                    warn(
+                        "x-for templates require a single root element, additional elements will be ignored.",
+                        templateEl,
+                    );
                 let clone2 = document.importNode(templateEl.content, true).firstElementChild;
                 let reactiveScope = reactive(scope2);
                 addScopeToNode(clone2, reactiveScope, templateEl);
@@ -3351,12 +3356,13 @@ function isObject2(subject) {
     return typeof subject === "object" && !Array.isArray(subject);
 }
 function handler3() {}
-handler3.inline = skipDuringClone((el, { expression }, { cleanup: cleanup2 }) => {
+handler3.inline = (el, { expression }, { cleanup: cleanup2 }) => {
     let root = closestRoot(el);
+    if (!root) return;
     if (!root._x_refs) root._x_refs = {};
     root._x_refs[expression] = el;
     cleanup2(() => delete root._x_refs[expression]);
-});
+};
 directive("ref", handler3);
 directive("if", (el, { expression }, { effect: effect3, cleanup: cleanup2 }) => {
     if (el.tagName.toLowerCase() !== "template") warn("x-if can only be used on a <template> tag", el);
