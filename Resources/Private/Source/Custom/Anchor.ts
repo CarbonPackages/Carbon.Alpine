@@ -33,11 +33,11 @@ export default function (Alpine: AlpineType) {
         "anchor",
         Alpine.skipDuringClone(
             (el: ElementWithAnchor, { expression, modifiers }, { cleanup, evaluate }) => {
-                let { placement, offsetValue, unstyled, arrowOptions } = getOptions(el, modifiers);
+                let { placement, offsetValue, unstyled, arrowOptions, allowFlip } = getOptions(el, modifiers);
 
                 el._x_anchor = Alpine.reactive({ x: 0, y: 0 });
 
-                const middleware = [flip(), shift({ padding: 5 }), offset(offsetValue)];
+                const middleware = [allowFlip && flip(), shift({ padding: 5 }), offset(offsetValue)];
                 if (arrowOptions) {
                     middleware.push(arrow(arrowOptions));
                 }
@@ -133,8 +133,9 @@ function getOptions(el: ElementWithAnchor, modifiers: string[]) {
         offsetValue = modifiers[idx + 1] !== undefined ? Number(modifiers[idx + 1]) : offsetValue;
     }
     let unstyled = modifiers.includes("no-style");
+    let allowFlip = !modifiers.includes("noflip");
 
-    return { placement, offsetValue, unstyled, arrowOptions };
+    return { placement, offsetValue, unstyled, arrowOptions, allowFlip };
 }
 
 function initComputePosition({
