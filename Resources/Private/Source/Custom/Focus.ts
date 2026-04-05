@@ -173,6 +173,8 @@ function createFocusPlugin(Alpine, config) {
                     fallbackFocus: () => el,
                 };
 
+                let undoInert = () => {};
+
                 if (modifiers.includes("noautofocus")) {
                     options.initialFocus = false;
                 } else {
@@ -181,9 +183,16 @@ function createFocusPlugin(Alpine, config) {
                     if (autofocusEl) options.initialFocus = autofocusEl;
                 }
 
+                if (modifiers.includes("inert")) {
+                    options.onPostActivate = () => {
+                        Alpine.nextTick(() => {
+                            undoInert = setInert(el);
+                        });
+                    };
+                }
+
                 let trap = createFocusTrap(el, options);
 
-                let undoInert = () => {};
                 let undoDisableScrolling = () => {};
 
                 const releaseFocus = () => {
@@ -205,7 +214,6 @@ function createFocusPlugin(Alpine, config) {
                         // Start trapping.
                         if (value && !oldValue) {
                             if (modifiers.includes("noscroll")) undoDisableScrolling = disableScrolling();
-                            if (modifiers.includes("inert")) undoInert = setInert(el);
 
                             // Activate the trap after a generous tick. (Needed to play nice with transitions...)
                             setTimeout(() => {
