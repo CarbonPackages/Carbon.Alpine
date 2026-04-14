@@ -4,10 +4,19 @@ function Fetch_default(Alpine) {
     Alpine.magic(
         "fetch",
         () =>
-            async (url, { maxAgeInSeconds = 0, prefix = "alpine-fetch-", version = release, cache = true } = {}) =>
+            async (
+                url,
+                { maxAgeInSeconds = 0, prefix = "alpine-fetch-", version = release, cache = true, hashed = false } = {},
+            ) =>
                 cache
-                    ? await cachedFetch({ url, prefix, version, maxAgeInSeconds, forceFlush: cache === "flush" })
-                    : await fetch(url),
+                    ? await cachedFetch({
+                          url: decodeUrl(url, hashed),
+                          prefix,
+                          version,
+                          maxAgeInSeconds,
+                          forceFlush: cache === "flush",
+                      })
+                    : await fetch(decodeUrl(url, hashed)),
     );
     Alpine.data(
         "fetch",
@@ -21,6 +30,7 @@ function Fetch_default(Alpine) {
             maxAgeInSeconds = 300,
             cache = true,
             release2,
+            hashed = false,
         ) => ({
             noMarkup: false,
             target: null,
@@ -44,7 +54,7 @@ function Fetch_default(Alpine) {
                     this.noContentFound("No URL defined in x-data='fetch'");
                     return;
                 }
-                const urls = url.split("||");
+                const urls = decodeUrl(url, hashed).split("||");
                 Promise.all(
                     urls.map(async (url2) => {
                         const response = cache
@@ -157,5 +167,11 @@ async function deleteOldCaches(currentCache, prefix, forceFlush = false) {
             caches.delete(key);
         }
     }
+}
+function decodeUrl(url, hashed = false) {
+    if (!hashed) {
+        return url;
+    }
+    return window.atob(url);
 }
 export { cachedFetch, Fetch_default as default };
