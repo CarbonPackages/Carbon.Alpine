@@ -53,22 +53,24 @@ export default function (Alpine: AlpineType) {
                     : await fetch(decodeUrl(url, hashed)),
     );
 
-    // x-data="fetch(url, notification, maxItems, showErrorIfNoMarkup, insertMode, filter)"
+    // x-data="fetch(url, {notification, maxItems, showErrorIfNoMarkup, insertMode, filter})"
     // insertMode: replace | beforeBegin | afterBegin | beforeEnd | afterEnd
     // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
     Alpine.data(
         "fetch",
         (
             url: string,
-            notification: boolean,
-            maxItems: number,
-            showErrorIfNoMarkup: false,
-            insertMode: InsertMode = "replace",
-            filter = true,
-            maxAgeInSeconds: number = 300,
-            cache: boolean | "flush" = true,
-            release: string,
-            hashed: boolean = false,
+            {
+                notification = false as boolean,
+                maxItems = null as number | null,
+                showErrorIfNoMarkup = false as boolean,
+                insertMode = "replace" as InsertMode,
+                filter = true as boolean,
+                maxAgeInSeconds = 300 as number,
+                cache = true as boolean | "flush",
+                version = release as string | number,
+                hashed = false as boolean,
+            },
         ) => ({
             noMarkup: false,
             target: null as HTMLElement | null,
@@ -102,7 +104,7 @@ export default function (Alpine: AlpineType) {
                             ? await cachedFetch({
                                   url,
                                   prefix: "alpine-fetch-",
-                                  version: release,
+                                  version,
                                   maxAgeInSeconds,
                                   forceFlush: cache === "flush",
                               })
