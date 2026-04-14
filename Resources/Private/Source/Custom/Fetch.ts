@@ -10,6 +10,7 @@ type magicOptions = {
     prefix: string | number;
     version: string | number;
     cache: boolean | "flush";
+    hashed: boolean;
 };
 
 type cachedFetchOptions = {
@@ -33,11 +34,23 @@ export default function (Alpine: AlpineType) {
         () =>
             async (
                 url: string,
-                { maxAgeInSeconds = 0, prefix = "alpine-fetch-", version = release, cache = true } = {} as magicOptions,
+                {
+                    maxAgeInSeconds = 0,
+                    prefix = "alpine-fetch-",
+                    version = release,
+                    cache = true,
+                    hashed = false,
+                } = {} as magicOptions,
             ) =>
                 cache
-                    ? await cachedFetch({ url, prefix, version, maxAgeInSeconds, forceFlush: cache === "flush" })
-                    : await fetch(url),
+                    ? await cachedFetch({
+                          url: decodeUrl(url, hashed),
+                          prefix,
+                          version,
+                          maxAgeInSeconds,
+                          forceFlush: cache === "flush",
+                      })
+                    : await fetch(decodeUrl(url, hashed)),
     );
 
     // x-data="fetch(url, notification, maxItems, showErrorIfNoMarkup, insertMode, filter)"
@@ -55,6 +68,7 @@ export default function (Alpine: AlpineType) {
             maxAgeInSeconds: number = 300,
             cache: boolean | "flush" = true,
             release: string,
+            hashed: boolean = false,
         ) => ({
             noMarkup: false,
             target: null as HTMLElement | null,
@@ -81,8 +95,7 @@ export default function (Alpine: AlpineType) {
                     this.noContentFound("No URL defined in x-data='fetch'");
                     return;
                 }
-
-                const urls = url.split("||");
+                const urls = decodeUrl(url, hashed).split("||");
                 Promise.all(
                     urls.map(async (url) => {
                         const response: Response = cache
@@ -227,4 +240,11 @@ async function deleteOldCaches(currentCache: string, prefix: string | number, fo
             caches.delete(key);
         }
     }
+}
+
+function decodeUrl(url: string, hashed: boolean = false): string {
+    if (!hashed) {
+        return url;
+    }
+    return window.atob(url);
 }
