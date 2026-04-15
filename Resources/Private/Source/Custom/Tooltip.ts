@@ -1,5 +1,6 @@
 import { Alpine as AlpineType } from "alpinejs";
 import { computePosition, autoUpdate, flip, offset, shift, arrow, hide } from "../FloatingUI";
+import { decodeUrl } from "./Helper";
 
 // x-tooltip adds a tooltip to an element, width x-tooltip="placement" (top, left, right, bottom, etc) will set the placement
 // x-tooltips will add a tooltip to all elements with a data-tooltip, aria-label or title attribute. You can also set the placement here.
@@ -127,14 +128,14 @@ export default function (Alpine: AlpineType) {
                 return;
             }
 
-            const { url, text } = evaluate(tooltipText) as { url?: string; text?: string };
+            const { url, text, hashed } = evaluate(tooltipText) as { url?: string; text?: string; hashed?: boolean };
             if (!url) {
                 hasContent = false;
                 hideTooltip();
                 return;
             }
             tooltipContent.innerHTML = text || "";
-            fetch(url)
+            fetch(hashed ? decodeUrl(url, true) : url)
                 .then((response) => response.text())
                 .then((html) => {
                     if (html) {
