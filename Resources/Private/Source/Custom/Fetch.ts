@@ -28,6 +28,9 @@ type InsertMode = "replace" | "beforebegin" | "afterbegin" | "beforeend" | "afte
 const release: string = ENV.RELEASE_DATE || "v1";
 
 export default function (Alpine: AlpineType) {
+    // add $base64UrlDecode
+    Alpine.magic("base64UrlDecode", () => (value: string) => decodeUrl(value, true));
+
     // add $fetch
     Alpine.magic(
         "fetch",
