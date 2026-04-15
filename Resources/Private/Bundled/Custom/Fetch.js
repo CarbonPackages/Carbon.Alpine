@@ -1,6 +1,9 @@
+import { decodeBase64Url } from "../chunk-4ZNF6U5X.js";
+
 // Resources/Private/Source/Custom/Fetch.ts
 var release = ENV.RELEASE_DATE || "v1";
 function Fetch_default(Alpine) {
+    Alpine.magic("base64UrlDecode", () => (value) => decodeBase64Url(value));
     Alpine.magic(
         "fetch",
         () =>
@@ -22,91 +25,96 @@ function Fetch_default(Alpine) {
         "fetch",
         (
             url,
-            notification,
-            maxItems,
-            showErrorIfNoMarkup,
-            insertMode = "replace",
-            filter = true,
-            maxAgeInSeconds = 300,
-            cache = true,
-            release2,
-            hashed = false,
-        ) => ({
-            noMarkup: false,
-            target: null,
-            fetched: false,
-            noContentFound(errorMessage) {
-                this.$dispatch("fetch-no-content", { url, element: this.$el, target: this.target });
-                if (errorMessage) {
-                    console.error(errorMessage);
-                }
-                if (notification) {
-                    this.noMarkup = true;
-                    return;
-                }
-                this.$el.remove();
+            {
+                notification = false,
+                maxItems = null,
+                showErrorIfNoMarkup = false,
+                insertMode = "replace",
+                filter = true,
+                maxAgeInSeconds = 300,
+                cache = true,
+                version = release,
+                hashed = false,
             },
-            init() {
-                const element = this.$el;
-                const target = this.$refs.target || element;
-                this.target = target;
-                if (!url || typeof url !== "string") {
-                    this.noContentFound("No URL defined in x-data='fetch'");
-                    return;
-                }
-                const urls = decodeUrl(url, hashed).split("||");
-                Promise.all(
-                    urls.map(async (url2) => {
-                        const response = cache
-                            ? await cachedFetch({
-                                  url: url2,
-                                  prefix: "alpine-fetch-",
-                                  version: release2,
-                                  maxAgeInSeconds,
-                                  forceFlush: cache === "flush",
-                              })
-                            : await fetch(url2);
-                        if (!response?.ok) {
-                            throw new Error("Network response was not ok " + JSON.stringify(response));
-                        }
-                        return response.json();
-                    }),
-                )
-                    .then((data) => {
-                        let entries = {};
-                        data.forEach((group) => {
-                            group.forEach((item) => {
-                                if (!filter || item.url != window.location.pathname) {
-                                    entries[item.url] = item.markup;
-                                }
-                            });
-                        });
-                        let entriesArray = Object.values(entries);
-                        if (maxItems) {
-                            entriesArray = entriesArray.slice(0, maxItems);
-                        }
-                        const markup = entriesArray.join("");
-                        if (!markup) {
-                            if (showErrorIfNoMarkup) {
-                                throw new Error("No Markup found");
+        ) => {
+            url = decodeUrl(url, hashed);
+            return {
+                noMarkup: false,
+                target: null,
+                fetched: false,
+                noContentFound(errorMessage) {
+                    this.$dispatch("fetch-no-content", { url, element: this.$el, target: this.target });
+                    if (errorMessage) {
+                        console.error(errorMessage);
+                    }
+                    if (notification) {
+                        this.noMarkup = true;
+                        return;
+                    }
+                    this.$el.remove();
+                },
+                init() {
+                    const element = this.$el;
+                    const target = this.$refs.target || element;
+                    this.target = target;
+                    if (!url || typeof url !== "string") {
+                        this.noContentFound("No URL defined in x-data='fetch'");
+                        return;
+                    }
+                    const urls = url.split("||");
+                    Promise.all(
+                        urls.map(async (url2) => {
+                            const response = cache
+                                ? await cachedFetch({
+                                      url: url2,
+                                      prefix: "alpine-fetch-",
+                                      version,
+                                      maxAgeInSeconds,
+                                      forceFlush: cache === "flush",
+                                  })
+                                : await fetch(url2);
+                            if (!response?.ok) {
+                                throw new Error("Network response was not ok " + JSON.stringify(response));
                             }
-                            this.noContentFound(null);
-                            return;
-                        }
-                        this.fetched = true;
-                        this.$dispatch("fetch-has-content", { url, element, target });
-                        if (insertMode === "replace") {
-                            target.innerHTML = markup;
-                            return;
-                        }
-                        target.insertAdjacentHTML(insertMode, markup);
-                    })
-                    .catch((error) => {
-                        this.fetched = true;
-                        this.noContentFound(error);
-                    });
-            },
-        }),
+                            return response.json();
+                        }),
+                    )
+                        .then((data) => {
+                            let entries = {};
+                            data.forEach((group) => {
+                                group.forEach((item) => {
+                                    if (!filter || item.url != window.location.pathname) {
+                                        entries[item.url] = item.markup;
+                                    }
+                                });
+                            });
+                            let entriesArray = Object.values(entries);
+                            if (maxItems) {
+                                entriesArray = entriesArray.slice(0, maxItems);
+                            }
+                            const markup = entriesArray.join("");
+                            if (!markup) {
+                                if (showErrorIfNoMarkup) {
+                                    throw new Error("No Markup found");
+                                }
+                                this.noContentFound(null);
+                                return;
+                            }
+                            this.fetched = true;
+                            this.$dispatch("fetch-has-content", { url, element, target });
+                            if (insertMode === "replace") {
+                                target.innerHTML = markup;
+                                return;
+                            }
+                            target.insertAdjacentHTML(insertMode, markup);
+                        })
+                        .catch((error) => {
+                            this.fetched = true;
+                            this.noContentFound(error);
+                        });
+                },
+            };
+        },
     );
 }
 async function cachedFetch({
@@ -172,6 +180,6 @@ function decodeUrl(url, hashed = false) {
     if (!hashed) {
         return url;
     }
-    return window.atob(url);
+    return decodeBase64Url(url);
 }
 export { cachedFetch, Fetch_default as default };

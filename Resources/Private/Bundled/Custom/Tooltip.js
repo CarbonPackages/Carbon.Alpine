@@ -1,4 +1,5 @@
 import { arrow, autoUpdate, computePosition, flip, hide, offset, shift } from "../chunk-AZCY6WKO.js";
+import { decodeBase64Url } from "../chunk-4ZNF6U5X.js";
 
 // Resources/Private/Source/Custom/Tooltip.ts
 var xTooltipAttribute = "x-tooltip";
@@ -64,14 +65,14 @@ function Tooltip_default(Alpine) {
                 tooltipContent.textContent = tooltipText;
                 return;
             }
-            const { url, text } = evaluate(tooltipText);
+            const { url, text, hashed } = evaluate(tooltipText);
             if (!url) {
                 hasContent = false;
                 hideTooltip();
                 return;
             }
             tooltipContent.innerHTML = text || "";
-            fetch(url)
+            fetch(hashed ? decodeBase64Url(url) : url)
                 .then((response) => response.text())
                 .then((html) => {
                     if (html) {
