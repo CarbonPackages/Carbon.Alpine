@@ -1,5 +1,5 @@
 import { Alpine as AlpineType } from "alpinejs";
-import { decodeUrl } from "./Helper";
+import { decodeBase64Url } from "./Helper";
 
 type ItemType = {
     url: string;
@@ -30,7 +30,7 @@ const release: string = ENV.RELEASE_DATE || "v1";
 
 export default function (Alpine: AlpineType) {
     // add $base64UrlDecode
-    Alpine.magic("base64UrlDecode", () => (value: string) => decodeUrl(value, true));
+    Alpine.magic("base64UrlDecode", () => (value: string) => decodeBase64Url(value));
 
     // add $fetch
     Alpine.magic(
@@ -75,93 +75,96 @@ export default function (Alpine: AlpineType) {
                 version = release as string | number,
                 hashed = false as boolean,
             },
-        ) => ({
-            noMarkup: false,
-            target: null as HTMLElement | null,
-            fetched: false,
-            noContentFound(errorMessage: any) {
-                this.$dispatch("fetch-no-content", { url, element: this.$el, target: this.target });
+        ) => {
+            url = decodeUrl(url, hashed);
+            return {
+                noMarkup: false,
+                target: null as HTMLElement | null,
+                fetched: false,
+                noContentFound(errorMessage: any) {
+                    this.$dispatch("fetch-no-content", { url, element: this.$el, target: this.target });
 
-                if (errorMessage) {
-                    console.error(errorMessage);
-                }
+                    if (errorMessage) {
+                        console.error(errorMessage);
+                    }
 
-                if (notification) {
-                    this.noMarkup = true;
-                    return;
-                }
-                this.$el.remove();
-            },
-            init() {
-                const element = this.$el;
-                const target = this.$refs.target || element;
-                this.target = target;
+                    if (notification) {
+                        this.noMarkup = true;
+                        return;
+                    }
+                    this.$el.remove();
+                },
+                init() {
+                    const element = this.$el;
+                    const target = this.$refs.target || element;
+                    this.target = target;
 
-                if (!url || typeof url !== "string") {
-                    this.noContentFound("No URL defined in x-data='fetch'");
-                    return;
-                }
-                const urls = decodeUrl(url, hashed).split("||");
-                Promise.all(
-                    urls.map(async (url) => {
-                        const response: Response = cache
-                            ? await cachedFetch({
-                                  url,
-                                  prefix: "alpine-fetch-",
-                                  version,
-                                  maxAgeInSeconds,
-                                  forceFlush: cache === "flush",
-                              })
-                            : await fetch(url);
+                    if (!url || typeof url !== "string") {
+                        this.noContentFound("No URL defined in x-data='fetch'");
+                        return;
+                    }
+                    const urls = url.split("||");
+                    Promise.all(
+                        urls.map(async (url) => {
+                            const response: Response = cache
+                                ? await cachedFetch({
+                                      url,
+                                      prefix: "alpine-fetch-",
+                                      version,
+                                      maxAgeInSeconds,
+                                      forceFlush: cache === "flush",
+                                  })
+                                : await fetch(url);
 
-                        if (!response?.ok) {
-                            throw new Error("Network response was not ok " + JSON.stringify(response));
-                        }
-
-                        return response.json();
-                    }),
-                )
-                    .then((data) => {
-                        let entries: { [key: string]: string } = {};
-                        // Write entries to object with key as path (This removes duplicates)
-                        data.forEach((group) => {
-                            group.forEach((item: ItemType) => {
-                                // If filter is true, only add items that are not the current page
-                                if (!filter || item.url != window.location.pathname) {
-                                    entries[item.url] = item.markup;
-                                }
-                            });
-                        });
-
-                        // Convert entries object to array
-                        let entriesArray = Object.values(entries);
-
-                        // Limit entries to maxItems
-                        if (maxItems) {
-                            entriesArray = entriesArray.slice(0, maxItems);
-                        }
-                        const markup = entriesArray.join("");
-                        if (!markup) {
-                            if (showErrorIfNoMarkup) {
-                                throw new Error("No Markup found");
+                            if (!response?.ok) {
+                                throw new Error("Network response was not ok " + JSON.stringify(response));
                             }
-                            this.noContentFound(null);
-                            return;
-                        }
-                        this.fetched = true;
-                        this.$dispatch("fetch-has-content", { url, element, target });
-                        if (insertMode === "replace") {
-                            target.innerHTML = markup;
-                            return;
-                        }
-                        target.insertAdjacentHTML(insertMode, markup);
-                    })
-                    .catch((error) => {
-                        this.fetched = true;
-                        this.noContentFound(error);
-                    });
-            },
-        }),
+
+                            return response.json();
+                        }),
+                    )
+                        .then((data) => {
+                            let entries: { [key: string]: string } = {};
+                            // Write entries to object with key as path (This removes duplicates)
+                            data.forEach((group) => {
+                                group.forEach((item: ItemType) => {
+                                    // If filter is true, only add items that are not the current page
+                                    if (!filter || item.url != window.location.pathname) {
+                                        entries[item.url] = item.markup;
+                                    }
+                                });
+                            });
+
+                            // Convert entries object to array
+                            let entriesArray = Object.values(entries);
+
+                            // Limit entries to maxItems
+                            if (maxItems) {
+                                entriesArray = entriesArray.slice(0, maxItems);
+                            }
+                            const markup = entriesArray.join("");
+                            if (!markup) {
+                                if (showErrorIfNoMarkup) {
+                                    throw new Error("No Markup found");
+                                }
+                                this.noContentFound(null);
+                                return;
+                            }
+                            this.fetched = true;
+                            this.$dispatch("fetch-has-content", { url, element, target });
+                            if (insertMode === "replace") {
+                                target.innerHTML = markup;
+                                return;
+                            }
+                            target.insertAdjacentHTML(insertMode, markup);
+                        })
+                        .catch((error) => {
+                            this.fetched = true;
+                            this.noContentFound(error);
+                        });
+                },
+            };
+        },
     );
 }
 
@@ -246,4 +249,11 @@ async function deleteOldCaches(currentCache: string, prefix: string | number, fo
             caches.delete(key);
         }
     }
+}
+
+function decodeUrl(url: string, hashed: boolean = false): string {
+    if (!hashed) {
+        return url;
+    }
+    return decodeBase64Url(url);
 }

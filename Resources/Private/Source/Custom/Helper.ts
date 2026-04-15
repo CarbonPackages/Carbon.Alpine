@@ -1,7 +1,4 @@
-export function decodeUrl(url: string, hashed: boolean = false): string {
-    if (!hashed) {
-        return url;
-    }
+export function decodeBase64Url(url: string): string {
     const length = url.length;
     const m = length % 4;
     url = url
