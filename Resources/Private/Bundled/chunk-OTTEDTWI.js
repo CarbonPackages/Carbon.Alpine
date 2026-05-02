@@ -1,4 +1,4 @@
-// node_modules/.pnpm/alpinejs@3.15.11/node_modules/alpinejs/dist/module.esm.js
+// node_modules/.pnpm/alpinejs@3.15.12/node_modules/alpinejs/dist/module.esm.js
 var flushPending = false;
 var flushing = false;
 var queue = [];
@@ -736,8 +736,8 @@ var DEFAULT = "DEFAULT";
 var directiveOrder = [
     "ignore",
     "ref",
-    "data",
     "id",
+    "data",
     "anchor",
     "bind",
     "init",
@@ -1663,7 +1663,7 @@ var Alpine = {
     get transaction() {
         return transaction;
     },
-    version: "3.15.11",
+    version: "3.15.12",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,
@@ -2621,8 +2621,8 @@ directive("teleport", (el, { modifiers, expression }, { cleanup: cleanup2 }) => 
         }
     };
     mutateDom(() => {
-        placeInDom(clone2, target, modifiers);
         skipDuringClone(() => {
+            placeInDom(clone2, target, modifiers);
             initTree(clone2);
         })();
     });
@@ -3236,7 +3236,7 @@ function refreshScope(scope2) {
 function loop(templateEl, iteratorNames, evaluateItems, evaluateKey) {
     evaluateItems((items) => {
         if (isNumeric3(items)) items = Array.from({ length: items }, (_, i) => i + 1);
-        if (items === void 0) items = [];
+        if (items === void 0 || items === null) items = [];
         if (items instanceof Set) items = Array.from(items);
         if (items instanceof Map) items = Array.from(items);
         let oldLookup = templateEl._x_lookup;
@@ -3350,7 +3350,7 @@ function getIterationScopeVariables(iteratorNames, item, index, items) {
     return scopeVariables;
 }
 function isNumeric3(subject) {
-    return !Array.isArray(subject) && !isNaN(subject);
+    return typeof subject !== "object" && !isNaN(subject);
 }
 function isObject2(subject) {
     return typeof subject === "object" && !Array.isArray(subject);

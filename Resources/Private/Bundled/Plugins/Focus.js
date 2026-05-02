@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+focus@3.15.11/node_modules/@alpinejs/focus/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+focus@3.15.12/node_modules/@alpinejs/focus/dist/module.esm.js
 var candidateSelectors = [
     "input:not([inert]):not([inert] *)",
     "select:not([inert]):not([inert] *)",

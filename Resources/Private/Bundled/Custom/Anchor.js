@@ -15,7 +15,10 @@ function Anchor_default(Alpine) {
         "anchor",
         Alpine.skipDuringClone(
             (el, { expression, modifiers }, { evaluate, effect, cleanup }) => {
-                let { placement, offsetValue, unstyled, arrowOptions, allowFlip } = getOptions(el, modifiers);
+                const { placement, offsetValue, unstyled, arrowOptions, strategy, allowFlip } = getOptions(
+                    el,
+                    modifiers,
+                );
                 el._x_anchor = Alpine.reactive({ x: 0, y: 0 });
                 const middleware = [allowFlip && flip(), shift({ padding: 5 }), offset(offsetValue)];
                 if (arrowOptions) {
@@ -24,7 +27,7 @@ function Anchor_default(Alpine) {
                 if (expression == "mouse") {
                     const mouseEventFunction = (position) => {
                         const reference = createVirtualElement(position);
-                        initComputePosition({ reference, el, placement, middleware, unstyled, arrowOptions });
+                        initComputePosition({ reference, el, placement, middleware, unstyled, strategy, arrowOptions });
                     };
                     document.addEventListener("mousemove", mouseEventFunction);
                     cleanup(() => {
@@ -35,7 +38,7 @@ function Anchor_default(Alpine) {
                 let previousReference = null;
                 let release = null;
                 effect(() => {
-                    let reference = evaluate(expression);
+                    const reference = evaluate(expression);
                     if (!reference || previousReference === reference) {
                         return;
                     }
@@ -50,6 +53,7 @@ function Anchor_default(Alpine) {
                             placement,
                             middleware,
                             unstyled,
+                            strategy,
                             arrowOptions,
                         });
                     };
@@ -63,23 +67,23 @@ function Anchor_default(Alpine) {
             },
             // When cloning (or "morphing"), we will graft the style and position data from the live tree...
             (el, { expression, modifiers, value }, { cleanup, evaluate }) => {
-                let { unstyled } = getOptions(el, modifiers);
+                const { unstyled, strategy } = getOptions(el, modifiers);
                 if (el._x_anchor) {
-                    unstyled || setStyles(el, el._x_anchor.x, el._x_anchor.y);
+                    unstyled || setStyles(el, el._x_anchor.x, el._x_anchor.y, strategy);
                 }
             },
         ),
     );
 }
-function setStyles(el, x, y) {
+function setStyles(el, x, y, strategy) {
     Object.assign(el.style, {
         left: x + "px",
         top: y + "px",
-        position: "absolute",
+        position: strategy,
     });
 }
 function getOptions(el, modifiers) {
-    let positions = [
+    const positions = [
         "top",
         "top-start",
         "top-end",
@@ -93,11 +97,11 @@ function getOptions(el, modifiers) {
         "left-start",
         "left-end",
     ];
-    let placement = positions.find((i) => modifiers.includes(i));
+    const placement = positions.find((i) => modifiers.includes(i));
     let offsetValue = 0;
     let arrowOptions = null;
     if (modifiers.includes("arrow")) {
-        let idx = modifiers.findIndex((i) => i === "arrow");
+        const idx = modifiers.findIndex((i) => i === "arrow");
         const arrowClass = modifiers[idx + 1] !== void 0 ? `.${modifiers[idx + 1]}` : null;
         const arrowPadding = modifiers[idx + 2] !== void 0 ? Number(modifiers[idx + 2]) : 0;
         const arrowElement = arrowClass ? el.querySelector(arrowClass) : null;
@@ -110,12 +114,13 @@ function getOptions(el, modifiers) {
         };
     }
     if (modifiers.includes("offset")) {
-        let idx = modifiers.findIndex((i) => i === "offset");
+        const idx = modifiers.findIndex((i) => i === "offset");
         offsetValue = modifiers[idx + 1] !== void 0 ? Number(modifiers[idx + 1]) : offsetValue;
     }
-    let unstyled = modifiers.includes("no-style");
-    let allowFlip = !modifiers.includes("noflip");
-    return { placement, offsetValue, unstyled, arrowOptions, allowFlip };
+    const unstyled = modifiers.includes("no-style");
+    const allowFlip = !modifiers.includes("noflip");
+    const strategy = modifiers.includes("fixed") ? "fixed" : "absolute";
+    return { placement, offsetValue, unstyled, arrowOptions, allowFlip, strategy };
 }
 function initComputePosition({
     reference,
@@ -124,6 +129,7 @@ function initComputePosition({
     middleware,
     unstyled,
     arrowOptions,
+    strategy = "absolute",
     callback = (data) => {},
 }) {
     let previousValue;
@@ -131,7 +137,7 @@ function initComputePosition({
         placement,
         middleware,
     }).then(({ x, y, middlewareData, placement: placement2 }) => {
-        unstyled || setStyles(el, x, y);
+        unstyled || setStyles(el, x, y, strategy);
         if (middlewareData.arrow && arrowOptions) {
             const { x: x2, y: y2 } = middlewareData.arrow;
             const side = placement2.split("-")[0];
@@ -150,7 +156,7 @@ function initComputePosition({
                 bottom: "",
                 [staticSide]: `${-arrowOptions.length / 2}px`,
                 transform: "rotate(45deg)",
-                position: "absolute",
+                position: strategy,
             });
         }
         if (JSON.stringify({ x, y }) !== previousValue) {

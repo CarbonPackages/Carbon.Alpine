@@ -434,7 +434,7 @@ var isFocusable = function isFocusable2(node, options) {
     return isNodeMatchingSelectorFocusable(options, node);
 };
 
-// node_modules/.pnpm/focus-trap@8.0.1/node_modules/focus-trap/dist/focus-trap.esm.js
+// node_modules/.pnpm/focus-trap@8.1.0/node_modules/focus-trap/dist/focus-trap.esm.js
 function _arrayLikeToArray(r, a) {
     (null == a || a > r.length) && (a = r.length);
     for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
@@ -1453,7 +1453,11 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
                 state.active = true;
                 state.paused = false;
                 state.nodeFocusedBeforeActivation = _getActiveElement(doc);
-                onActivate === null || onActivate === void 0 || onActivate();
+                onActivate === null ||
+                    onActivate === void 0 ||
+                    onActivate({
+                        trap,
+                    });
                 var finishActivation = /* @__PURE__ */ (function () {
                     var _ref6 = _asyncToGenerator(
                         /* @__PURE__ */ _regenerator().m(function _callee() {
@@ -1469,7 +1473,11 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
                                         case 1:
                                             trap._setSubtreeIsolation(true);
                                             updateObservedNodes();
-                                            onPostActivate === null || onPostActivate === void 0 || onPostActivate();
+                                            onPostActivate === null ||
+                                                onPostActivate === void 0 ||
+                                                onPostActivate({
+                                                    trap,
+                                                });
                                         case 2:
                                             return _context.a(2);
                                     }
@@ -1523,13 +1531,21 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
             var onPostDeactivate = getOption(options, "onPostDeactivate");
             var checkCanReturnFocus = getOption(options, "checkCanReturnFocus");
             var returnFocus = getOption(options, "returnFocus", "returnFocusOnDeactivate");
-            onDeactivate === null || onDeactivate === void 0 || onDeactivate();
+            onDeactivate === null ||
+                onDeactivate === void 0 ||
+                onDeactivate({
+                    trap,
+                });
             var finishDeactivation = function finishDeactivation2() {
                 delay(function () {
                     if (returnFocus) {
                         _tryFocus(getReturnFocusNode(state.nodeFocusedBeforeActivation));
                     }
-                    onPostDeactivate === null || onPostDeactivate === void 0 || onPostDeactivate();
+                    onPostDeactivate === null ||
+                        onPostDeactivate === void 0 ||
+                        onPostDeactivate({
+                            trap,
+                        });
                 });
             };
             if (returnFocus && checkCanReturnFocus) {
@@ -1592,15 +1608,27 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
                 if (paused) {
                     var onPause = getOption(options, "onPause");
                     var onPostPause = getOption(options, "onPostPause");
-                    onPause === null || onPause === void 0 || onPause();
+                    onPause === null ||
+                        onPause === void 0 ||
+                        onPause({
+                            trap,
+                        });
                     removeListeners();
                     trap._setSubtreeIsolation(false);
                     updateObservedNodes();
-                    onPostPause === null || onPostPause === void 0 || onPostPause();
+                    onPostPause === null ||
+                        onPostPause === void 0 ||
+                        onPostPause({
+                            trap,
+                        });
                 } else {
                     var onUnpause = getOption(options, "onUnpause");
                     var onPostUnpause = getOption(options, "onPostUnpause");
-                    onUnpause === null || onUnpause === void 0 || onUnpause();
+                    onUnpause === null ||
+                        onUnpause === void 0 ||
+                        onUnpause({
+                            trap,
+                        });
                     var finishUnpause = /* @__PURE__ */ (function () {
                         var _ref7 = _asyncToGenerator(
                             /* @__PURE__ */ _regenerator().m(function _callee2() {
@@ -1614,7 +1642,11 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
                                             case 1:
                                                 trap._setSubtreeIsolation(true);
                                                 updateObservedNodes();
-                                                onPostUnpause === null || onPostUnpause === void 0 || onPostUnpause();
+                                                onPostUnpause === null ||
+                                                    onPostUnpause === void 0 ||
+                                                    onPostUnpause({
+                                                        trap,
+                                                    });
                                             case 2:
                                                 return _context2.a(2);
                                         }

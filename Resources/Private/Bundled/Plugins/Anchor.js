@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+anchor@3.15.11/node_modules/@alpinejs/anchor/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+anchor@3.15.12/node_modules/@alpinejs/anchor/dist/module.esm.js
 var min = Math.min;
 var max = Math.max;
 var round = Math.round;
@@ -1241,7 +1241,7 @@ function src_default(Alpine) {
         "anchor",
         Alpine.skipDuringClone(
             (el, { expression, modifiers, value }, { evaluate: evaluate2, effect, cleanup }) => {
-                let { placement, offsetValue, unstyled, allowFlip } = getOptions(modifiers);
+                let { placement, offsetValue, unstyled, strategy, allowFlip } = getOptions(modifiers);
                 el._x_anchor = Alpine.reactive({ x: 0, y: 0 });
                 let previousReference = null;
                 let release = null;
@@ -1255,9 +1255,10 @@ function src_default(Alpine) {
                             let previousValue;
                             computePosition2(reference, el, {
                                 placement,
+                                strategy,
                                 middleware: [allowFlip && flip(), shift({ padding: 5 }), offset(offsetValue)],
                             }).then(({ x, y }) => {
-                                unstyled || setStyles(el, x, y);
+                                unstyled || setStyles(el, x, y, strategy);
                                 if (JSON.stringify({ x, y }) !== previousValue) {
                                     el._x_anchor.x = x;
                                     el._x_anchor.y = y;
@@ -1274,19 +1275,19 @@ function src_default(Alpine) {
             },
             // When cloning (or "morphing"), we will graft the style and position data from the live tree...
             (el, { expression, modifiers, value }, { cleanup, evaluate: evaluate2 }) => {
-                let { placement, offsetValue, unstyled } = getOptions(modifiers);
+                let { placement, offsetValue, unstyled, strategy } = getOptions(modifiers);
                 if (el._x_anchor) {
-                    unstyled || setStyles(el, el._x_anchor.x, el._x_anchor.y);
+                    unstyled || setStyles(el, el._x_anchor.x, el._x_anchor.y, strategy);
                 }
             },
         ),
     );
 }
-function setStyles(el, x, y) {
+function setStyles(el, x, y, strategy = "absolute") {
     Object.assign(el.style, {
         left: x + "px",
         top: y + "px",
-        position: "absolute",
+        position: strategy,
     });
 }
 function getOptions(modifiers) {
@@ -1312,7 +1313,8 @@ function getOptions(modifiers) {
     }
     let unstyled = modifiers.includes("no-style");
     let allowFlip = !modifiers.includes("noflip");
-    return { placement, offsetValue, unstyled, allowFlip };
+    let strategy = modifiers.includes("fixed") ? "fixed" : "absolute";
+    return { placement, offsetValue, unstyled, strategy, allowFlip };
 }
 var module_default = src_default;
 
