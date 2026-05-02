@@ -33,7 +33,10 @@ export default function (Alpine: AlpineType) {
         "anchor",
         Alpine.skipDuringClone(
             (el: ElementWithAnchor, { expression, modifiers }, { evaluate, effect, cleanup }) => {
-                let { placement, offsetValue, unstyled, arrowOptions, allowFlip } = getOptions(el, modifiers);
+                const { placement, offsetValue, unstyled, arrowOptions, strategy, allowFlip } = getOptions(
+                    el,
+                    modifiers,
+                );
 
                 el._x_anchor = Alpine.reactive({ x: 0, y: 0 });
 
@@ -47,7 +50,7 @@ export default function (Alpine: AlpineType) {
                 if (expression == "mouse") {
                     const mouseEventFunction = (position: { clientX: any; clientY: any }) => {
                         const reference = createVirtualElement(position);
-                        initComputePosition({ reference, el, placement, middleware, unstyled, arrowOptions });
+                        initComputePosition({ reference, el, placement, middleware, unstyled, strategy, arrowOptions });
                     };
 
                     document.addEventListener("mousemove", mouseEventFunction);
@@ -61,7 +64,7 @@ export default function (Alpine: AlpineType) {
                 let release: any = null;
 
                 effect(() => {
-                    let reference = evaluate(expression) as Element;
+                    const reference = evaluate(expression) as Element;
                     if (!reference || previousReference === reference) {
                         return;
                     }
@@ -78,6 +81,7 @@ export default function (Alpine: AlpineType) {
                             placement,
                             middleware,
                             unstyled,
+                            strategy,
                             arrowOptions,
                         });
                     };
@@ -94,26 +98,26 @@ export default function (Alpine: AlpineType) {
 
             // When cloning (or "morphing"), we will graft the style and position data from the live tree...
             (el, { expression, modifiers, value }, { cleanup, evaluate }) => {
-                let { unstyled } = getOptions(el, modifiers);
+                const { unstyled, strategy } = getOptions(el, modifiers);
 
                 if (el._x_anchor) {
-                    unstyled || setStyles(el, el._x_anchor.x, el._x_anchor.y);
+                    unstyled || setStyles(el, el._x_anchor.x, el._x_anchor.y, strategy);
                 }
             },
         ),
     );
 }
 
-function setStyles(el: ElementWithAnchor, x: string | number, y: string | number) {
+function setStyles(el: ElementWithAnchor, x: string | number, y: string | number, strategy: string) {
     Object.assign(el.style, {
         left: x + "px",
         top: y + "px",
-        position: "absolute",
+        position: strategy,
     });
 }
 
 function getOptions(el: ElementWithAnchor, modifiers: string[]) {
-    let positions = [
+    const positions = [
         "top",
         "top-start",
         "top-end",
@@ -127,11 +131,11 @@ function getOptions(el: ElementWithAnchor, modifiers: string[]) {
         "left-start",
         "left-end",
     ];
-    let placement = positions.find((i) => modifiers.includes(i)) as Placement | undefined;
+    const placement = positions.find((i) => modifiers.includes(i)) as Placement | undefined;
     let offsetValue = 0;
     let arrowOptions = null;
     if (modifiers.includes("arrow")) {
-        let idx = modifiers.findIndex((i) => i === "arrow");
+        const idx = modifiers.findIndex((i) => i === "arrow");
         const arrowClass = modifiers[idx + 1] !== undefined ? `.${modifiers[idx + 1]}` : null;
         const arrowPadding = modifiers[idx + 2] !== undefined ? Number(modifiers[idx + 2]) : 0;
         const arrowElement = arrowClass ? el.querySelector(arrowClass) : null;
@@ -144,14 +148,15 @@ function getOptions(el: ElementWithAnchor, modifiers: string[]) {
         } as ArrowOptions;
     }
     if (modifiers.includes("offset")) {
-        let idx = modifiers.findIndex((i) => i === "offset");
+        const idx = modifiers.findIndex((i) => i === "offset");
 
         offsetValue = modifiers[idx + 1] !== undefined ? Number(modifiers[idx + 1]) : offsetValue;
     }
-    let unstyled = modifiers.includes("no-style");
-    let allowFlip = !modifiers.includes("noflip");
+    const unstyled = modifiers.includes("no-style");
+    const allowFlip = !modifiers.includes("noflip");
+    const strategy = modifiers.includes("fixed") ? "fixed" : "absolute";
 
-    return { placement, offsetValue, unstyled, arrowOptions, allowFlip };
+    return { placement, offsetValue, unstyled, arrowOptions, allowFlip, strategy };
 }
 
 function initComputePosition({
@@ -161,6 +166,7 @@ function initComputePosition({
     middleware,
     unstyled,
     arrowOptions,
+    strategy = "absolute",
     callback = (data: any) => {},
 }: {
     reference: Element | ReturnType<typeof createVirtualElement>;
@@ -169,6 +175,7 @@ function initComputePosition({
     middleware: any[];
     unstyled: boolean;
     arrowOptions: any;
+    strategy: string;
     callback?: (data: any) => void;
 }) {
     let previousValue: string;
@@ -176,7 +183,7 @@ function initComputePosition({
         placement,
         middleware,
     }).then(({ x, y, middlewareData, placement }) => {
-        unstyled || setStyles(el, x, y);
+        unstyled || setStyles(el, x, y, strategy);
         if (middlewareData.arrow && arrowOptions) {
             const { x, y } = middlewareData.arrow;
             const side = placement.split("-")[0];
@@ -197,7 +204,7 @@ function initComputePosition({
                 bottom: "",
                 [staticSide as string]: `${-arrowOptions.length / 2}px`,
                 transform: "rotate(45deg)",
-                position: "absolute",
+                position: strategy,
             });
         }
 
