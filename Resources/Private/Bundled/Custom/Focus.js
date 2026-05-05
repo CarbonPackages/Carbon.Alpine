@@ -434,7 +434,7 @@ var isFocusable = function isFocusable2(node, options) {
     return isNodeMatchingSelectorFocusable(options, node);
 };
 
-// node_modules/.pnpm/focus-trap@8.1.0/node_modules/focus-trap/dist/focus-trap.esm.js
+// node_modules/.pnpm/focus-trap@8.2.0/node_modules/focus-trap/dist/focus-trap.esm.js
 function _arrayLikeToArray(r, a) {
     (null == a || a > r.length) && (a = r.length);
     for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
@@ -839,6 +839,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
             returnFocusOnDeactivate: true,
             escapeDeactivates: true,
             delayInitialFocus: true,
+            delayReturnFocus: true,
             isolateSubtrees: false,
             isKeyForward,
             isKeyBackward,
@@ -1397,14 +1398,25 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
         return trap;
     };
     var checkDomRemoval = function checkDomRemoval2(mutations) {
+        var focusedNode = state.mostRecentlyFocusedNode;
+        if (!focusedNode) {
+            return;
+        }
         var isFocusedNodeRemoved = mutations.some(function (mutation) {
             var removedNodes = Array.from(mutation.removedNodes);
             return removedNodes.some(function (node) {
-                return node === state.mostRecentlyFocusedNode;
+                return node === focusedNode || (typeof node.contains === "function" && node.contains(focusedNode));
             });
         });
-        if (isFocusedNodeRemoved) {
-            _tryFocus(getInitialFocusNode());
+        if (
+            isFocusedNodeRemoved &&
+            state.containers.some(function (container) {
+                return container === null || container === void 0 ? void 0 : container.isConnected;
+            })
+        ) {
+            updateTabbableNodes();
+            var initialFocusNode = getInitialFocusNode();
+            _tryFocus(initialFocusNode);
         }
     };
     var mutationObserver =
@@ -1530,23 +1542,29 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
             var onDeactivate = getOption(options, "onDeactivate");
             var onPostDeactivate = getOption(options, "onPostDeactivate");
             var checkCanReturnFocus = getOption(options, "checkCanReturnFocus");
+            var delayReturnFocus = getOption(options, "delayReturnFocus");
             var returnFocus = getOption(options, "returnFocus", "returnFocusOnDeactivate");
             onDeactivate === null ||
                 onDeactivate === void 0 ||
                 onDeactivate({
                     trap,
                 });
+            var completeDeactivation = function completeDeactivation2() {
+                if (returnFocus) {
+                    _tryFocus(getReturnFocusNode(state.nodeFocusedBeforeActivation));
+                }
+                onPostDeactivate === null ||
+                    onPostDeactivate === void 0 ||
+                    onPostDeactivate({
+                        trap,
+                    });
+            };
             var finishDeactivation = function finishDeactivation2() {
-                delay(function () {
-                    if (returnFocus) {
-                        _tryFocus(getReturnFocusNode(state.nodeFocusedBeforeActivation));
-                    }
-                    onPostDeactivate === null ||
-                        onPostDeactivate === void 0 ||
-                        onPostDeactivate({
-                            trap,
-                        });
-                });
+                if (delayReturnFocus && returnFocus) {
+                    delay(completeDeactivation);
+                } else {
+                    completeDeactivation();
+                }
             };
             if (returnFocus && checkCanReturnFocus) {
                 checkCanReturnFocus(getReturnFocusNode(state.nodeFocusedBeforeActivation)).then(
