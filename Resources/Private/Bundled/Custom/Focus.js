@@ -1,9 +1,10 @@
-// node_modules/.pnpm/tabbable@6.4.0/node_modules/tabbable/dist/index.esm.js
+// node_modules/.pnpm/tabbable@6.5.0/node_modules/tabbable/dist/index.esm.js
 var candidateSelectors = [
     "input:not([inert]):not([inert] *)",
     "select:not([inert]):not([inert] *)",
     "textarea:not([inert]):not([inert] *)",
     "a[href]:not([inert]):not([inert] *)",
+    "area[href]:not([inert]):not([inert] *)",
     "button:not([inert]):not([inert] *)",
     "[tabindex]:not(slot):not([inert]):not([inert] *)",
     "audio[controls]:not([inert]):not([inert] *)",
@@ -259,7 +260,9 @@ var isHidden = function isHidden2(node, _ref) {
             return !visible;
         }
     }
-    if (getComputedStyle(node).visibility === "hidden") {
+    var _getComputedStyle = getComputedStyle(node),
+        visibility = _getComputedStyle.visibility;
+    if (visibility === "hidden" || visibility === "collapse") {
         return true;
     }
     var isDirectSummary = matches.call(node, "details>summary:first-of-type");
@@ -434,7 +437,7 @@ var isFocusable = function isFocusable2(node, options) {
     return isNodeMatchingSelectorFocusable(options, node);
 };
 
-// node_modules/.pnpm/focus-trap@8.2.1/node_modules/focus-trap/dist/focus-trap.esm.js
+// node_modules/.pnpm/focus-trap@8.2.2/node_modules/focus-trap/dist/focus-trap.esm.js
 function _arrayLikeToArray(r, a) {
     (null == a || a > r.length) && (a = r.length);
     for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
@@ -1164,7 +1167,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
         var _iterator = _createForOfIteratorHelper(containers),
             _step;
         try {
-            for (_iterator.s(); !(_step = _iterator.n()).done; ) {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
                 var container = _step.value;
                 containerAncestors.add(container);
                 var insideShadowRoot =
@@ -1185,7 +1188,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
                     var _iterator2 = _createForOfIteratorHelper(siblings),
                         _step2;
                     try {
-                        for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
+                        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
                             var child = _step2.value;
                             adjacentElements.add(child);
                         }

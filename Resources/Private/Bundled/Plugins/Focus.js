@@ -616,7 +616,7 @@ function _regenerator() {
                     }
                     return function (o4, p2, l) {
                         if (f2 > 1) throw TypeError("Generator is already running");
-                        for (y && 1 === p2 && d(p2, l), c3 = p2, u3 = l; (t = c3 < 2 ? e : u3) || !y; ) {
+                        for (y && 1 === p2 && d(p2, l), c3 = p2, u3 = l; (t = c3 < 2 ? e : u3) || !y;) {
                             i3 || (c3 ? (c3 < 3 ? (c3 > 1 && (G.n = -1), d(c3, u3)) : (G.n = u3)) : (G.v = u3));
                             try {
                                 if (((f2 = 2), i3)) {
@@ -1339,7 +1339,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
         var _iterator = _createForOfIteratorHelper(containers),
             _step;
         try {
-            for (_iterator.s(); !(_step = _iterator.n()).done; ) {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
                 var container = _step.value;
                 containerAncestors.add(container);
                 var insideShadowRoot =
@@ -1360,7 +1360,7 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
                     var _iterator2 = _createForOfIteratorHelper(siblings),
                         _step2;
                     try {
-                        for (_iterator2.s(); !(_step2 = _iterator2.n()).done; ) {
+                        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
                             var child = _step2.value;
                             adjacentElements.add(child);
                         }
