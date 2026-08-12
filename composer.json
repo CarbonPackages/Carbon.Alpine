@@ -2,6 +2,7 @@
   "name" : "carbon/alpine",
   "description": "Include AlpineJS into Neos",
   "type" : "neos-carbon",
+  "license": "GPL-3.0-or-later",
   "require": {
     "carbon/includeassets": "^5.0 || ^6.0 || ^7.0"
   },
