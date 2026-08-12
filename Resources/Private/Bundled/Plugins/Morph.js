@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+morph@3.15.12/node_modules/@alpinejs/morph/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+morph@3.16.1/node_modules/@alpinejs/morph/dist/module.esm.js
 function morph(from, toHtml, options) {
     monkeyPatchDomSetAttributeToAllowAtSymbols();
     let context = createMorphContext(options);
@@ -252,6 +252,9 @@ function createMorphContext(options = {}) {
             }
             let currentFromNext = currentFrom && getNextSibling(from, currentFrom);
             context.patch(currentFrom, currentTo);
+            if (currentFrom._x_lastRenderedEl) {
+                currentFromNext = getNextSibling(from, currentFrom._x_lastRenderedEl);
+            }
             currentTo = currentTo && getNextSibling(to, currentTo);
             currentFrom = currentFromNext;
         }

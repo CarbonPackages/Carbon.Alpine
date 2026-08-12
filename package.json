@@ -14,31 +14,31 @@
     "dev": "node build.mjs"
   },
   "dependencies": {
-    "@alpinejs/anchor": "^3.15.12",
-    "@alpinejs/collapse": "^3.15.12",
-    "@alpinejs/focus": "^3.15.12",
-    "@alpinejs/intersect": "^3.15.12",
-    "@alpinejs/mask": "^3.15.12",
-    "@alpinejs/morph": "^3.15.12",
-    "@alpinejs/persist": "^3.15.12",
-    "@alpinejs/resize": "^3.15.12",
-    "@alpinejs/sort": "^3.15.12",
-    "@floating-ui/dom": "^1.7.6",
+    "@alpinejs/anchor": "^3.16.1",
+    "@alpinejs/collapse": "^3.16.1",
+    "@alpinejs/focus": "^3.16.1",
+    "@alpinejs/intersect": "^3.16.1",
+    "@alpinejs/mask": "^3.16.1",
+    "@alpinejs/morph": "^3.16.1",
+    "@alpinejs/persist": "^3.16.1",
+    "@alpinejs/resize": "^3.16.1",
+    "@alpinejs/sort": "^3.16.1",
+    "@floating-ui/dom": "^1.8.0",
     "@imacrayon/alpine-ajax": "^0.12.7",
     "@ryangjchandler/alpine-clipboard": "^2.3.0",
-    "alpinejs": "^3.15.12",
+    "alpinejs": "^3.16.1",
     "focus-trap": "^8.2.2",
     "tabbable": "^6.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/alpinejs": "^3.13.11",
-    "esbuild": "^0.28.1",
-    "eslint": "^10.6.0",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.8.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
-    "globals": "^17.7.0",
-    "prettier": "^3.9.3"
+    "globals": "^17.9.0",
+    "prettier": "^3.9.6"
   },
-  "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b"
+  "packageManager": "pnpm@11.21.0+sha512.521705bce689924eac72f5a3587122f362689ef6571e55ba80076fd637c11132ecffada26fad4ea79c485bfddbfd3d5a2a5b05805a77e893de71ec8a6cca3bb1"
 }

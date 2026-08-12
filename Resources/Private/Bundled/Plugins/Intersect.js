@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+intersect@3.15.12/node_modules/@alpinejs/intersect/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+intersect@3.16.1/node_modules/@alpinejs/intersect/dist/module.esm.js
 function src_default(Alpine) {
     Alpine.directive(
         "intersect",
@@ -7,6 +7,7 @@ function src_default(Alpine) {
             let options = {
                 rootMargin: getRootMargin(modifiers),
                 threshold: getThreshold(modifiers),
+                root: modifiers.includes("parent") ? el.parentElement : null,
             };
             let observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {

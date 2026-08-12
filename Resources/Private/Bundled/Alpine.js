@@ -1,2 +1,2 @@
-import { Alpine_default } from "./chunk-OTTEDTWI.js";
+import { Alpine_default } from "./chunk-KOXOLAWX.js";
 export { Alpine_default as default };
