@@ -9,32 +9,32 @@ importers:
   .:
     dependencies:
       '@alpinejs/anchor':
-        specifier: ^3.16.1
-        version: 3.16.1
+        specifier: ^3.16.2
+        version: 3.16.2
       '@alpinejs/collapse':
-        specifier: ^3.16.1
-        version: 3.16.1
+        specifier: ^3.16.2
+        version: 3.16.2
       '@alpinejs/focus':
-        specifier: ^3.16.1
-        version: 3.16.1
+        specifier: ^3.16.2
+        version: 3.16.2
       '@alpinejs/intersect':
-        specifier: ^3.16.1
-        version: 3.16.1
+        specifier: ^3.16.2
+        version: 3.16.2
       '@alpinejs/mask':
-        specifier: ^3.16.1
-        version: 3.16.1
+        specifier: ^3.16.2
+        version: 3.16.2
       '@alpinejs/morph':
-        specifier: ^3.16.1
-        version: 3.16.1
+        specifier: ^3.16.2
+        version: 3.16.2
       '@alpinejs/persist':
-        specifier: ^3.16.1
-        version: 3.16.1
+        specifier: ^3.16.2
+        version: 3.16.2
       '@alpinejs/resize':
-        specifier: ^3.16.1
-        version: 3.16.1
+        specifier: ^3.16.2
+        version: 3.16.2
       '@alpinejs/sort':
-        specifier: ^3.16.1
-        version: 3.16.1
+        specifier: ^3.16.2
+        version: 3.16.2
       '@floating-ui/dom':
         specifier: ^1.8.0
         version: 1.8.0
@@ -45,8 +45,8 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
       alpinejs:
-        specifier: ^3.16.1
-        version: 3.16.1
+        specifier: ^3.16.2
+        version: 3.16.2
       focus-trap:
         specifier: ^8.2.2
         version: 8.2.2
@@ -73,40 +73,40 @@ importers:
         specifier: ^5.5.6
         version: 5.5.6(eslint-config-prettier@10.1.8(eslint@10.8.1))(eslint@10.8.1)(prettier@3.9.6)
       globals:
-        specifier: ^17.9.0
-        version: 17.9.0
+        specifier: ^17.11.0
+        version: 17.11.0
       prettier:
         specifier: ^3.9.6
         version: 3.9.6
 
 packages:
 
-  '@alpinejs/anchor@3.16.1':
-    resolution: {integrity: sha512-BtQpqFuVflPoux9hW72G51PmKyeg8vrFPWawbl86jPKK39oqQXMdxG7suYPcAEzHcqKx9X9bfC4Hrgn+IfIaaw==}
+  '@alpinejs/anchor@3.16.2':
+    resolution: {integrity: sha512-LvYAC/GKAsTX/DQEZObt/WiZgpm/rDVe92d683aBfwCiUxgtg91a0ZJhJO3DM+TpLgvtD+wtYsGEILGv9MmL9A==}
 
-  '@alpinejs/collapse@3.16.1':
-    resolution: {integrity: sha512-02tk8uxvujlHAawm/0RIgmf0Myf08wMDSBRgmAGrvyuvhDgaZ8xArQFtFesINqp5DOblVUnMWiqe4kYN6/odhQ==}
+  '@alpinejs/collapse@3.16.2':
+    resolution: {integrity: sha512-3WDwJ6RMEYlfilk1pCm0LMZvCrBU7JgTWqTuz0MdcZ3Jpg4hxeV+cGyuYOeRB5/3+YaDsoO5lUlor0VYE2EHYA==}
 
-  '@alpinejs/focus@3.16.1':
-    resolution: {integrity: sha512-gB/VbkEyKzJcJ7axGxyPhEucPwawVNTbWU94blXRAsYnjsIYlRB2rpITZwZLXzY4ctYpQv2tupLklIEDMiMoyw==}
+  '@alpinejs/focus@3.16.2':
+    resolution: {integrity: sha512-B0if1ez97E2iuQ7W6VVFydrZq5K58TMfWHr3zW99Bwpz3YVX1rD3PRO6M9/CATvKMtNXjnO66MBAzatde44PTQ==}
 
-  '@alpinejs/intersect@3.16.1':
-    resolution: {integrity: sha512-MN2UphEQ/C/iVJ/IrU/kHpoYbUNZhvhEXz+ZLF3sm2tkGNACUIWqeDVMSlJ2PSqnIiq7DE/tqUmgNIKJVOErvw==}
+  '@alpinejs/intersect@3.16.2':
+    resolution: {integrity: sha512-qRguIfwsvMrQwl5vgHm0wDKgexa9kjaInge8+3zJLhluSlwXf+ksg1ZdPINvFOFnrtD2WOABBqyDhCBZ815TOQ==}
 
-  '@alpinejs/mask@3.16.1':
-    resolution: {integrity: sha512-pWVqQlgzaDh8L30fsPL05QpNmsSASByQ1mcZAwDsQsA7Drvh6ZyMW6eDmUwMQI8eZPgdpbClYyWF9feWHSIFJg==}
+  '@alpinejs/mask@3.16.2':
+    resolution: {integrity: sha512-UZbEEtC6DRGgpd9atqlKr5din2grjZP2Aie2iLepXTyUUIJJAbxT/bVIelPzqwhjGtNxmAYxokeGF4cjEvBAMg==}
 
-  '@alpinejs/morph@3.16.1':
-    resolution: {integrity: sha512-HoTa8sqgNx6Ezmy8x0IwdF48Xmllttb7SHSmN0NhjGc6PNDqnrSShd3qyAcoxkqftliUf81qwEPwCRXodgWEWg==}
+  '@alpinejs/morph@3.16.2':
+    resolution: {integrity: sha512-PQEuQg19QSauhj2t2XCZnFUh8YGNGH2CXwukp8eufKBp4X9CNUKqK2OxDOxonWXj9xfbBQqHZGWRVqrRnrg9ig==}
 
-  '@alpinejs/persist@3.16.1':
-    resolution: {integrity: sha512-h1Qv0s+O4XzBZDCl2Fu66PsYmCtI+e7BFcJcWq71MB8sQumVfy7ndXbZZYRkSCk71m2Q5xQOlAsU/Kx2SEeeww==}
+  '@alpinejs/persist@3.16.2':
+    resolution: {integrity: sha512-KOqh+3Dkn/jPWoXpwnouT2n8iPCXxm0F9BWcOw+pd3PdJJQEYzV6RlBOGa85+A7HSLPyIi11AVxlxH+EPyjg1g==}
 
-  '@alpinejs/resize@3.16.1':
-    resolution: {integrity: sha512-bC15nTwIPhfF2VCOWYVmQpA8yhQ/BbJ9OAFq/z0CKjLVOGnm4HhqV9ZIKioVbSyu3oqUPJ/SScPzSyfSz2Lg6g==}
+  '@alpinejs/resize@3.16.2':
+    resolution: {integrity: sha512-XzYzKmV/6weRar4T2Vvg3u4mBHr7wQ1qrAvlK04ifAIzPehFL5vqM7cKaRyjnIzEyzPQFHYYIcyeZBSqxDMaqQ==}
 
-  '@alpinejs/sort@3.16.1':
-    resolution: {integrity: sha512-+UmVPX7zskSzj9gKjH9c7Sop5EcZb2RwJULjNYPiy/zuw8OgzGdMGE4z4CYUoNgcU0f/OhBUZeBdbtbU9fr8hg==}
+  '@alpinejs/sort@3.16.2':
+    resolution: {integrity: sha512-82zdilMSFHkkMU5qDnBXKwOYXnofkq9BtMSupTN7lAguQG66UCrxC5/9T3DDzJfWX8G4KCE4zHdkowQtsFnekg==}
 
   '@esbuild/aix-ppc64@0.28.2':
     resolution: {integrity: sha512-XExcO+dvLKvVtNTibSTBej1NCAbaGhWn9Ww1ZPx80qsahhPFe/8jgWP0IchNe0F3HwkU7n8ejhH8bjonqht8mQ==}
@@ -354,11 +354,11 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
-  '@vue/reactivity@3.1.5':
-    resolution: {integrity: sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==}
+  '@vue/reactivity@3.5.41':
+    resolution: {integrity: sha512-rznsqKM0np0x18EjzF8x88MpEhdNsffbvFbckLL5+oUKz1BxAImEmO7J1ArRYSyo6aQaVoBDp7jEkT91OOxydA==}
 
-  '@vue/shared@3.1.5':
-    resolution: {integrity: sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==}
+  '@vue/shared@3.5.41':
+    resolution: {integrity: sha512-IOnwSCma8j+9xJT6b8H0dEYidC80NsYmNMlZxRsukYcSoGaDBohog5hDxzeUXdFeGWFA++vWvxqOmrr96VlqMA==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -373,8 +373,8 @@ packages:
   ajv@6.15.0:
     resolution: {integrity: sha512-fgFx7Hfoq60ytK2c7DhnF8jIvzYgOMxfugjLOSMHjLIPgenqa7S7oaagATUq99mV6IYvN2tRmC0wnTYX6iPbMw==}
 
-  alpinejs@3.16.1:
-    resolution: {integrity: sha512-QXcW8MK9JoG8GZ7vCt2cXJlcEPIA7Xk/7IQ1+L2iLp7sXcIxct0PrgidmHzK97gD9QlfUjHXPxujdZ1mC2PYVg==}
+  alpinejs@3.16.2:
+    resolution: {integrity: sha512-6kbqqrRK7iGPYx5upTfqc8Tcl1xhpcurLCxTdn4/ym2Kb68+cYj+2I5Zji53vUIPf7zj3C1DoIvrDkgrNDCXdA==}
 
   balanced-match@4.0.4:
     resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
@@ -505,8 +505,8 @@ packages:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
     engines: {node: '>=10.13.0'}
 
-  globals@17.9.0:
-    resolution: {integrity: sha512-m/MvAW61QVU5VDNF1Vj8axt016h8w7L5TU1e9zlab7XIttAT2YAlCwl75K1fOqvMM9apmD7lbCIRhpfkhmxhCg==}
+  globals@17.11.0:
+    resolution: {integrity: sha512-Z2I8hM+PbJDXQDq3Icgpzv+mPdwr68iZUU9d5WW4FuXfDUQfkZaZuvjMv42/5crNyw154+9+VWXbYrUgDXbxNw==}
     engines: {node: '>=18'}
 
   ignore@5.3.2:
@@ -635,28 +635,28 @@ packages:
 
 snapshots:
 
-  '@alpinejs/anchor@3.16.1':
+  '@alpinejs/anchor@3.16.2':
     dependencies:
       '@floating-ui/dom': 1.8.0
 
-  '@alpinejs/collapse@3.16.1': {}
+  '@alpinejs/collapse@3.16.2': {}
 
-  '@alpinejs/focus@3.16.1':
+  '@alpinejs/focus@3.16.2':
     dependencies:
       focus-trap: 8.2.2
       tabbable: 6.5.0
 
-  '@alpinejs/intersect@3.16.1': {}
+  '@alpinejs/intersect@3.16.2': {}
 
-  '@alpinejs/mask@3.16.1': {}
+  '@alpinejs/mask@3.16.2': {}
 
-  '@alpinejs/morph@3.16.1': {}
+  '@alpinejs/morph@3.16.2': {}
 
-  '@alpinejs/persist@3.16.1': {}
+  '@alpinejs/persist@3.16.2': {}
 
-  '@alpinejs/resize@3.16.1': {}
+  '@alpinejs/resize@3.16.2': {}
 
-  '@alpinejs/sort@3.16.1':
+  '@alpinejs/sort@3.16.2':
     dependencies:
       sortablejs: 1.15.7
 
@@ -813,11 +813,11 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
-  '@vue/reactivity@3.1.5':
+  '@vue/reactivity@3.5.41':
     dependencies:
-      '@vue/shared': 3.1.5
+      '@vue/shared': 3.5.41
 
-  '@vue/shared@3.1.5': {}
+  '@vue/shared@3.5.41': {}
 
   acorn-jsx@5.3.2(acorn@8.18.0):
     dependencies:
@@ -832,9 +832,9 @@ snapshots:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  alpinejs@3.16.1:
+  alpinejs@3.16.2:
     dependencies:
-      '@vue/reactivity': 3.1.5
+      '@vue/reactivity': 3.5.41
 
   balanced-match@4.0.4: {}
 
@@ -994,7 +994,7 @@ snapshots:
     dependencies:
       is-glob: 4.0.3
 
-  globals@17.9.0: {}
+  globals@17.11.0: {}
 
   ignore@5.3.2: {}
 
