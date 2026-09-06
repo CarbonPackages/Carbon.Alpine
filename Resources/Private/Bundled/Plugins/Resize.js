@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+resize@3.16.2/node_modules/@alpinejs/resize/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+resize@3.17.1/node_modules/@alpinejs/resize/dist/module.esm.js
 function src_default(Alpine) {
     Alpine.directive(
         "resize",

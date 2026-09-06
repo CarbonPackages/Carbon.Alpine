@@ -1,4 +1,4 @@
-import { Alpine as AlpineType } from "alpinejs";
+import type { Alpine as AlpineType } from "alpinejs";
 import { decodeBase64Url } from "./Helper";
 
 type ItemType = {

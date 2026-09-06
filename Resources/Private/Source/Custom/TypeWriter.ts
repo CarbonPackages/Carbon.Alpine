@@ -1,4 +1,4 @@
-import { Alpine as AlpineType, ElementWithXAttributes } from "alpinejs";
+import type { Alpine as AlpineType, ElementWithXAttributes } from "alpinejs";
 
 const size = "0.05em";
 const styles = {

@@ -1,4 +1,5 @@
 import { arrow, autoUpdate, computePosition, flip, hide, offset, shift } from "../chunk-65PQM6D4.js";
+import "../chunk-YDI5VSU7.js";
 import { decodeBase64Url } from "../chunk-4ZNF6U5X.js";
 
 // Resources/Private/Source/Custom/Tooltip.ts

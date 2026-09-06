@@ -1,4 +1,4 @@
-import { Alpine as AlpineType, ElementWithXAttributes } from "alpinejs";
+import type { Alpine as AlpineType, ElementWithXAttributes } from "alpinejs";
 
 export default function (Alpine: AlpineType) {
     Alpine.directive("counter", (el: ElementWithXAttributes, { expression, modifiers }, { evaluate }) => {

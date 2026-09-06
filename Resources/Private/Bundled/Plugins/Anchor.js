@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+anchor@3.16.2/node_modules/@alpinejs/anchor/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+anchor@3.17.1/node_modules/@alpinejs/anchor/dist/module.esm.js
 var min = Math.min;
 var max = Math.max;
 var round = Math.round;

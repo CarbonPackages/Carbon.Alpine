@@ -1,8 +1,9 @@
-// node_modules/.pnpm/@alpinejs+mask@3.16.2/node_modules/@alpinejs/mask/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+mask@3.17.1/node_modules/@alpinejs/mask/dist/module.esm.js
 function src_default(Alpine) {
     Alpine.directive("mask", (el, { value, expression }, { effect, evaluateLater, cleanup }) => {
         let templateFn = () => expression;
         let lastInputValue = "";
+        let undoModelUpdate = () => {};
         queueMicrotask(() => {
             if (["function", "dynamic"].includes(value)) {
                 let evaluator = evaluateLater(expression);
@@ -37,7 +38,7 @@ function src_default(Alpine) {
                     }
                 }
                 let updater = el._x_forceModelUpdate;
-                el._x_forceModelUpdate = (value2) => {
+                let update = (value2) => {
                     if (value2 === void 0) {
                         lastInputValue = "";
                         return updater(value2);
@@ -51,11 +52,18 @@ function src_default(Alpine) {
                     updater(value2);
                     el._x_model.set(value2);
                 };
+                el._x_forceModelUpdate = update;
+                undoModelUpdate = () => {
+                    if (el._x_forceModelUpdate === update) {
+                        el._x_forceModelUpdate = updater;
+                    }
+                };
             }
         });
         const controller = new AbortController();
         cleanup(() => {
             controller.abort();
+            undoModelUpdate();
         });
         el.addEventListener("input", () => processInputValue(el), {
             signal: controller.signal,
