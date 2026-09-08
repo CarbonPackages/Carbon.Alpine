@@ -1,3 +1,2 @@
-import { Alpine_default } from "./chunk-FC2MC5XF.js";
-import "./chunk-YDI5VSU7.js";
+import { Alpine_default } from "./chunk-GGNHKBYV.js";
 export { Alpine_default as default };

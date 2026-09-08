@@ -1,4 +1,4 @@
-// node_modules/.pnpm/alpinejs@3.17.1/node_modules/alpinejs/dist/module.esm.js
+// node_modules/.pnpm/alpinejs@3.17.2/node_modules/alpinejs/dist/module.esm.js
 var flushPending = false;
 var flushing = false;
 var queue = [];
@@ -1805,7 +1805,7 @@ var Alpine = {
     get transaction() {
         return transaction;
     },
-    version: "3.17.1",
+    version: "3.17.2",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,
@@ -4107,4 +4107,7 @@ alpine_default.setReactivityEngine({
 var src_default = alpine_default;
 var module_default = src_default;
 
-export { module_default };
+// Resources/Private/Source/Alpine.ts
+var Alpine_default = module_default;
+
+export { Alpine_default };
