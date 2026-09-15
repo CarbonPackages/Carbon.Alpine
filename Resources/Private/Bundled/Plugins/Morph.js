@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+morph@3.17.2/node_modules/@alpinejs/morph/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+morph@3.17.3/node_modules/@alpinejs/morph/dist/module.esm.js
 function morph(from, toHtml, options) {
     monkeyPatchDomSetAttributeToAllowAtSymbols();
     let context = createMorphContext(options);
