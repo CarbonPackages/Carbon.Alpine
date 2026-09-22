@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@alpinejs+intersect@3.17.3/node_modules/@alpinejs/intersect/dist/module.esm.js
+// node_modules/.pnpm/@alpinejs+intersect@3.17.4/node_modules/@alpinejs/intersect/dist/module.esm.js
 function src_default(Alpine) {
     Alpine.directive(
         "intersect",

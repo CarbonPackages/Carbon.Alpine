@@ -1,4 +1,4 @@
-// node_modules/.pnpm/alpinejs@3.17.3/node_modules/alpinejs/dist/module.esm.js
+// node_modules/.pnpm/alpinejs@3.17.4/node_modules/alpinejs/dist/module.esm.js
 var flushPending = false;
 var flushing = false;
 var queue = [];
@@ -238,9 +238,11 @@ function flushPendingMutations() {
 function mutateDom(callback) {
     if (!currentlyObserving) return callback();
     stopObservingMutations();
-    let result = callback();
-    startObservingMutations();
-    return result;
+    try {
+        return callback();
+    } finally {
+        startObservingMutations();
+    }
 }
 var isCollecting = false;
 var deferredMutations = [];
@@ -1809,7 +1811,7 @@ var Alpine = {
     get transaction() {
         return transaction;
     },
-    version: "3.17.3",
+    version: "3.17.4",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,
