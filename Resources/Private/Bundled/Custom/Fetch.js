@@ -117,13 +117,7 @@ function Fetch_default(Alpine) {
         },
     );
 }
-async function cachedFetch({
-    url = "",
-    prefix = "alpine-",
-    version = release,
-    maxAgeInSeconds = 0,
-    forceFlush = false,
-} = {}) {
+async function cachedFetch({ url, prefix = "alpine-", version = release, maxAgeInSeconds = 0, forceFlush = false }) {
     if (!("caches" in window)) {
         return fetch(url);
     }
@@ -132,34 +126,34 @@ async function cachedFetch({
         await deleteOldCaches(cacheName, prefix, true);
     } else {
         const cachedResponse = await getCachedResponse(cacheName, url, maxAgeInSeconds);
-        if (cachedResponse !== false && cachedResponse !== void 0) {
-            return new Promise((resolve) => resolve(cachedResponse));
+        if (cachedResponse) {
+            return cachedResponse;
         }
     }
     const cacheStorage = await caches.open(cacheName);
-    await cacheStorage.add(url);
-    const fetchedResponse = await getCachedResponse(cacheName, url);
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new TypeError(`Failed to cache ${url}: ${response.status} ${response.statusText}`);
+    }
+    await cacheStorage.put(url, response.clone());
+    const timestamps = await caches.open(`${cacheName}-timestamps`);
+    await timestamps.put(url, new Response(Date.now().toString()));
     if (!forceFlush) {
         await deleteOldCaches(cacheName, prefix);
     }
-    return new Promise((resolve, reject) => {
-        if (fetchedResponse === false || !fetchedResponse?.ok) {
-            reject(fetchedResponse);
-        }
-        resolve(fetchedResponse);
-    });
+    return response;
 }
 async function getCachedResponse(cacheName, url, maxAgeInSeconds = 0) {
     const cacheStorage = await caches.open(cacheName);
     const cachedResponse = await cacheStorage.match(url);
     if (!cachedResponse?.ok) {
-        return cachedResponse;
+        return void 0;
     }
-    const dateHeader = maxAgeInSeconds > 0 ? cachedResponse.headers.get("date") : null;
-    if (dateHeader) {
-        const date = new Date(dateHeader);
-        const needRefetch = date && Date.now() > date.getTime() + 1e3 * maxAgeInSeconds;
-        if (needRefetch) {
+    if (maxAgeInSeconds > 0) {
+        const timestamps = await caches.open(`${cacheName}-timestamps`);
+        const timestamp = await timestamps.match(url);
+        const cachedAt = Number(await timestamp?.text());
+        if (!Number.isFinite(cachedAt) || cachedAt <= 0 || Date.now() > cachedAt + 1e3 * maxAgeInSeconds) {
             return false;
         }
     }
@@ -171,8 +165,8 @@ async function deleteOldCaches(currentCache, prefix, forceFlush = false) {
         if (!key.startsWith(prefix.toString())) {
             continue;
         }
-        if (forceFlush || currentCache !== key) {
-            caches.delete(key);
+        if (forceFlush || (currentCache !== key && `${currentCache}-timestamps` !== key)) {
+            await caches.delete(key);
         }
     }
 }
