@@ -168,15 +168,13 @@ export default function (Alpine: AlpineType) {
     );
 }
 
-export async function cachedFetch(
-    {
-        url = "",
-        prefix = "alpine-",
-        version = release,
-        maxAgeInSeconds = 0,
-        forceFlush = false,
-    } = {} as cachedFetchOptions,
-): Promise<Response> {
+export async function cachedFetch({
+    url,
+    prefix = "alpine-",
+    version = release,
+    maxAgeInSeconds = 0,
+    forceFlush = false,
+}: cachedFetchOptions): Promise<Response> {
     if (!("caches" in window)) {
         return fetch(url);
     }
@@ -187,25 +185,24 @@ export async function cachedFetch(
     } else {
         const cachedResponse = await getCachedResponse(cacheName, url, maxAgeInSeconds);
 
-        if (cachedResponse !== false && cachedResponse !== undefined) {
-            return new Promise((resolve) => resolve(cachedResponse));
+        if (cachedResponse) {
+            return cachedResponse;
         }
     }
 
     const cacheStorage = await caches.open(cacheName);
-    await cacheStorage.add(url);
-    const fetchedResponse = await getCachedResponse(cacheName, url);
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new TypeError(`Failed to cache ${url}: ${response.status} ${response.statusText}`);
+    }
+    await cacheStorage.put(url, response.clone());
+    const timestamps = await caches.open(`${cacheName}-timestamps`);
+    await timestamps.put(url, new Response(Date.now().toString()));
     if (!forceFlush) {
         await deleteOldCaches(cacheName, prefix);
     }
 
-    return new Promise((resolve, reject) => {
-        if (fetchedResponse === false || !fetchedResponse?.ok) {
-            reject(fetchedResponse);
-        }
-        // @ts-ignore
-        resolve(fetchedResponse);
-    });
+    return response;
 }
 
 // Get data from the cache.
@@ -218,16 +215,14 @@ async function getCachedResponse(
     const cachedResponse = await cacheStorage.match(url);
 
     if (!cachedResponse?.ok) {
-        return cachedResponse;
+        return undefined;
     }
 
-    const dateHeader = maxAgeInSeconds > 0 ? cachedResponse.headers.get("date") : null;
-    if (dateHeader) {
-        const date = new Date(dateHeader);
-        // if cached file is older maxAgeInSeconds
-        const needRefetch = date && Date.now() > date.getTime() + 1000 * maxAgeInSeconds;
-
-        if (needRefetch) {
+    if (maxAgeInSeconds > 0) {
+        const timestamps = await caches.open(`${cacheName}-timestamps`);
+        const timestamp = await timestamps.match(url);
+        const cachedAt = Number(await timestamp?.text());
+        if (!Number.isFinite(cachedAt) || cachedAt <= 0 || Date.now() > cachedAt + 1000 * maxAgeInSeconds) {
             return false;
         }
     }
@@ -245,8 +240,8 @@ async function deleteOldCaches(currentCache: string, prefix: string | number, fo
             continue;
         }
 
-        if (forceFlush || currentCache !== key) {
-            caches.delete(key);
+        if (forceFlush || (currentCache !== key && `${currentCache}-timestamps` !== key)) {
+            await caches.delete(key);
         }
     }
 }

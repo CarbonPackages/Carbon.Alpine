@@ -14,6 +14,15 @@ This package bundles the Alpine runtime, optional feature modules, and plugin-sp
 - Support for both classic script bundles and ES module bundles
 - Build pipeline powered by esbuild
 
+### Fetch cache lifetime
+
+The custom fetch helper measures `maxAgeInSeconds` from the local cache write
+time, not the server's HTTP `Date` header. It stores timestamps in a separate
+`<cacheName>-timestamps` cache, preserving the original responses and their metadata.
+Existing entries without a valid timestamp are fetched again
+when an age limit is set; `maxAgeInSeconds: 0` keeps caching without an age limit.
+Flushing or removing an old cache also removes its timestamps.
+
 ## Requirements
 
 - Neos CMS
