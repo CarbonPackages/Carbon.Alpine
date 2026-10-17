@@ -10,6 +10,7 @@ Carbon:
   Alpine:
     includeOnPage: true
     useModules: true
+    includeCSSOnPage: false
 
     Main: true
     Files:

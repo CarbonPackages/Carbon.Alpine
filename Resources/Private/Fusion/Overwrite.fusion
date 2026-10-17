@@ -3,4 +3,8 @@ prototype(Neos.Neos:Page) {
         {value}
         <Carbon.Alpine:Scripts @if.set={Configuration.setting('Carbon.Alpine.includeOnPage')} />
     `
+    head.stylesheets.carbonAlpineCss = Carbon.Alpine:Styles {
+        @position = 'after carbonIncludeAssetsSyncCss'
+        @if.set = ${Configuration.setting('Carbon.Alpine.includeCSSOnPage')}
+    }
 }

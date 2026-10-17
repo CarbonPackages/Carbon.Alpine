@@ -56,6 +56,7 @@ Carbon:
   Alpine:
     includeOnPage: true
     useModules: true
+    includeCSSOnPage: false
 
     Main: true
     Files:
@@ -95,8 +96,43 @@ Carbon:
 
 - `includeOnPage`: includes the Alpine asset collection on the page automatically
 - `useModules`: renders the files as ES modules (`.mjs`) instead of classic script files (`.js`)
+- `includeCSSOnPage`: includes `Main.css` on the page automatically; disabled by default
 - `Main`: includes the main Alpine bundle
 - `Files`: enables or disables individual plugin, UI, and custom asset files
+
+### Stylesheet
+
+`Main.css` provides three `x-cloak` behaviors. Alpine removes the `x-cloak`
+attribute after initialization, revealing the element unless another directive
+(such as `x-show`) keeps it hidden.
+
+Use plain `x-cloak` to hide an element visually while Alpine starts. It still
+occupies its layout space, and cannot be clicked:
+
+```html
+<div x-data="{ open: false }">
+  <button x-on:click="open = !open">Toggle</button>
+  <div x-cloak x-show="open">Hidden until Alpine initializes and opened</div>
+</div>
+```
+
+Use `x-cloak="hidden"` when the cloaked element should take up no layout space:
+
+```html
+<div x-cloak="hidden">No space is reserved for this element while cloaked</div>
+```
+
+Use `x-cloak="nojs"` to remove the element from layout when browser scripting
+is enabled. With scripting disabled, the general `x-cloak` rule still hides it
+visually, but leaves its layout space:
+
+```html
+<div x-cloak="nojs">Removed from layout when scripting is enabled</div>
+```
+
+The stylesheet is built to `Resources/Public/Styles/Main.css`. Set
+`includeCSSOnPage: true` to add it to the page head through the Fusion
+integration.
 
 ## Usage
 

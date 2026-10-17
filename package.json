@@ -9,6 +9,7 @@
     "not dead"
   ],
   "scripts": {
+    "css": "lightningcss Resources/Private/Assets/*.css --minify --bundle --targets \">= 0.25%\" -d Resources/Public/Styles",
     "build": "node build.mjs --production",
     "watch": "node build.mjs --watch",
     "dev": "node build.mjs"
@@ -38,6 +39,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.7",
     "globals": "^17.13.0",
+    "lightningcss-cli": "^1.33.0",
     "prettier": "^3.9.10"
   }
 }

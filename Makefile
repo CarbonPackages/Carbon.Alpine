@@ -21,6 +21,7 @@ cleanup:
 build:
 	@make cleanup
 	@pnpm build
+	@pnpm css
 	@make prettier
 
 ## Watch files
