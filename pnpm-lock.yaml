@@ -110,32 +110,32 @@ importers:
   .:
     dependencies:
       '@alpinejs/anchor':
-        specifier: ^3.17.4
-        version: 3.17.4
+        specifier: ^3.17.5
+        version: 3.17.5
       '@alpinejs/collapse':
-        specifier: ^3.17.4
-        version: 3.17.4
+        specifier: ^3.17.5
+        version: 3.17.5
       '@alpinejs/focus':
-        specifier: ^3.17.4
-        version: 3.17.4
+        specifier: ^3.17.5
+        version: 3.17.5
       '@alpinejs/intersect':
-        specifier: ^3.17.4
-        version: 3.17.4
+        specifier: ^3.17.5
+        version: 3.17.5
       '@alpinejs/mask':
-        specifier: ^3.17.4
-        version: 3.17.4
+        specifier: ^3.17.5
+        version: 3.17.5
       '@alpinejs/morph':
-        specifier: ^3.17.4
-        version: 3.17.4
+        specifier: ^3.17.5
+        version: 3.17.5
       '@alpinejs/persist':
-        specifier: ^3.17.4
-        version: 3.17.4
+        specifier: ^3.17.5
+        version: 3.17.5
       '@alpinejs/resize':
-        specifier: ^3.17.4
-        version: 3.17.4
+        specifier: ^3.17.5
+        version: 3.17.5
       '@alpinejs/sort':
-        specifier: ^3.17.4
-        version: 3.17.4
+        specifier: ^3.17.5
+        version: 3.17.5
       '@floating-ui/dom':
         specifier: ^1.8.0
         version: 1.8.0
@@ -146,18 +146,18 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
       alpinejs:
-        specifier: ^3.17.4
-        version: 3.17.4
+        specifier: ^3.17.5
+        version: 3.17.5
       focus-trap:
         specifier: ^8.2.3
         version: 8.2.3
       tabbable:
-        specifier: ^6.5.0
-        version: 6.5.0
+        specifier: ^6.5.1
+        version: 6.5.1
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
-        version: 10.0.1(eslint@10.12.0)
+        version: 10.0.1(eslint@10.13.0)
       '@types/alpinejs':
         specifier: ^3.17.0
         version: 3.17.0
@@ -165,14 +165,14 @@ importers:
         specifier: ^0.28.2
         version: 0.28.2
       eslint:
-        specifier: ^10.12.0
-        version: 10.12.0
+        specifier: ^10.13.0
+        version: 10.13.0
       eslint-config-prettier:
         specifier: ^10.1.8
-        version: 10.1.8(eslint@10.12.0)
+        version: 10.1.8(eslint@10.13.0)
       eslint-plugin-prettier:
         specifier: ^5.5.7
-        version: 5.5.7(eslint-config-prettier@10.1.8(eslint@10.12.0))(eslint@10.12.0)(prettier@3.9.10)
+        version: 5.5.7(eslint-config-prettier@10.1.8(eslint@10.13.0))(eslint@10.13.0)(prettier@3.9.10)
       globals:
         specifier: ^17.13.0
         version: 17.13.0
@@ -185,32 +185,32 @@ importers:
 
 packages:
 
-  '@alpinejs/anchor@3.17.4':
-    resolution: {integrity: sha512-sHCML94TM7fugZucIJBb+vyw/igMdd3ZawGe/daoD1OIzTtJe0ShgFAzqG6Wj1gilZwV/HrI5P/OWovMSd76WQ==}
+  '@alpinejs/anchor@3.17.5':
+    resolution: {integrity: sha512-boU+v2FthhEbKzq8cFQEaxAb2+3PhGjUlvF95zu5HrAQHfglkPRfLZU5X378FtfNQi9IAmCDE3iTvoU2KEXibA==}
 
-  '@alpinejs/collapse@3.17.4':
-    resolution: {integrity: sha512-Us4cE8jHzKtRs4mYNbmX4art/Hpm90vIGH6h5Mcv1EWK9Dgg48RNzSlPFt9F/D6bk2onbdeagYayqEvzpPbqPg==}
+  '@alpinejs/collapse@3.17.5':
+    resolution: {integrity: sha512-6UJsyEef1a5gh18VhTomP/kHYFxg82ExKSyaezU0iMwTWZSNaApZIvdr7FbMMb5qs+TECctkRgJD37Y3QOyo+A==}
 
-  '@alpinejs/focus@3.17.4':
-    resolution: {integrity: sha512-IpZuMQC+nk9xEr9lfqzI+m7Pwti3dfiYhB4UrRIbO2KurezOM5HppYYXVtRQ1mD7L3R7rGtjAQksvWpCnk3lGw==}
+  '@alpinejs/focus@3.17.5':
+    resolution: {integrity: sha512-wQsgn+DKAxb7FD18jMgDsAlGqoayMiL8BYOiQIGcwCWxwqDKMVBX0OZ9/vezrf4u6C2LASkJHuvBphvOGgtZCg==}
 
-  '@alpinejs/intersect@3.17.4':
-    resolution: {integrity: sha512-soIfavWRHh1dEs05z6wkKtYf8i/ohIG1EDo51urbURj8HifVLV8hd4oCVEGlKwEwt6NXBZDhWMhKk9SM//JHtQ==}
+  '@alpinejs/intersect@3.17.5':
+    resolution: {integrity: sha512-ajnUJjrx3ygix9uLW0xx4TPzegBNi2cJEVA/Z2kEoqKR5fANXSKcVzWc3NyYO0Fi1DZ0aPYQ3esXIDSNCbQdBw==}
 
-  '@alpinejs/mask@3.17.4':
-    resolution: {integrity: sha512-eEcggxA8+TlpMYoioF43vhLuoInL8rlkPpAZmIWh4SRLJwZRaxCYrb8W+A3kyiRos7z8Bfj2FHwJmq+jejfKaw==}
+  '@alpinejs/mask@3.17.5':
+    resolution: {integrity: sha512-Luqp6ZcATVCgUTBSyet40LNezOH+X0QEJpwCa9stFmZT6ozDi3HeLFlNQM8LJJ3Y2fM7psLKBtYrJc7n7WY89w==}
 
-  '@alpinejs/morph@3.17.4':
-    resolution: {integrity: sha512-0jjisxp/ErYv3yRFIccViLgJa+BODm8aBBS/kUBp62+qd4rJ5c6mJ1zad/fJiexixgUqjtjD1L4zoLNP2f0INg==}
+  '@alpinejs/morph@3.17.5':
+    resolution: {integrity: sha512-3/zvG152HGW/sIuvOKMojKc0sH+quIFjMArKuG8vT07x5I7R90iVmwCtCZgE+9+7BJoop9q00maNd7nvHIA5Fw==}
 
-  '@alpinejs/persist@3.17.4':
-    resolution: {integrity: sha512-ZTPF2eqYP0khAKrlQRD/dz/q1W4yWAnbwmd25NyMOQmFOD9839xP2+Go4zDp2w2jfSQPM4SL1nA5X0knUpSsTw==}
+  '@alpinejs/persist@3.17.5':
+    resolution: {integrity: sha512-hH1UmIXgakz93pHFif5a6N0HLRO2237l7i0xvS7cpxV47WLJv8+1hAiWABjKZA2VQuWEghXMvYFjtoOLihP5PQ==}
 
-  '@alpinejs/resize@3.17.4':
-    resolution: {integrity: sha512-IoWyu8o86JAm0HiGFu0bSUaNfFnNMJYtERm0E4s4TCVZ5x8t8cpOAMo62fuAMaLEaEeRCL4c9dmAuYDXzoAewA==}
+  '@alpinejs/resize@3.17.5':
+    resolution: {integrity: sha512-8Yp52/oeQRHuXwCPjxX4dvP0wfhtcZsfc4Ci6DPRw7ZzyljijpxiJYG5PKfQ0C249D8fNR8B/7xzYHxVgrc13w==}
 
-  '@alpinejs/sort@3.17.4':
-    resolution: {integrity: sha512-GHy/duQx9CvvDu9bUxDxFFwBVTZ59QQNQOEQ346h8qFqQU1lcK1vfxZTQWfw6hujCUJ+Xi2ayjXO7OvMb+NQRA==}
+  '@alpinejs/sort@3.17.5':
+    resolution: {integrity: sha512-YwfNQ5fWTNwab2cEV9fvw5OSYz0bq6HvYVgi3dqIDIr8qw6/T0CqxKcA/K6owgYEuROaEqkJaUaoajEdL2tZKg==}
 
   '@cacheable/memory@2.2.0':
     resolution: {integrity: sha512-CTLKqLItRCEixEAewD3/j9DB3/o96gpTPD4eJ1v+DGOlxZRZncRQkGYqqnAGCscYd6RNeXfGeiuCphsPtqyIfQ==}
@@ -495,8 +495,8 @@ packages:
   ajv@6.15.0:
     resolution: {integrity: sha512-fgFx7Hfoq60ytK2c7DhnF8jIvzYgOMxfugjLOSMHjLIPgenqa7S7oaagATUq99mV6IYvN2tRmC0wnTYX6iPbMw==}
 
-  alpinejs@3.17.4:
-    resolution: {integrity: sha512-N2gsr+58XVUt7OAPKnUGiKPDtkd+xbSGTae8C8IJxeRdkkhBJPIautkJ+qcwb7lcjJ/QK3/CPVIbN20JPvtK7A==}
+  alpinejs@3.17.5:
+    resolution: {integrity: sha512-XewMqRC6zjy8iaUPn86dxjvooAsNai3hUtQbdn0A5H2w7Jt10xHGZ1SczN5+Dvp3UKkuSEt9moy/UaUWOwKdnQ==}
 
   balanced-match@4.0.4:
     resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
@@ -570,8 +570,8 @@ packages:
     resolution: {integrity: sha512-tD40eHxA35h0PEIZNeIjkHoDR4YjjJp34biM0mDvplBe//mB+IHCqHDGV7pxF+7MklTvighcCPPZC7ynWyjdTA==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  eslint@10.12.0:
-    resolution: {integrity: sha512-npHjrHb2o4ehH3mE+YuxABR+0gyb0aVWCIolgJDArwCiHEIsonBm3ZKjel5b0U5+a+MbEvIyRCGCzD3eKKK2NA==}
+  eslint@10.13.0:
+    resolution: {integrity: sha512-UohDjD4zSzEwhf58M3O7vc/ycc8O1I7dNlhtD0WxE8Px8EHNJKtUwzBqrzeGhisRuv2ag4sAYswszCJRgKXYUg==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
     hasBin: true
     peerDependencies:
@@ -823,8 +823,8 @@ packages:
     resolution: {integrity: sha512-U+/AXT6LWsxnj2vz9HeUuPWBNgdWxjyIEjEPdbJARC9txmgPzo2VEdqnFo4hHaNyMPtycyVJrSaQYeQv/PoyyA==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
-  tabbable@6.5.0:
-    resolution: {integrity: sha512-wieBHXygIm7OyQOu5hQlkk62/WyCFYGlWg7L6/ZCUZwx0o398Zkn4pVmMyfYhfMG8kGrj/Krt8eIk6UKC6VzwA==}
+  tabbable@6.5.1:
+    resolution: {integrity: sha512-dMCuwDUY6Noz3zVKLefBC4wq+aJV20yc7vWmM7uTNGwtQSFF5kX7OUIUsxuVajz/bdt5Xqdah3/0NLjth+cM5A==}
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -848,28 +848,28 @@ packages:
 
 snapshots:
 
-  '@alpinejs/anchor@3.17.4':
+  '@alpinejs/anchor@3.17.5':
     dependencies:
       '@floating-ui/dom': 1.8.0
 
-  '@alpinejs/collapse@3.17.4': {}
+  '@alpinejs/collapse@3.17.5': {}
 
-  '@alpinejs/focus@3.17.4':
+  '@alpinejs/focus@3.17.5':
     dependencies:
       focus-trap: 8.2.3
-      tabbable: 6.5.0
+      tabbable: 6.5.1
 
-  '@alpinejs/intersect@3.17.4': {}
+  '@alpinejs/intersect@3.17.5': {}
 
-  '@alpinejs/mask@3.17.4': {}
+  '@alpinejs/mask@3.17.5': {}
 
-  '@alpinejs/morph@3.17.4': {}
+  '@alpinejs/morph@3.17.5': {}
 
-  '@alpinejs/persist@3.17.4': {}
+  '@alpinejs/persist@3.17.5': {}
 
-  '@alpinejs/resize@3.17.4': {}
+  '@alpinejs/resize@3.17.5': {}
 
-  '@alpinejs/sort@3.17.4':
+  '@alpinejs/sort@3.17.5':
     dependencies:
       sortablejs: 1.15.7
 
@@ -965,9 +965,9 @@ snapshots:
   '@esbuild/win32-x64@0.28.2':
     optional: true
 
-  '@eslint-community/eslint-utils@4.10.1(eslint@10.12.0)':
+  '@eslint-community/eslint-utils@4.10.1(eslint@10.13.0)':
     dependencies:
-      eslint: 10.12.0
+      eslint: 10.13.0
       eslint-visitor-keys: 3.4.3
 
   '@eslint-community/regexpp@4.12.2': {}
@@ -988,9 +988,9 @@ snapshots:
     dependencies:
       '@types/json-schema': 7.0.15
 
-  '@eslint/js@10.0.1(eslint@10.12.0)':
+  '@eslint/js@10.0.1(eslint@10.13.0)':
     optionalDependencies:
-      eslint: 10.12.0
+      eslint: 10.13.0
 
   '@eslint/object-schema@3.0.5': {}
 
@@ -1067,7 +1067,7 @@ snapshots:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
 
-  alpinejs@3.17.4:
+  alpinejs@3.17.5:
     dependencies:
       '@vue/reactivity': 3.5.44
 
@@ -1130,18 +1130,18 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-config-prettier@10.1.8(eslint@10.12.0):
+  eslint-config-prettier@10.1.8(eslint@10.13.0):
     dependencies:
-      eslint: 10.12.0
+      eslint: 10.13.0
 
-  eslint-plugin-prettier@5.5.7(eslint-config-prettier@10.1.8(eslint@10.12.0))(eslint@10.12.0)(prettier@3.9.10):
+  eslint-plugin-prettier@5.5.7(eslint-config-prettier@10.1.8(eslint@10.13.0))(eslint@10.13.0)(prettier@3.9.10):
     dependencies:
-      eslint: 10.12.0
+      eslint: 10.13.0
       prettier: 3.9.10
       prettier-linter-helpers: 1.0.1
       synckit: 0.12.3
     optionalDependencies:
-      eslint-config-prettier: 10.1.8(eslint@10.12.0)
+      eslint-config-prettier: 10.1.8(eslint@10.13.0)
 
   eslint-scope@9.1.2:
     dependencies:
@@ -1154,9 +1154,9 @@ snapshots:
 
   eslint-visitor-keys@5.0.1: {}
 
-  eslint@10.12.0:
+  eslint@10.13.0:
     dependencies:
-      '@eslint-community/eslint-utils': 4.10.1(eslint@10.12.0)
+      '@eslint-community/eslint-utils': 4.10.1(eslint@10.13.0)
       '@eslint-community/regexpp': 4.12.2
       '@eslint/config-array': 0.23.5
       '@eslint/config-helpers': 0.7.0
@@ -1234,7 +1234,7 @@ snapshots:
 
   focus-trap@8.2.3:
     dependencies:
-      tabbable: 6.5.0
+      tabbable: 6.5.1
 
   glob-parent@6.0.2:
     dependencies:
@@ -1384,7 +1384,7 @@ snapshots:
       '@dual-bundle/import-meta-resolve': 4.2.1
       '@pkgr/core': 0.3.6
 
-  tabbable@6.5.0: {}
+  tabbable@6.5.1: {}
 
   type-check@0.4.0:
     dependencies:

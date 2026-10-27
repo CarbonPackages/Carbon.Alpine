@@ -1,4 +1,4 @@
-// node_modules/.pnpm/alpinejs@3.17.4/node_modules/alpinejs/dist/module.esm.js
+// node_modules/.pnpm/alpinejs@3.17.5/node_modules/alpinejs/dist/module.esm.js
 var flushPending = false;
 var flushing = false;
 var queue = [];
@@ -1811,7 +1811,7 @@ var Alpine = {
     get transaction() {
         return transaction;
     },
-    version: "3.17.4",
+    version: "3.17.5",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,
@@ -3660,7 +3660,10 @@ function isGetterSetter(value) {
         typeof value.set === "function"
     );
 }
-directive("cloak", (el) => queueMicrotask(() => mutateDom(() => el.removeAttribute(prefix("cloak")))));
+directive("cloak", (el) => {
+    if (isCloning) return el.removeAttribute(prefix("cloak"));
+    queueMicrotask(() => mutateDom(() => el.removeAttribute(prefix("cloak"))));
+});
 addInitSelector(() => `[${prefix("init")}]`);
 directive(
     "init",

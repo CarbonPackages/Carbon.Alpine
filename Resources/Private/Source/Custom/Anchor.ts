@@ -1,13 +1,18 @@
 import { Alpine as AlpineType, ElementWithXAttributes } from "alpinejs";
 import { computePosition, autoUpdate, flip, offset, shift, arrow, Placement, Padding } from "../FloatingUI";
 
+export type AnchorAttributes = {
+    x: number;
+    y: number;
+};
+
 // This is basically the same as the Alpine anchor directive, but it adds an arrowClass option
 // use it like this x-anchor.arrow.arrowClassName.arrowPadding (e.g. x-anchor.arrow.arrow-anchor.0)
 // the fix it to the mouse use target as mouse
 
 // Extend the element type to include the _x_anchor property
 interface ElementWithAnchor extends ElementWithXAttributes {
-    _x_anchor?: { x: number; y: number };
+    _x_anchor?: AnchorAttributes;
 }
 
 type ArrowOptions = {

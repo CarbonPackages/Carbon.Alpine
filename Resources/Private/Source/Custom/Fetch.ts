@@ -6,12 +6,12 @@ type ItemType = {
     markup: string;
 };
 
-type magicOptions = {
-    maxAgeInSeconds: number;
-    prefix: string | number;
-    version: string | number;
-    cache: boolean | "flush";
-    hashed: boolean;
+export type fetchMagicOptions = {
+    maxAgeInSeconds?: number;
+    prefix?: string | number;
+    version?: string | number;
+    cache?: boolean | "flush";
+    hashed?: boolean;
 };
 
 type cachedFetchOptions = {
@@ -44,7 +44,7 @@ export default function (Alpine: AlpineType) {
                     version = release,
                     cache = true,
                     hashed = false,
-                } = {} as magicOptions,
+                } = {} as fetchMagicOptions,
             ) =>
                 cache
                     ? await cachedFetch({
