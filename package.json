@@ -28,17 +28,17 @@
     "@imacrayon/alpine-ajax": "^0.12.7",
     "@ryangjchandler/alpine-clipboard": "^2.3.0",
     "alpinejs": "^3.17.5",
-    "focus-trap": "^8.2.3",
+    "focus-trap": "^8.2.4",
     "tabbable": "^6.5.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/alpinejs": "^3.17.0",
     "esbuild": "^0.28.2",
-    "eslint": "^10.13.0",
+    "eslint": "^10.14.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.7",
-    "globals": "^17.13.0",
+    "globals": "^17.14.0",
     "lightningcss-cli": "^1.33.0",
     "prettier": "^3.9.10"
   }

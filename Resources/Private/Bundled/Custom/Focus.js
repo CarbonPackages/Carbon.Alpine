@@ -416,7 +416,7 @@ var isFocusable = function isFocusable2(node, options) {
     return isNodeMatchingSelectorFocusable(options, node);
 };
 
-// node_modules/.pnpm/focus-trap@8.2.3/node_modules/focus-trap/dist/focus-trap.esm.js
+// node_modules/.pnpm/focus-trap@8.2.4/node_modules/focus-trap/dist/focus-trap.esm.js
 function _arrayLikeToArray(r, a) {
     (null == a || a > r.length) && (a = r.length);
     for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
@@ -935,7 +935,12 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
                             !isTabbable(target, config.tabbableOptions) &&
                             !containerGroup.nextTabbableNode(target, false)))
                 ) {
-                    startOfGroupIndex = containerIndex;
+                    startOfGroupIndex = Math.max(
+                        0,
+                        state.tabbableGroups.findIndex(function (group) {
+                            return state.containerGroups.indexOf(group) >= containerIndex;
+                        }),
+                    );
                 }
                 if (startOfGroupIndex >= 0) {
                     var destinationGroupIndex =
@@ -960,7 +965,10 @@ var createFocusTrap = function createFocusTrap2(elements, userOptions) {
                             !isTabbable(target, config.tabbableOptions) &&
                             !containerGroup.nextTabbableNode(target)))
                 ) {
-                    lastOfGroupIndex = containerIndex;
+                    var nextGroupIndex = state.tabbableGroups.findIndex(function (group) {
+                        return state.containerGroups.indexOf(group) > containerIndex;
+                    });
+                    lastOfGroupIndex = nextGroupIndex > 0 ? nextGroupIndex - 1 : state.tabbableGroups.length - 1;
                 }
                 if (lastOfGroupIndex >= 0) {
                     var _destinationGroupIndex =
